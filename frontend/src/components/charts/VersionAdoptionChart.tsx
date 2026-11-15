@@ -30,8 +30,19 @@ export function VersionAdoptionChart({
 }: VersionAdoptionChartProps) {
   const [chartMode, setChartMode] = useState<"dual" | "stacked">("dual");
 
-  // Take top 8 most significant versions by review volume to keep the chart clean & readable
-  const topVersions = versions.slice(0, 8);
+  // Take top 8 most significant versions by review volume, then sort them chronologically (oldest -> newest, left to right)
+  const topVersions = [...versions]
+    .slice(0, 8)
+    .sort((a, b) => {
+      const pa = a.app_version.replace(/^[vV]/, "").trim().split(".").map((p) => parseInt(p, 10) || 0);
+      const pb = b.app_version.replace(/^[vV]/, "").trim().split(".").map((p) => parseInt(p, 10) || 0);
+      for (let i = 0; i < Math.max(pa.length, pb.length); i++) {
+        const na = pa[i] || 0;
+        const nb = pb[i] || 0;
+        if (na !== nb) return na - nb;
+      }
+      return 0;
+    });
 
   const chartData = topVersions.map((v) => {
     const total = v.review_count;
@@ -67,7 +78,7 @@ export function VersionAdoptionChart({
               : "Cấu Trúc Phân Bổ Điểm Đánh Giá 1★ đến 5★ Theo Phiên Bản"}
           </div>
           <p className="text-xs text-slate-400 mt-0.5">
-            Theo dõi {topVersions.length} bản phát hành chiếm tỷ trọng lớn nhất của {bankName}
+            Theo dõi {topVersions.length} bản phát hành chủ lực sắp xếp theo tiến trình cập nhật từ cũ đến mới nhất của {bankName}
           </p>
         </div>
 
