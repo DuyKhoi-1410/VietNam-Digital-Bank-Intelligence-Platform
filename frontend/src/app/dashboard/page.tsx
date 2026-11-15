@@ -48,7 +48,7 @@ export default function MarketOverviewPage() {
       setTrends(tr);
       setAspectsData(asp);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Không thể tải dữ liệu tổng quan thị trường từ BigQuery");
+      setError(err instanceof Error ? err.message : "Không thể tải dữ liệu tổng quan thị trường");
     } finally {
       setLoading(false);
     }
@@ -62,7 +62,7 @@ export default function MarketOverviewPage() {
     return (
       <div className="flex flex-col items-center justify-center min-h-[500px] space-y-4">
         <RefreshCw className="w-8 h-8 text-cyan-400 animate-spin" />
-        <p className="text-sm text-slate-400 font-mono">Đang truy vấn dữ liệu thị trường từ BigQuery...</p>
+        <p className="text-sm text-slate-400 font-mono">Đang đồng bộ dữ liệu phân tích thị trường...</p>
       </div>
     );
   }
@@ -71,14 +71,14 @@ export default function MarketOverviewPage() {
     return (
       <div className="glass-panel rounded-2xl p-8 border-rose-500/30 text-center max-w-xl mx-auto my-12">
         <AlertTriangle className="w-10 h-10 text-rose-400 mx-auto mb-4" />
-        <h3 className="text-lg font-bold text-white mb-2">Lỗi Kết Nối Backend</h3>
+        <h3 className="text-lg font-bold text-white mb-2">Lỗi Kết Nối Máy Chủ</h3>
         <p className="text-sm text-slate-300 mb-6">{error}</p>
         <button
           onClick={loadData}
           className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold"
         >
           <RefreshCw className="w-3.5 h-3.5" />
-          <span>Thử lại truy vấn BigQuery</span>
+          <span>Tải lại dữ liệu</span>
         </button>
       </div>
     );
@@ -103,7 +103,7 @@ export default function MarketOverviewPage() {
           </div>
           <button
             onClick={loadData}
-            title="Làm mới dữ liệu từ BigQuery"
+            title="Làm mới dữ liệu phân tích"
             className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700 transition-colors"
           >
             <RefreshCw className="w-4 h-4" />

@@ -118,7 +118,7 @@ export default function BankInsightsPage() {
     return (
       <div className="flex flex-col items-center justify-center min-h-[500px] space-y-4">
         <RefreshCw className="w-8 h-8 text-cyan-400 animate-spin" />
-        <p className="text-sm text-slate-400 font-mono">Đang tải danh sách ngân hàng từ BigQuery...</p>
+        <p className="text-sm text-slate-400 font-mono">Đang tải danh mục ngân hàng phân tích...</p>
       </div>
     );
   }

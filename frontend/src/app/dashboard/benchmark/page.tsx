@@ -107,7 +107,7 @@ export default function BenchmarkPage() {
     return (
       <div className="flex flex-col items-center justify-center min-h-[500px] space-y-4">
         <RefreshCw className="w-8 h-8 text-cyan-400 animate-spin" />
-        <p className="text-sm text-slate-400 font-mono">Đang truy vấn ma trận đối sánh từ BigQuery...</p>
+        <p className="text-sm text-slate-400 font-mono">Đang tính toán ma trận đối sánh cạnh tranh...</p>
       </div>
     );
   }
@@ -283,7 +283,7 @@ export default function BenchmarkPage() {
           )}
 
           <div className="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-400">
-            Lưu ý: Điểm mạnh và điểm yếu được trích xuất trực tiếp từ dữ liệu cảm xúc khía cạnh ABSA thực chứng trong BigQuery.
+            Lưu ý: Điểm mạnh và điểm yếu được trích xuất trực tiếp từ mô hình phân tích cảm xúc khía cạnh ABSA thực chứng.
           </div>
         </div>
       )}

@@ -76,11 +76,11 @@ export function LandingFooter() {
           <div className="flex items-center gap-4 text-[11px] font-mono">
             <span className="flex items-center gap-1.5 text-slate-400">
               <Database className="w-3 h-3 text-cyan-400" />
-              BigQuery: aiinbusinessgroup3
+              Kho Dữ Liệu Thực Chứng
             </span>
             <span className="flex items-center gap-1.5 text-slate-400">
               <Cpu className="w-3 h-3 text-emerald-400" />
-              FastAPI: v1.0
+              Mô Hình ABSA Engine
             </span>
           </div>
         </div>

@@ -50,11 +50,11 @@ export function HealthIndicator() {
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
             </span>
             <div className="flex items-center gap-1.5">
-              <span className="text-emerald-400 font-semibold">BigQuery Kết Nối</span>
+              <span className="text-emerald-400 font-semibold">Hệ Thống Trực Tuyến</span>
               <span className="text-slate-500">•</span>
               <span className="text-slate-300">{health.bigquery.latency_ms.toFixed(0)}ms</span>
               <span className="text-slate-500">•</span>
-              <span className="text-slate-400 hidden xl:inline">{health.bigquery.project_id}</span>
+              <span className="text-slate-400 hidden xl:inline">Live Engine</span>
             </div>
           </>
         )}
@@ -62,14 +62,14 @@ export function HealthIndicator() {
         {status === "disconnected" && (
           <div className="flex items-center gap-1.5 text-rose-400">
             <AlertCircle className="w-3.5 h-3.5" />
-            <span>Backend Ngoại Tuyến</span>
+            <span>Máy Chủ Ngoại Tuyến</span>
           </div>
         )}
 
         {status === "error" && (
           <div className="flex items-center gap-1.5 text-amber-400">
             <AlertCircle className="w-3.5 h-3.5" />
-            <span>BigQuery Gián Đoạn</span>
+            <span>Dịch Vụ Dữ Liệu Gián Đoạn</span>
           </div>
         )}
       </div>
@@ -77,7 +77,7 @@ export function HealthIndicator() {
       <button
         onClick={checkHealth}
         disabled={status === "checking"}
-        title="Làm mới trạng thái kết nối BigQuery"
+        title="Làm mới trạng thái hệ thống"
         className="p-1 text-slate-500 hover:text-slate-300 disabled:opacity-50 transition-colors ml-1"
       >
         <RefreshCw className={`w-3 h-3 ${status === "checking" ? "animate-spin text-cyan-400" : ""}`} />

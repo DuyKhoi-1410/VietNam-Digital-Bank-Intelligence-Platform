@@ -106,7 +106,7 @@ export default function ReportsPage() {
         <div className="flex items-center gap-2 mb-4">
           <FileSpreadsheet className="w-4 h-4 text-cyan-400" />
           <h2 className="text-sm font-bold text-white uppercase tracking-wider font-mono">
-            Bảng Dữ Liệu Tổng Hợp (Dữ Liệu BigQuery Trực Tiếp)
+            Kho Dữ Liệu Tổng Hợp (Dữ Liệu Phân Tích Thực Chứng)
           </h2>
         </div>
 
@@ -294,10 +294,10 @@ export default function ReportsPage() {
       <div className="p-5 rounded-2xl bg-slate-900/60 border border-slate-800 text-xs text-slate-400 space-y-2">
         <div className="flex items-center gap-2 text-white font-semibold font-mono text-xs">
           <ShieldCheck className="w-4 h-4 text-emerald-400" />
-          <span>Cam Kết Quản Trị Dữ Liệu & Bảo Vệ Hệ Thống BigQuery</span>
+          <span>Tiêu Chuẩn Quản Trị & Toàn Vẹn Dữ Liệu Doanh Nghiệp</span>
         </div>
         <p className="leading-relaxed">
-          • Mọi tệp xuất dữ liệu được khởi tạo thời gian thực thông qua các câu lệnh SQL chỉ đọc (Read-Only) có tham số hóa với thời gian chờ (timeout) tự động ngắt an toàn.
+          • Mọi tệp xuất dữ liệu được khởi tạo thời gian thực thông qua các truy vấn chỉ đọc (Read-Only) có tham số hóa với thời gian chờ (timeout) tự động ngắt an toàn.
           <br />
           • Quy trình xuất tự động áp dụng hàm phân vùng khử trùng lặp (`ROW_NUMBER() OVER(PARTITION BY ID) = 1`), tuyệt đối ngăn ngừa hiện tượng nhân đôi số liệu làm sai lệch bảng phân tích của bạn.
           <br />

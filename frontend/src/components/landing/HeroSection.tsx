@@ -60,7 +60,7 @@ export function HeroSection() {
           {loading ? (
             <div className="flex items-center gap-2 text-xs text-slate-400 font-mono">
               <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
-              <span>Đang kết nối dữ liệu BigQuery thời gian thực...</span>
+              <span>Đang đồng bộ dữ liệu thời gian thực...</span>
             </div>
           ) : liveOverview ? (
             <div className="flex items-center gap-2.5 text-xs font-mono text-slate-300">
@@ -76,7 +76,7 @@ export function HeroSection() {
                 <strong className="text-white font-semibold">{liveOverview.total_banks_tracked}</strong> Ứng Dụng Ngân Hàng
               </span>
               <span className="text-slate-600">•</span>
-              <span className="text-cyan-400 font-semibold">Live BigQuery</span>
+              <span className="text-cyan-400 font-semibold">Dữ Liệu Thực Chứng</span>
             </div>
           ) : (
             <div className="flex items-center gap-2 text-xs text-slate-400 font-mono">

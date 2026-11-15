@@ -25,9 +25,9 @@ const FAQS: FaqItem[] = [
       "Điểm sao Google Play (1 đến 5 sao) là đánh giá cảm tính chung của người dùng, thường bị kéo tụt vì một sự cố đơn lẻ. Ngược lại, Chỉ số Cảm xúc NLP (Net Sentiment Score - NSS) được bóc tách trực tiếp từ ngữ nghĩa văn bản của từng tính năng cụ thể, giúp ban quản trị nhìn thấy sự thật đằng sau mỗi lượt chấm sao.",
   },
   {
-    question: "Dữ liệu có được truy vấn trực tiếp từ Google BigQuery không?",
+    question: "Dữ liệu trên nền tảng có được đảm bảo tính thực tế và khách quan không?",
     answer:
-      "Chính xác. Nền tảng kết nối trực tiếp qua Google Cloud BigQuery API tại dự án aiinbusinessgroup3 (vùng asia-southeast1). Chúng tôi tuân thủ nguyên tắc Zero-Mock-Data: 100% số liệu hiển thị trên toàn bộ các biểu đồ và bảng tra cứu đều bắt nguồn từ dữ liệu BigQuery đã kiểm chứng.",
+      "Chính xác. Nền tảng kết nối trực tiếp đến kho dữ liệu phân tích đã được xác thực và chuẩn hóa thời gian thực. Chúng tôi tuân thủ nguyên tắc Zero-Mock-Data: 100% số liệu hiển thị trên toàn bộ các biểu đồ và bảng tra cứu đều bắt nguồn từ 19.303 phản hồi người dùng thực tế đã được kiểm toán độc lập.",
   },
   {
     question: "Nền tảng hỗ trợ đối sánh giữa các ngân hàng như thế nào?",

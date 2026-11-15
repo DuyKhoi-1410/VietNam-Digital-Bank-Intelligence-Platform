@@ -212,9 +212,9 @@ export function Sidebar({ mobileOpen, setMobileOpen }: SidebarProps) {
             <div className="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800 text-[10px] text-slate-400 space-y-1 font-mono">
               <div className="flex items-center gap-1.5 text-slate-300">
                 <Database className="w-3 h-3 text-cyan-400" />
-                <span className="truncate">aiinbusinessgroup3</span>
+                <span className="truncate">VDBI Intelligence Engine</span>
               </div>
-              <div className="text-[9px] text-slate-400">Vùng: asia-southeast1</div>
+              <div className="text-[9px] text-slate-400">Hạ tầng: Cloud Enterprise SE-Asia</div>
             </div>
           )}
         </div>

@@ -279,7 +279,7 @@ export default function ReviewExplorerPage() {
       {loadingSearch ? (
         <div className="flex flex-col items-center justify-center min-h-[350px] space-y-3">
           <RefreshCw className="w-6 h-6 text-cyan-400 animate-spin" />
-          <p className="text-xs text-slate-400 font-mono">Đang truy vấn đánh giá từ BigQuery...</p>
+          <p className="text-xs text-slate-400 font-mono">Đang trích xuất dữ liệu đánh giá thực chứng...</p>
         </div>
       ) : results && results.reviews.length > 0 ? (
         <div className="glass-panel rounded-2xl overflow-hidden border border-slate-800">
