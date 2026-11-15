@@ -1,0 +1,56 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+**/*.pyc
+**/__pycache__/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+**/.venv/
+
+# Environment variables & secrets (CRITICAL)
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+*.json
+!package.json
+!tsconfig.json
+!components.json
+!**/package.json
+!**/tsconfig.json
+!**/components.json
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+**/.pytest_cache/
+
+# Logs
+*.log
+logs/
+**/*.log
+
+# Node / Frontend
+node_modules/
+.next/
+out/
+dist/
+build/
+**/node_modules/
+**/.next/
+*.tsbuildinfo
+next-env.d.ts

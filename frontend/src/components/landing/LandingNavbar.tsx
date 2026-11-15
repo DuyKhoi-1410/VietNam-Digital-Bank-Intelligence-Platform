@@ -1,0 +1,141 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { ArrowUpRight, Menu, X } from "lucide-react";
+
+export function LandingNavbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-[#05070b]/85 backdrop-blur-md border-b border-slate-800/80 shadow-lg shadow-black/50 py-3.5"
+          : "bg-transparent py-5"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between">
+          {/* Logo Brand Header */}
+          <Link href="/" className="flex items-center gap-3 group">
+            <Image
+              src="/logo-full.png"
+              alt="Vietnam Digital Banking Intelligence"
+              width={220}
+              height={37}
+              className="h-8 sm:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
+              priority
+            />
+            <span className="hidden sm:inline-block px-2 py-0.5 rounded-full text-[10px] font-mono tracking-wider uppercase border border-cyan-500/30 bg-cyan-950/40 text-cyan-300">
+              BETA
+            </span>
+          </Link>
+
+          {/* Desktop Navigation Links */}
+          <nav className="hidden md:flex items-center gap-8">
+            <a
+              href="#platform"
+              className="text-sm text-slate-300 hover:text-white transition-colors tracking-wide"
+            >
+              Nền tảng
+            </a>
+            <a
+              href="#modules"
+              className="text-sm text-slate-300 hover:text-white transition-colors tracking-wide"
+            >
+              Module phân tích
+            </a>
+            <a
+              href="#methodology"
+              className="text-sm text-slate-300 hover:text-white transition-colors tracking-wide"
+            >
+              Phương pháp luận
+            </a>
+            <a
+              href="#faq"
+              className="text-sm text-slate-300 hover:text-white transition-colors tracking-wide"
+            >
+              Câu hỏi thường gặp
+            </a>
+          </nav>
+
+          {/* Right Action - Chuẩn Stitch: Pure White Pill Button "Try now" */}
+          <div className="hidden md:flex items-center gap-4">
+            <Link
+              href="/dashboard"
+              className="px-5 py-2 rounded-full text-sm font-semibold tracking-wide text-black bg-white hover:bg-slate-200 transition-all duration-200 shadow-md shadow-white/10 active:scale-95"
+            >
+              Trải nghiệm Dashboard
+            </Link>
+          </div>
+
+          {/* Mobile Hamburger Button */}
+          <div className="md:hidden flex items-center">
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 text-slate-300 hover:text-white"
+              aria-label="Mở menu điều hướng"
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Drawer */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-[#070b14]/95 backdrop-blur-xl border-b border-slate-800 px-6 py-6 space-y-4">
+          <a
+            href="#platform"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block text-base text-slate-200 hover:text-cyan-300 py-1"
+          >
+            Nền tảng
+          </a>
+          <a
+            href="#modules"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block text-base text-slate-200 hover:text-cyan-300 py-1"
+          >
+            Module phân tích
+          </a>
+          <a
+            href="#methodology"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block text-base text-slate-200 hover:text-cyan-300 py-1"
+          >
+            Phương pháp luận
+          </a>
+          <a
+            href="#about"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block text-base text-slate-200 hover:text-cyan-300 py-1"
+          >
+            Về dự án
+          </a>
+          <div className="pt-4 border-t border-slate-800">
+            <Link
+              href="/dashboard"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-lg text-sm font-semibold text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 shadow-lg shadow-cyan-500/20"
+            >
+              <span>Trải nghiệm Dashboard</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+}

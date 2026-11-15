@@ -1,0 +1,228 @@
+@import "tailwindcss";
+
+:root {
+  --background: #05070b;
+  --foreground: #f8fafc;
+  --surface: #0a0f1d;
+  --surface-border: rgba(51, 65, 85, 0.45);
+  --cyan-accent: #00f2fe;
+  --blue-accent: #4facfe;
+  --violet-accent: #8a2be2;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #05070b;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* =========================================================================
+   GOOGLE STITCH SIGNATURE LOWER NEON STREAM (CLEAN TEXT CONTRAST + CONTINUOUS FLOW)
+   ========================================================================= */
+
+/* The neon container: positioned strictly in the lower region to never obscure or glare on text */
+.stitch-neon-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -40px;
+  height: 480px;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 1;
+}
+
+/* Entrance animation: blooms smoothly into view from pitch darkness */
+.stitch-neon-entrance-hidden {
+  opacity: 0;
+  transform: translateY(35px) scale(0.96);
+}
+
+.stitch-neon-entrance-active {
+  animation: stitch-neon-bloom 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes stitch-neon-bloom {
+  0% {
+    opacity: 0;
+    transform: translateY(35px) scale(0.96);
+  }
+  60% {
+    opacity: 0.95;
+    transform: translateY(-4px) scale(1.01);
+  }
+  100% {
+    opacity: 0.88;
+    transform: translateY(0px) scale(1);
+  }
+}
+
+/* =========================================================================
+   DYNAMIC HIGH-ENERGY STITCH NEON WAVE (ACTIVE UNDULATION & LIQUID FLOW)
+   ========================================================================= */
+
+/* Continuous dynamic wave motions - faster cycles, large visible amplitude */
+.animate-stitch-wave-primary {
+  animation: stitch-wave-flow-1 7s ease-in-out infinite alternate;
+  transform-origin: 50% 60%;
+}
+
+.animate-stitch-wave-secondary {
+  animation: stitch-wave-flow-2 9s ease-in-out infinite alternate;
+  transform-origin: 45% 55%;
+}
+
+.animate-stitch-wave-core {
+  animation: stitch-wave-flow-core 5.5s ease-in-out infinite alternate;
+  transform-origin: 52% 58%;
+}
+
+.animate-stitch-wave-ambient {
+  animation: stitch-wave-flow-ambient 11s ease-in-out infinite alternate;
+  transform-origin: 50% 50%;
+}
+
+/* Dynamic color shimmer / liquid light breathing */
+.animate-stitch-shimmer {
+  animation: stitch-shimmer-flow 8s ease-in-out infinite alternate;
+}
+
+@keyframes stitch-wave-flow-1 {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translate3d(75px, -35px, 0) rotate(3deg) scale(1.08);
+  }
+  50% {
+    transform: translate3d(-45px, 45px, 0) rotate(-2.8deg) scale(0.96);
+  }
+  75% {
+    transform: translate3d(-90px, -25px, 0) rotate(2.2deg) scale(1.05);
+  }
+  100% {
+    transform: translate3d(65px, 35px, 0) rotate(-3.2deg) scale(1.03);
+  }
+}
+
+@keyframes stitch-wave-flow-2 {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+  30% {
+    transform: translate3d(-105px, 40px, 0) rotate(-3.8deg) scale(1.1);
+  }
+  65% {
+    transform: translate3d(95px, -45px, 0) rotate(3.4deg) scale(0.93);
+  }
+  100% {
+    transform: translate3d(-55px, -25px, 0) rotate(-2.2deg) scale(1.06);
+  }
+}
+
+@keyframes stitch-wave-flow-core {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+    opacity: 0.9;
+  }
+  33% {
+    transform: translate3d(90px, -38px, 0) rotate(3.5deg) scale(1.12);
+    opacity: 1;
+  }
+  66% {
+    transform: translate3d(-85px, 32px, 0) rotate(-3deg) scale(0.94);
+    opacity: 0.88;
+  }
+  100% {
+    transform: translate3d(50px, -25px, 0) rotate(2.2deg) scale(1.07);
+    opacity: 1;
+  }
+}
+
+@keyframes stitch-wave-flow-ambient {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.65;
+  }
+  50% {
+    transform: translate3d(40px, -25px, 0) scale(1.14);
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate3d(-40px, 25px, 0) scale(0.95);
+    opacity: 0.6;
+  }
+}
+
+@keyframes stitch-shimmer-flow {
+  0% {
+    filter: hue-rotate(0deg) brightness(1);
+  }
+  40% {
+    filter: hue-rotate(22deg) brightness(1.25);
+  }
+  75% {
+    filter: hue-rotate(-18deg) brightness(1.15);
+  }
+  100% {
+    filter: hue-rotate(12deg) brightness(1.05);
+  }
+}
+
+/* Glassmorphic Surfaces */
+.glass-panel {
+  background: rgba(10, 15, 29, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(51, 65, 85, 0.45);
+}
+
+.glass-card {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(71, 85, 105, 0.35);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(0, 242, 254, 0.5);
+  box-shadow: 0 0 30px rgba(0, 242, 254, 0.14), 0 0 10px rgba(138, 43, 226, 0.08);
+}
+
+/* Gradient Text */
+.text-gradient-cyan {
+  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-aurora {
+  background: linear-gradient(135deg, #ffffff 10%, #67e8f9 45%, #c084fc 80%, #f472b6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-silver {
+  background: linear-gradient(180deg, #ffffff 0%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
