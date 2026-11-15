@@ -41,36 +41,36 @@ export function StitchShowcase() {
     restDelta: 0.0001,
   });
 
-  // Scale: Starts clearly compact (0.60 on desktop, 0.74 on mobile) -> smoothly expands to 1.0 (true full screen) as it enters and moves to top
+  // Scale: Starts clearly compact (0.60 on desktop, 0.74 on mobile) -> smoothly expands to 1.0 (true full screen) as it enters
   const scale = useTransform(
     smoothProgress,
-    [0, 1],
+    [0, 0.95],
     [isMobile ? 0.74 : 0.60, 1.0]
   );
 
   // Border radius: Smooth transition from 32px rounded floating window -> 0px flush full screen
-  const borderRadius = useTransform(smoothProgress, [0, 1], ["32px", "0px"]);
+  const borderRadius = useTransform(smoothProgress, [0, 0.95], ["32px", "0px"]);
 
   // Opacity: Smooth fade-in at very start
   const opacity = useTransform(smoothProgress, [0, 0.15], [0.85, 1]);
 
   // Floating live badge: prominent when card is small, smoothly fades out as canvas zooms to full
-  const previewBadgeOpacity = useTransform(smoothProgress, [0, 0.35], [1, 0]);
-  const previewBadgeY = useTransform(smoothProgress, [0, 0.35], [0, -15]);
+  const previewBadgeOpacity = useTransform(smoothProgress, [0, 0.3], [1, 0]);
+  const previewBadgeY = useTransform(smoothProgress, [0, 0.3], [0, -15]);
 
   // Floating parallax and depth scale for the 3 internal cards
-  const cardsScale = useTransform(smoothProgress, [0, 1], [0.92, 1.0]);
-  const cardY1 = useTransform(smoothProgress, [0, 1], [25, 0]);
-  const cardY2 = useTransform(smoothProgress, [0, 1], [0, 0]);
-  const cardY3 = useTransform(smoothProgress, [0, 1], [30, 0]);
+  const cardsScale = useTransform(smoothProgress, [0, 0.95], [0.92, 1.0]);
+  const cardY1 = useTransform(smoothProgress, [0, 0.95], [25, 0]);
+  const cardY2 = useTransform(smoothProgress, [0, 0.95], [0, 0]);
+  const cardY3 = useTransform(smoothProgress, [0, 0.95], [30, 0]);
 
   // Prompt note (top left): slides and fades in as canvas approaches full screen
   const noteOpacity = useTransform(smoothProgress, [0.35, 0.85], [0, 1]);
   const noteY = useTransform(smoothProgress, [0.35, 0.85], [-12, 0]);
 
   // Floating vertical toolstrip (right edge): slides in smoothly
-  const toolstripOpacity = useTransform(smoothProgress, [0.40, 0.90], [0, 1]);
-  const toolstripX = useTransform(smoothProgress, [0.40, 0.90], [24, 0]);
+  const toolstripOpacity = useTransform(smoothProgress, [0.40, 0.85], [0, 1]);
+  const toolstripX = useTransform(smoothProgress, [0.40, 0.85], [24, 0]);
 
   // Bottom prompt bar: slides up effortlessly into position
   const barY = useTransform(smoothProgress, [0.35, 0.85], [25, 0]);
@@ -79,7 +79,7 @@ export function StitchShowcase() {
   return (
     <section
       ref={containerRef}
-      className="relative h-[180vh] bg-transparent"
+      className="relative h-[105vh] bg-transparent"
       id="platform"
     >
       {/* Sticky Viewport Container: Stays fixed while user smoothly scrolls through zoom track */}
