@@ -1,9 +1,8 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import {
   MousePointer,
   ZoomIn,
@@ -12,66 +11,92 @@ import {
   ArrowUp,
   Plus,
   MessageSquare,
-  ShieldAlert,
-  TrendingUp,
-  SlidersHorizontal,
   ChevronRight,
   ArrowRight,
   Activity,
-  CheckCircle2,
 } from "lucide-react";
 
 export function StitchShowcase() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Track scroll progress within this 220vh section
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Track scroll progress within this 210vh bounded container
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
 
-  // Scale: Starts at 0.82 (card view with border-radius), zooms to 1.0 (full screen)
-  const scale = useTransform(scrollYProgress, [0, 0.65], [0.84, 1]);
-  
-  // Border radius: Starts rounded (32px), softens to 0px at full screen
-  const borderRadius = useTransform(scrollYProgress, [0, 0.65], ["28px", "0px"]);
+  // Physics-based spring smoothing to eliminate mouse-wheel stepping and make the zoom silky smooth (60-120fps)
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 85,
+    damping: 24,
+    mass: 0.25,
+    restDelta: 0.0001,
+  });
 
-  // Opacity: Fades in slightly at start
-  const opacity = useTransform(scrollYProgress, [0, 0.15], [0.75, 1]);
+  // Scale: Starts clearly compact (0.62 on desktop, 0.74 on mobile) -> smoothly expands to 1.0 (true full screen)
+  const scale = useTransform(
+    smoothProgress,
+    [0.02, 0.60],
+    [isMobile ? 0.74 : 0.62, 1.0]
+  );
 
-  // Subtle Y translation for floating parallax cards inside canvas
-  const cardY1 = useTransform(scrollYProgress, [0, 0.7], [20, -10]);
-  const cardY2 = useTransform(scrollYProgress, [0, 0.7], [0, 0]);
-  const cardY3 = useTransform(scrollYProgress, [0, 0.7], [30, -15]);
+  // Border radius: Smooth transition from 32px rounded floating window -> 0px flush full screen
+  const borderRadius = useTransform(smoothProgress, [0.02, 0.60], ["32px", "0px"]);
 
-  // Prompt note opacity: fades in as you scale
-  const noteOpacity = useTransform(scrollYProgress, [0.1, 0.45], [0, 1]);
-  
-  // Prompt bar opacity & Y
-  const barY = useTransform(scrollYProgress, [0.15, 0.55], [20, 0]);
-  const barOpacity = useTransform(scrollYProgress, [0.15, 0.5], [0, 1]);
+  // Opacity: Smooth fade-in at very start
+  const opacity = useTransform(smoothProgress, [0, 0.08], [0.85, 1]);
+
+  // Floating live badge: prominent when card is small, smoothly fades out as canvas zooms to full
+  const previewBadgeOpacity = useTransform(smoothProgress, [0.02, 0.22], [1, 0]);
+  const previewBadgeY = useTransform(smoothProgress, [0.02, 0.22], [0, -15]);
+
+  // Floating parallax and depth scale for the 3 internal cards
+  const cardsScale = useTransform(smoothProgress, [0.05, 0.60], [0.92, 1.0]);
+  const cardY1 = useTransform(smoothProgress, [0.05, 0.60], [25, 0]);
+  const cardY2 = useTransform(smoothProgress, [0.05, 0.60], [0, 0]);
+  const cardY3 = useTransform(smoothProgress, [0.05, 0.60], [30, 0]);
+
+  // Prompt note (top left): slides and fades in as canvas approaches full screen
+  const noteOpacity = useTransform(smoothProgress, [0.25, 0.55], [0, 1]);
+  const noteY = useTransform(smoothProgress, [0.25, 0.55], [-12, 0]);
+
+  // Floating vertical toolstrip (right edge): slides in smoothly
+  const toolstripOpacity = useTransform(smoothProgress, [0.30, 0.58], [0, 1]);
+  const toolstripX = useTransform(smoothProgress, [0.30, 0.58], [24, 0]);
+
+  // Bottom prompt bar: slides up effortlessly into position
+  const barY = useTransform(smoothProgress, [0.25, 0.55], [25, 0]);
+  const barOpacity = useTransform(smoothProgress, [0.25, 0.55], [0, 1]);
 
   return (
     <section
       ref={containerRef}
-      className="relative h-[200vh] bg-transparent"
+      className="relative h-[210vh] bg-transparent"
       id="platform"
     >
-      {/* Sticky Viewport Container: Stays fixed while user scrolls through 200vh track */}
+      {/* Sticky Viewport Container: Stays fixed while user smoothly scrolls through zoom track */}
       <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
-        {/* Animated Expanding Canvas (Google Stitch Signature Zoom) */}
+        {/* Animated Expanding Canvas (Google Stitch Signature Zoom: small preview -> 100% full screen) */}
         <motion.div
           style={{
             scale,
             borderRadius,
             opacity,
           }}
-          className="relative w-full h-full bg-[#070b14]/95 border border-slate-800 shadow-[0_0_80px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col justify-between p-4 sm:p-6 lg:p-8 select-none"
+          className="relative w-full h-full bg-[#070b14]/95 border border-cyan-500/30 shadow-[0_0_90px_rgba(0,0,0,0.95)] overflow-hidden flex flex-col justify-between p-4 sm:p-6 lg:p-8 select-none"
         >
           {/* Canvas Ambient Aurora Lighting */}
-          <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[350px] bg-cyan-500/15 blur-[120px] rounded-full pointer-events-none" />
-          <div className="absolute top-1/2 right-1/4 translate-x-1/2 -translate-y-1/2 w-[450px] h-[350px] bg-violet-600/15 blur-[130px] rounded-full pointer-events-none" />
-          <div className="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[250px] bg-emerald-500/10 blur-[140px] rounded-full pointer-events-none" />
+          <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[380px] bg-cyan-500/15 blur-[130px] rounded-full pointer-events-none" />
+          <div className="absolute top-1/2 right-1/4 translate-x-1/2 -translate-y-1/2 w-[480px] h-[380px] bg-violet-600/15 blur-[140px] rounded-full pointer-events-none" />
+          <div className="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-[620px] h-[260px] bg-emerald-500/10 blur-[150px] rounded-full pointer-events-none" />
 
           {/* Canvas Dot Matrix Pattern */}
           <div
@@ -83,12 +108,25 @@ export function StitchShowcase() {
           />
 
           {/* =========================================================================
+              FLOATING PREVIEW BADGE (Prominent when small, fades out as you zoom full)
+              ========================================================================= */}
+          <motion.div
+            style={{ opacity: previewBadgeOpacity, y: previewBadgeY }}
+            className="absolute top-5 left-1/2 -translate-x-1/2 z-30 pointer-events-none flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/95 border border-cyan-500/40 shadow-xl backdrop-blur-md"
+          >
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+            <span className="text-[11px] font-mono font-semibold text-cyan-300 uppercase tracking-wider">
+              ✦ VDBI Interactive Canvas • Cuộn để phóng to full
+            </span>
+          </motion.div>
+
+          {/* =========================================================================
               TOP ROW: Floating Prompt Note (Google Stitch signature) + Canvas Badge
               ========================================================================= */}
           <div className="relative z-20 flex items-start justify-between w-full">
             {/* Top-Left Floating Prompt Note (Exact Stitch UX) */}
             <motion.div
-              style={{ opacity: noteOpacity }}
+              style={{ opacity: noteOpacity, y: noteY }}
               className="max-w-xs sm:max-w-sm rounded-2xl bg-[#0b1120]/90 backdrop-blur-xl border border-slate-700/70 p-4 shadow-2xl text-left hidden md:block"
             >
               <div className="flex items-center justify-between text-slate-400 mb-2">
@@ -123,8 +161,10 @@ export function StitchShowcase() {
               CENTER: 3 FLOATING INTERACTIVE DESIGN CARDS (Google Stitch Aesthetic)
               ========================================================================= */}
           <div className="relative z-10 flex-1 flex items-center justify-center my-4 sm:my-6 overflow-hidden">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 w-full max-w-5xl items-center">
-              
+            <motion.div
+              style={{ scale: cardsScale }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 w-full max-w-5xl items-center"
+            >
               {/* Card 1: Macro Market & Scorecard */}
               <motion.div
                 style={{ y: cardY1 }}
@@ -274,13 +314,16 @@ export function StitchShowcase() {
                   </Link>
                 </div>
               </motion.div>
-            </div>
+            </motion.div>
           </div>
 
           {/* =========================================================================
               FLOATING VERTICAL TOOLBAR (Right edge - Exact Google Stitch UI)
               ========================================================================= */}
-          <div className="absolute right-4 top-1/2 -translate-y-1/2 z-20 hidden lg:flex flex-col items-center gap-2 p-1.5 rounded-2xl bg-[#0b1120]/90 backdrop-blur-xl border border-slate-700/70 shadow-2xl">
+          <motion.div
+            style={{ opacity: toolstripOpacity, x: toolstripX }}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 hidden lg:flex flex-col items-center gap-2 p-1.5 rounded-2xl bg-[#0b1120]/90 backdrop-blur-xl border border-slate-700/70 shadow-2xl"
+          >
             <button
               className="p-2 rounded-xl text-cyan-400 bg-cyan-500/15 hover:bg-cyan-500/25 transition"
               title="Công cụ chọn (Pointer)"
@@ -305,7 +348,7 @@ export function StitchShowcase() {
             >
               <Sparkles className="w-4 h-4" />
             </button>
-          </div>
+          </motion.div>
 
           {/* =========================================================================
               BOTTOM ROW: Stitch Signature Prompt Input Bar + Scroll Continuity Guide

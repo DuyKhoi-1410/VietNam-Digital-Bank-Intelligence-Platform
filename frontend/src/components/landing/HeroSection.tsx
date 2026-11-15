@@ -52,7 +52,7 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center pt-32 pb-24 px-4 sm:px-6 lg:px-8 overflow-hidden bg-transparent">
+    <section className="relative min-h-[92vh] flex flex-col items-center justify-center pt-32 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-transparent">
       {/* Hero Content Container */}
       <div className="relative z-10 max-w-4xl mx-auto text-center flex flex-col items-center w-full">
         {/* Dynamic Live Dataset Badge (Retrieved strictly from BigQuery backend) */}
