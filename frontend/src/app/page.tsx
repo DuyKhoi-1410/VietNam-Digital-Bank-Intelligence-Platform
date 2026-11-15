@@ -1,6 +1,7 @@
 import { StitchBackground } from "@/components/landing/StitchBackground";
 import { LandingNavbar } from "@/components/landing/LandingNavbar";
 import { HeroSection } from "@/components/landing/HeroSection";
+import { StitchShowcase } from "@/components/landing/StitchShowcase";
 import { StorySection } from "@/components/landing/StorySection";
 import { ValueProps } from "@/components/landing/ValueProps";
 import { ModulesPreview } from "@/components/landing/ModulesPreview";
@@ -20,6 +21,7 @@ export default function LandingPage() {
       {/* Main Content Sections */}
       <main className="relative z-10 flex flex-col">
         <HeroSection />
+        <StitchShowcase />
         <StorySection />
         <ValueProps />
         <ModulesPreview />
