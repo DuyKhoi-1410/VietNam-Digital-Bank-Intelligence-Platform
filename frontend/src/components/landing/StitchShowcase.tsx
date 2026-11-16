@@ -10,10 +10,17 @@ import {
   Sparkles,
   ArrowUp,
   Plus,
-  MessageSquare,
-  ChevronRight,
+  MessageSquareText,
+  BrainCircuit,
+  GitCompare,
   ArrowRight,
-  Activity,
+  ShieldCheck,
+  CheckCircle2,
+  AlertTriangle,
+  Flame,
+  Layers,
+  Radio,
+  SlidersHorizontal,
 } from "lucide-react";
 
 export function StitchShowcase() {
@@ -116,7 +123,7 @@ export function StitchShowcase() {
           >
             <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
             <span className="text-[11px] font-mono font-semibold text-cyan-300 uppercase tracking-wider">
-              ✦ VDBI Interactive Canvas • Cuộn để phóng to full
+              ✦ Khám phá Năng lực Nền tảng • Cuộn để phóng to full
             </span>
           </motion.div>
 
@@ -124,20 +131,20 @@ export function StitchShowcase() {
               TOP ROW: Floating Prompt Note (Google Stitch signature) + Canvas Badge
               ========================================================================= */}
           <div className="relative z-20 flex items-start justify-between w-full">
-            {/* Top-Left Floating Prompt Note (Exact Stitch UX) */}
+            {/* Top-Left Floating Prompt Note (Google Stitch UX: Purpose Statement) */}
             <motion.div
               style={{ opacity: noteOpacity, y: noteY }}
               className="max-w-xs sm:max-w-sm rounded-2xl bg-[#0b1120]/90 backdrop-blur-xl border border-slate-700/70 p-4 shadow-2xl text-left hidden md:block"
             >
               <div className="flex items-center justify-between text-slate-400 mb-2">
-                <div className="flex items-center gap-1 font-mono text-[10px] text-cyan-400 font-bold uppercase tracking-wider">
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-                  <span>VDBI Intelligence Canvas</span>
+                <div className="flex items-center gap-1.5 font-mono text-[10px] text-cyan-400 font-bold uppercase tracking-wider">
+                  <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>Nền Tảng Này Dùng Làm Gì?</span>
                 </div>
-                <MessageSquare className="w-3.5 h-3.5 text-slate-400" />
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
               </div>
               <p className="text-xs text-slate-300 leading-relaxed font-sans">
-                Tách bạch điểm sao và bản chất trải nghiệm. Bóc tách 7 khía cạnh cốt lõi (ABSA) trên 19.303 đánh giá xác thực từ 7 ngân hàng thương mại Việt Nam.
+                Chuyển hóa hàng ngàn phản hồi rời rạc trên kho ứng dụng thành bản đồ hành động sắc nét. Thấu hiểu điểm nghẽn, bóc tách tính năng bằng AI và nâng cấp trải nghiệm ngân hàng số.
               </p>
             </motion.div>
 
@@ -145,173 +152,273 @@ export function StitchShowcase() {
             <div className="flex items-center gap-2 ml-auto">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono text-cyan-300 bg-cyan-950/50 border border-cyan-500/30">
                 <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
-                <span>Mô Hình ABSA Trực Tuyến</span>
+                <span>3 Trụ Cột Năng Lực Cốt Lõi</span>
               </span>
               <Link
                 href="/dashboard"
                 className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-semibold text-black bg-white hover:bg-slate-200 transition shadow-md shadow-white/10"
               >
-                <span>Mở Dashboard</span>
+                <span>Trải nghiệm Ngay</span>
                 <ArrowRight className="w-3 h-3" />
               </Link>
             </div>
           </div>
 
           {/* =========================================================================
-              CENTER: 3 FLOATING INTERACTIVE DESIGN CARDS (Google Stitch Aesthetic)
+              CENTER: 3 ANIMATED 3D FLOATING CARDS (Introducing Platform Purpose)
               ========================================================================= */}
-          <div className="relative z-10 flex-1 flex items-center justify-center my-4 sm:my-6 overflow-hidden">
+          <div className="relative z-10 flex-1 flex items-center justify-center my-4 sm:my-6 overflow-hidden perspective-[1000px]">
             <motion.div
               style={{ scale: cardsScale }}
-              className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 w-full max-w-5xl items-center"
+              className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 w-full max-w-5xl items-stretch"
             >
-              {/* Card 1: Macro Market & Scorecard */}
+              {/* =========================================================================
+                  CARD 1: LẮNG NGHE NGƯỜI DÙNG THỰC (Voice of Customer)
+                  ========================================================================= */}
               <motion.div
                 style={{ y: cardY1 }}
-                className="hidden md:flex flex-col rounded-2xl bg-gradient-to-b from-[#0e172a]/95 to-[#090d16]/95 border border-cyan-500/30 hover:border-cyan-400/60 p-5 shadow-2xl backdrop-blur-xl transition-all duration-300 group"
+                animate={{
+                  y: [0, -8, 0],
+                  rotateZ: [-0.4, 0.4, -0.4],
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                whileHover={{
+                  scale: 1.03,
+                  rotateY: 4,
+                  rotateX: -2,
+                  transition: { duration: 0.2 },
+                }}
+                className="hidden md:flex flex-col justify-between rounded-2xl bg-gradient-to-b from-[#0e172a]/95 via-[#0b1220]/95 to-[#080d16]/95 border border-cyan-500/30 hover:border-cyan-400/70 p-5 shadow-2xl backdrop-blur-xl transition-all duration-300 group cursor-pointer relative overflow-hidden"
               >
-                <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-                  <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-mono font-bold text-xs">
-                      M1
+                {/* 3D Glass Glow Background Accent */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 blur-2xl rounded-full pointer-events-none group-hover:bg-cyan-500/20 transition-all duration-300" />
+
+                <div>
+                  {/* Top Header Badge */}
+                  <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] font-mono font-bold text-cyan-300 bg-cyan-950/60 border border-cyan-500/30">
+                      <Radio className="w-3 h-3 text-cyan-400 animate-pulse" />
+                      TRỤ CỘT 01
+                    </span>
+                    <span className="text-[10px] font-mono text-slate-400">Tiếng nói khách hàng</span>
+                  </div>
+
+                  {/* Title & Purpose Description */}
+                  <h3 className="mt-4 text-base font-bold text-white tracking-tight group-hover:text-cyan-300 transition-colors">
+                    Lắng Nghe Người Dùng Thật
+                  </h3>
+                  <p className="mt-1.5 text-xs text-slate-300 leading-relaxed font-normal">
+                    Thu thập hàng ngàn phản hồi thực tế trên kho ứng dụng, khử trùng lặp và làm sạch để nắm bắt chính xác trải nghiệm người dùng mỗi ngày.
+                  </p>
+
+                  {/* 3D Visual Floating Interaction Elements (Speech Bubbles Mockup) */}
+                  <div className="mt-5 space-y-2.5">
+                    <div className="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-[11px] text-slate-200 flex items-center justify-between shadow-sm group-hover:border-cyan-500/30 transition">
+                      <div className="flex items-center gap-2 truncate">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
+                        <span className="truncate">&quot;Giao diện mới chuyển tiền rất mượt&quot;</span>
+                      </div>
+                      <span className="text-[9px] font-mono text-emerald-400 px-1.5 py-0.5 rounded bg-emerald-500/10 flex-shrink-0">Khen</span>
                     </div>
-                    <div>
-                      <h4 className="text-xs font-bold text-white tracking-tight">Thị Trường Ngân Hàng</h4>
-                      <p className="text-[10px] text-slate-400 font-mono">19.303 phản hồi hợp lệ</p>
+
+                    <div className="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-[11px] text-slate-200 flex items-center justify-between shadow-sm group-hover:border-cyan-500/30 transition">
+                      <div className="flex items-center gap-2 truncate">
+                        <AlertTriangle className="w-3.5 h-3.5 text-rose-400 flex-shrink-0" />
+                        <span className="truncate">&quot;Xác thực khuôn mặt báo lỗi liên tục&quot;</span>
+                      </div>
+                      <span className="text-[9px] font-mono text-rose-400 px-1.5 py-0.5 rounded bg-rose-500/10 flex-shrink-0">Điểm nghẽn</span>
+                    </div>
+
+                    <div className="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-[11px] text-slate-200 flex items-center justify-between shadow-sm group-hover:border-cyan-500/30 transition">
+                      <div className="flex items-center gap-2 truncate">
+                        <Flame className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
+                        <span className="truncate">&quot;Vừa cập nhật phiên bản mới là bị văng&quot;</span>
+                      </div>
+                      <span className="text-[9px] font-mono text-amber-400 px-1.5 py-0.5 rounded bg-amber-500/10 flex-shrink-0">Cần sửa</span>
                     </div>
                   </div>
-                  <span className="text-[10px] font-mono text-emerald-400 px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">
-                    4.12 ★ Avg
-                  </span>
                 </div>
 
-                <div className="mt-4 space-y-3">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-400">Tỷ lệ Tích Cực (Positive)</span>
-                    <span className="text-emerald-400 font-bold font-mono">64.8%</span>
-                  </div>
-                  <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden flex">
-                    <div className="bg-emerald-400 h-full w-[64.8%]" />
-                    <div className="bg-amber-400 h-full w-[7.9%]" />
-                    <div className="bg-rose-500 h-full w-[27.3%]" />
-                  </div>
-                  <div className="flex items-center justify-between text-[10px] font-mono text-slate-400 pt-1">
-                    <span className="text-emerald-400">● Khen: 12.508</span>
-                    <span className="text-amber-400">● Trung: 1.530</span>
-                    <span className="text-rose-400">● Chê: 5.265</span>
-                  </div>
-                </div>
-
-                <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-300">
-                  <span>Theo dõi: 7 ngân hàng</span>
-                  <span className="text-cyan-400 font-mono flex items-center gap-1">
-                    Khám phá <ChevronRight className="w-3 h-3" />
-                  </span>
+                {/* Bottom Card Footer */}
+                <div className="mt-5 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-cyan-400 font-mono">
+                  <span>Khám phá tiếng nói thật</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </div>
               </motion.div>
 
-              {/* Card 2: Centerpiece - ABSA Aspect Radar & Heatmap */}
+              {/* =========================================================================
+                  CARD 2: TRÍ TUỆ NHẬN THỨC ABSA (Core AI Engine - Centerpiece)
+                  ========================================================================= */}
               <motion.div
                 style={{ y: cardY2 }}
-                className="flex flex-col rounded-2xl bg-gradient-to-b from-[#111c35]/98 to-[#0b101c]/98 border-2 border-cyan-400/50 shadow-[0_0_40px_rgba(6,182,212,0.25)] p-5 backdrop-blur-2xl transition-all duration-300 relative group"
+                animate={{
+                  y: [-3, 5, -3],
+                  scale: [1, 1.015, 1],
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                whileHover={{
+                  scale: 1.04,
+                  rotateY: 0,
+                  rotateX: -3,
+                  transition: { duration: 0.2 },
+                }}
+                className="flex flex-col justify-between rounded-2xl bg-gradient-to-b from-[#111e38]/98 via-[#0c1424]/98 to-[#070b14]/98 border-2 border-cyan-400/60 shadow-[0_0_50px_rgba(6,182,212,0.3)] p-5 backdrop-blur-2xl transition-all duration-300 relative group cursor-pointer overflow-hidden"
               >
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-[10px] font-bold text-white uppercase tracking-wider shadow-lg">
-                  Lõi Phân Tích ABSA
+                {/* Center Highlight Badge */}
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-600 text-[10px] font-bold text-white uppercase tracking-wider shadow-lg flex items-center gap-1">
+                  <Sparkles className="w-3 h-3 text-cyan-200" />
+                  <span>Trọng Tâm Công Nghệ</span>
                 </div>
 
-                <div className="flex items-center justify-between pb-3 pt-1 border-b border-slate-800">
-                  <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-mono font-bold text-xs">
-                      M2
+                {/* 3D Glass Glow Background Accent */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-cyan-400/15 blur-3xl rounded-full pointer-events-none group-hover:bg-cyan-400/25 transition-all duration-300" />
+
+                <div>
+                  {/* Top Header Badge */}
+                  <div className="flex items-center justify-between pb-3 pt-1 border-b border-slate-800">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] font-mono font-bold text-cyan-300 bg-cyan-950/70 border border-cyan-400/40">
+                      <BrainCircuit className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
+                      TRỤ CỘT 02
+                    </span>
+                    <span className="text-[10px] font-mono text-cyan-300">Mô hình AI đa chiều</span>
+                  </div>
+
+                  {/* Title & Purpose Description */}
+                  <h3 className="mt-4 text-base font-bold text-white tracking-tight group-hover:text-cyan-300 transition-colors">
+                    Bóc Tách Khía Cạnh Bằng AI
+                  </h3>
+                  <p className="mt-1.5 text-xs text-slate-300 leading-relaxed font-normal">
+                    Mô hình ABSA tự động chẻ nhỏ từng câu phức tạp thành 7 khía cạnh độc lập, tách bạch giữa điểm sao cảm tính và bản chất từng tính năng.
+                  </p>
+
+                  {/* 3D Visual Slicing Metaphor (ABSA Decomposition) */}
+                  <div className="mt-4 p-3 rounded-xl bg-slate-950/80 border border-cyan-500/30 text-xs space-y-2">
+                    <div className="text-[10px] font-mono text-slate-400 flex items-center justify-between">
+                      <span>CÂU ĐÁNH GIÁ NGUYÊN BẢN</span>
+                      <span className="text-cyan-400">AI BÓC TÁCH</span>
                     </div>
-                    <div>
-                      <h4 className="text-xs font-bold text-white tracking-tight">7 Khía Cạnh Cốt Lõi</h4>
-                      <p className="text-[10px] text-slate-400 font-mono">13.864 câu bóc tách</p>
+
+                    {/* Sliced item 1 */}
+                    <div className="flex items-center justify-between p-1.5 rounded-lg bg-slate-900/90 border border-slate-800/80">
+                      <span className="text-[11px] text-slate-200 truncate">&quot;Giao diện trực quan đẹp&quot;</span>
+                      <span className="text-[10px] font-mono font-semibold text-emerald-400 px-1.5 py-0.5 rounded bg-emerald-500/10 flex-shrink-0">
+                        UI/UX • Khen
+                      </span>
+                    </div>
+
+                    {/* Sliced item 2 */}
+                    <div className="flex items-center justify-between p-1.5 rounded-lg bg-slate-900/90 border border-slate-800/80">
+                      <span className="text-[11px] text-slate-200 truncate">&quot;nhưng chuyển tiền bị chậm&quot;</span>
+                      <span className="text-[10px] font-mono font-semibold text-rose-400 px-1.5 py-0.5 rounded bg-rose-500/10 flex-shrink-0">
+                        Chuyển tiền • Lỗi
+                      </span>
+                    </div>
+
+                    {/* Sliced item 3 */}
+                    <div className="flex items-center justify-between p-1.5 rounded-lg bg-slate-900/90 border border-slate-800/80">
+                      <span className="text-[11px] text-slate-200 truncate">&quot;quét vân tay hay đơ&quot;</span>
+                      <span className="text-[10px] font-mono font-semibold text-amber-400 px-1.5 py-0.5 rounded bg-amber-500/10 flex-shrink-0">
+                        Bảo mật • Chê
+                      </span>
                     </div>
                   </div>
-                  <span className="text-[10px] font-mono text-cyan-400 px-2 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20">
-                    Net Sentiment
-                  </span>
                 </div>
 
-                {/* Micro Aspect Bars Preview */}
-                <div className="mt-4 space-y-2.5 text-xs">
-                  <div className="flex items-center justify-between">
-                    <span className="text-slate-300 text-[11px]">Giao diện & UI/UX</span>
-                    <span className="text-emerald-400 font-mono font-semibold">+27.0 (Khen)</span>
-                  </div>
-                  <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
-                    <div className="bg-emerald-400 h-full w-[78%]" />
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <span className="text-slate-300 text-[11px]">Giao dịch & Chuyển tiền</span>
-                    <span className="text-rose-400 font-mono font-semibold">-41.7 (Lỗi)</span>
-                  </div>
-                  <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
-                    <div className="bg-rose-500 h-full w-[65%]" />
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <span className="text-slate-300 text-[11px]">Bảo mật & Đăng nhập</span>
-                    <span className="text-rose-400 font-mono font-semibold">-75.6 (Sinh trắc)</span>
-                  </div>
-                  <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
-                    <div className="bg-rose-500 h-full w-[88%]" />
-                  </div>
-                </div>
-
-                <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-cyan-300">
+                {/* Bottom Card Footer */}
+                <div className="mt-5 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-cyan-300 font-mono">
                   <span className="flex items-center gap-1.5">
-                    <Activity className="w-3.5 h-3.5 text-cyan-400" />
-                    Chỉ số NSS Chuẩn
+                    <Layers className="w-3.5 h-3.5 text-cyan-400" />
+                    Bóc tách 7 khía cạnh
                   </span>
-                  <Link href="/dashboard/banks" className="hover:underline font-mono text-[10px]">
-                    Xem Radar →
-                  </Link>
+                  <span className="flex items-center gap-1 hover:underline">
+                    Xem mô hình →
+                  </span>
                 </div>
               </motion.div>
 
-              {/* Card 3: Competitive Benchmark & Verbatim Review Explorer */}
+              {/* =========================================================================
+                  CARD 3: ĐỐI SÁNH VỊ THẾ CẠNH TRANH (Competitive Benchmarking & Action)
+                  ========================================================================= */}
               <motion.div
                 style={{ y: cardY3 }}
-                className="hidden md:flex flex-col rounded-2xl bg-gradient-to-b from-[#0e172a]/95 to-[#090d16]/95 border border-violet-500/30 hover:border-violet-400/60 p-5 shadow-2xl backdrop-blur-xl transition-all duration-300 group"
+                animate={{
+                  y: [0, -10, 0],
+                  rotateZ: [0.4, -0.4, 0.4],
+                }}
+                transition={{
+                  duration: 5.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                whileHover={{
+                  scale: 1.03,
+                  rotateY: -4,
+                  rotateX: -2,
+                  transition: { duration: 0.2 },
+                }}
+                className="hidden md:flex flex-col justify-between rounded-2xl bg-gradient-to-b from-[#13112a]/95 via-[#0e0d1f]/95 to-[#080712]/95 border border-violet-500/30 hover:border-violet-400/70 p-5 shadow-2xl backdrop-blur-xl transition-all duration-300 group cursor-pointer relative overflow-hidden"
               >
-                <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-                  <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-lg bg-violet-500/10 border border-violet-500/30 flex items-center justify-center text-violet-400 font-mono font-bold text-xs">
-                      M3
+                {/* 3D Glass Glow Background Accent */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-violet-500/10 blur-2xl rounded-full pointer-events-none group-hover:bg-violet-500/20 transition-all duration-300" />
+
+                <div>
+                  {/* Top Header Badge */}
+                  <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] font-mono font-bold text-violet-300 bg-violet-950/60 border border-violet-500/30">
+                      <GitCompare className="w-3 h-3 text-violet-400 animate-pulse" />
+                      TRỤ CỘT 03
+                    </span>
+                    <span className="text-[10px] font-mono text-slate-400">Đối sánh & Ra quyết định</span>
+                  </div>
+
+                  {/* Title & Purpose Description */}
+                  <h3 className="mt-4 text-base font-bold text-white tracking-tight group-hover:text-violet-300 transition-colors">
+                    Đối Sánh & Ra Quyết Định
+                  </h3>
+                  <p className="mt-1.5 text-xs text-slate-300 leading-relaxed font-normal">
+                    Đặt các ngân hàng lên cùng ma trận đối sánh trực quan, tìm ra ưu thế vượt trội và phát hiện khoảng cách trải nghiệm so với đối thủ.
+                  </p>
+
+                  {/* 3D Visual Floating Action Items */}
+                  <div className="mt-5 space-y-2.5">
+                    <div className="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-[11px] text-slate-200 flex items-center justify-between shadow-sm group-hover:border-violet-500/30 transition">
+                      <div className="flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-violet-400" />
+                        <span>Đối sánh trực tiếp 2-4 ngân hàng</span>
+                      </div>
+                      <span className="text-[9px] font-mono text-violet-300 px-1.5 py-0.5 rounded bg-violet-500/10">Ma trận</span>
                     </div>
-                    <div>
-                      <h4 className="text-xs font-bold text-white tracking-tight">Đối Sánh Cạnh Tranh</h4>
-                      <p className="text-[10px] text-slate-400 font-mono">Ma trận so sánh 7 ngân hàng</p>
+
+                    <div className="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-[11px] text-slate-200 flex items-center justify-between shadow-sm group-hover:border-violet-500/30 transition">
+                      <div className="flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-cyan-400" />
+                        <span>Xác định khoảng cách năng lực tính năng</span>
+                      </div>
+                      <span className="text-[9px] font-mono text-cyan-300 px-1.5 py-0.5 rounded bg-cyan-500/10">Chênh lệch</span>
+                    </div>
+
+                    <div className="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-[11px] text-slate-200 flex items-center justify-between shadow-sm group-hover:border-violet-500/30 transition">
+                      <div className="flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                        <span>Đề xuất ưu tiên xử lý cho đội Product</span>
+                      </div>
+                      <span className="text-[9px] font-mono text-emerald-300 px-1.5 py-0.5 rounded bg-emerald-500/10">Hành động</span>
                     </div>
                   </div>
-                  <span className="text-[10px] font-mono text-violet-300 px-2 py-0.5 rounded bg-violet-500/10 border border-violet-500/20">
-                    Benchmark
-                  </span>
                 </div>
 
-                <div className="mt-4 space-y-2.5">
-                  <div className="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-[11px] flex items-center justify-between">
-                    <span className="text-slate-300 font-medium">BIDV SmartBanking</span>
-                    <span className="text-emerald-400 font-mono font-bold">4.21 ★</span>
-                  </div>
-                  <div className="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-[11px] flex items-center justify-between">
-                    <span className="text-slate-300 font-medium">VCB Digibank</span>
-                    <span className="text-emerald-400 font-mono font-bold">4.18 ★</span>
-                  </div>
-                  <div className="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-[11px] flex items-center justify-between">
-                    <span className="text-slate-300 font-medium">MB Bank</span>
-                    <span className="text-amber-400 font-mono font-bold">3.73 ★</span>
-                  </div>
-                </div>
-
-                <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-300">
-                  <span>Khoảng cách hiệu năng: 0.48★</span>
-                  <Link href="/dashboard/benchmark" className="text-violet-400 font-mono flex items-center gap-1 hover:underline">
-                    So sánh <ChevronRight className="w-3 h-3" />
-                  </Link>
+                {/* Bottom Card Footer */}
+                <div className="mt-5 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-violet-400 font-mono">
+                  <span>Khám phá công cụ đối sánh</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </div>
               </motion.div>
             </motion.div>
@@ -367,7 +474,7 @@ export function StitchShowcase() {
                   <Plus className="w-3.5 h-3.5" />
                 </div>
                 <span className="text-xs sm:text-sm text-slate-400 group-hover:text-slate-200 transition">
-                  Khám phá toàn bộ 5 Module phân tích trên Dashboard...
+                  Khám phá toàn bộ tính năng và công cụ trên Dashboard...
                 </span>
               </div>
               <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center shadow-md group-hover:scale-105 transition">
