@@ -3,7 +3,7 @@
 import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { api } from "@/lib/api";
-import { resolveBankSearch, CANONICAL_BANKS } from "@/lib/bankMatcher";
+import { resolveUniversalSearch, CANONICAL_BANKS, CANONICAL_ASPECTS } from "@/lib/bankMatcher";
 import {
   PaginatedReviewsResponse,
   FilterOptionsResponse,
@@ -30,26 +30,29 @@ function ReviewExplorerContent() {
   const rawRatingParam = searchParams.get("rating");
   const rawSentimentParam = searchParams.get("sentiment");
 
-  // Robust bank alias resolution from URL query params
+  // Robust bank & aspect alias resolution from URL query params
   let initialBank = "";
   if (rawBankParam) {
-    const resolved = resolveBankSearch(rawBankParam);
-    initialBank = resolved.canonicalName || rawBankParam;
+    const resolved = resolveUniversalSearch(rawBankParam, "banks");
+    initialBank = resolved.canonicalBank || rawBankParam;
+  }
+
+  let initialAspect = "";
+  if (rawAspectParam) {
+    const resolved = resolveUniversalSearch(rawAspectParam, "aspects");
+    initialAspect = resolved.canonicalAspect || rawAspectParam;
   }
 
   let initialKeyword = "";
   if (rawKeywordParam) {
-    if (!initialBank) {
-      const resolved = resolveBankSearch(rawKeywordParam);
-      if (resolved.canonicalName) {
-        initialBank = resolved.canonicalName;
-        initialKeyword = resolved.cleanKeyword;
-      } else {
-        initialKeyword = rawKeywordParam;
-      }
-    } else {
-      initialKeyword = rawKeywordParam;
+    const resolved = resolveUniversalSearch(rawKeywordParam);
+    if (!initialBank && resolved.canonicalBank) {
+      initialBank = resolved.canonicalBank;
     }
+    if (!initialAspect && resolved.canonicalAspect) {
+      initialAspect = resolved.canonicalAspect;
+    }
+    initialKeyword = resolved.cleanKeyword || rawKeywordParam;
   }
 
   const [filterOptions, setFilterOptions] = useState<FilterOptionsResponse | null>(null);
@@ -59,7 +62,7 @@ function ReviewExplorerContent() {
   const [selectedBank, setSelectedBank] = useState<string>(initialBank);
   const [selectedRating, setSelectedRating] = useState<string>(rawRatingParam || "");
   const [selectedSentiment, setSelectedSentiment] = useState<string>(rawSentimentParam || "");
-  const [selectedAspect, setSelectedAspect] = useState<string>(rawAspectParam || "");
+  const [selectedAspect, setSelectedAspect] = useState<string>(initialAspect);
   const [selectedVersion, setSelectedVersion] = useState<string>("");
   const [keyword, setKeyword] = useState<string>(initialKeyword);
   const [page, setPage] = useState<number>(1);
@@ -82,26 +85,24 @@ function ReviewExplorerContent() {
     const r = searchParams.get("rating");
     const s = searchParams.get("sentiment");
 
-    let resolvedBank = "";
     if (b !== null) {
-      const res = resolveBankSearch(b);
-      resolvedBank = res.canonicalName || b;
-      setSelectedBank(resolvedBank);
+      const res = resolveUniversalSearch(b, "banks");
+      setSelectedBank(res.canonicalBank || b);
+    }
+    if (a !== null) {
+      const res = resolveUniversalSearch(a, "aspects");
+      setSelectedAspect(res.canonicalAspect || a);
     }
     if (k !== null) {
-      if (!b) {
-        const res = resolveBankSearch(k);
-        if (res.canonicalName) {
-          setSelectedBank(res.canonicalName);
-          setKeyword(res.cleanKeyword);
-        } else {
-          setKeyword(k);
-        }
-      } else {
-        setKeyword(k);
+      const res = resolveUniversalSearch(k);
+      if (!b && res.canonicalBank) {
+        setSelectedBank(res.canonicalBank);
       }
+      if (!a && res.canonicalAspect) {
+        setSelectedAspect(res.canonicalAspect);
+      }
+      setKeyword(res.cleanKeyword || k);
     }
-    if (a !== null) setSelectedAspect(a);
     if (r !== null) setSelectedRating(r);
     if (s !== null) setSelectedSentiment(s);
   }, [searchParams]);
@@ -315,7 +316,7 @@ function ReviewExplorerContent() {
               className="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs focus:border-cyan-400 focus:outline-none"
             >
               <option value="">Tất cả khía cạnh</option>
-              {filterOptions?.genuine_aspects.map((a) => (
+              {(filterOptions?.genuine_aspects || CANONICAL_ASPECTS).map((a) => (
                 <option key={a} value={a}>
                   {getAspectViName(a)}
                 </option>

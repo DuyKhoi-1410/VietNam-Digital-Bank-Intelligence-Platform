@@ -4,17 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Plus, SlidersHorizontal, ArrowUp, Sparkles } from "lucide-react";
 import { SlidingToggle } from "@/components/ui/SlidingToggle";
-import { resolveBankSearch, CANONICAL_BANKS } from "@/lib/bankMatcher";
-
-const ASPECT_PREVIEWS = [
-  "Bảo mật & Đăng nhập",
-  "Giao dịch & Chuyển tiền",
-  "Hệ thống & Hiệu năng",
-  "Giao diện & UI/UX",
-  "CSKH & Phí dịch vụ",
-  "Tính năng khác",
-  "Trải nghiệm chung",
-];
+import { resolveUniversalSearch, CANONICAL_BANKS, CANONICAL_ASPECTS } from "@/lib/bankMatcher";
 
 export function HeroSection() {
   const router = useRouter();
@@ -28,12 +18,15 @@ export function HeroSection() {
       return;
     }
 
-    // Resolve bank alias variants and clean remaining keywords
-    const { canonicalName, cleanKeyword } = resolveBankSearch(query);
+    // Resolve bank and aspect aliases with universal search resolver
+    const { canonicalBank, canonicalAspect, cleanKeyword } = resolveUniversalSearch(query, activeTab);
 
     const params = new URLSearchParams();
-    if (canonicalName) {
-      params.set("bank", canonicalName);
+    if (canonicalBank) {
+      params.set("bank", canonicalBank);
+    }
+    if (canonicalAspect) {
+      params.set("aspect", canonicalAspect);
     }
     if (cleanKeyword) {
       params.set("keyword", cleanKeyword);
@@ -81,7 +74,11 @@ export function HeroSection() {
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Tìm ngân hàng hoặc từ khóa (VD: Vietcombank, MB, BIDV, OTP, lỗi đăng nhập...)"
+                placeholder={
+                  activeTab === "banks"
+                    ? "Tìm ngân hàng hoặc từ khóa (VD: Vietcombank, MB, BIDV, OTP, lỗi chuyển tiền...)"
+                    : "Tìm theo khía cạnh (VD: Bảo mật & Đăng nhập, Chuyển tiền, UI/UX, Hiệu năng, CSKH...)"
+                }
                 className="w-full bg-transparent border-none outline-none text-white placeholder-slate-400 text-base sm:text-lg font-normal py-2"
               />
             </div>
@@ -155,7 +152,7 @@ export function HeroSection() {
                     {b}
                   </button>
                 ))
-              : ASPECT_PREVIEWS.map((a) => (
+              : CANONICAL_ASPECTS.map((a) => (
                   <button
                     key={a}
                     type="button"
