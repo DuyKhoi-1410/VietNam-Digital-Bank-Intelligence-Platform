@@ -10,7 +10,7 @@ import {
   useSpring,
   AnimatePresence,
 } from "framer-motion";
-import { Play, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const SHOWCASE_WORDS = [
   {
@@ -40,6 +40,34 @@ const RUNNING_APPLICATIONS = [
   "RA QUYẾT ĐỊNH NÂNG CẤP SẢN PHẨM CHÍNH XÁC",
   "100% DỮ LIỆU THỰC CHỨNG TỪ GOOGLE PLAY",
   "THEO DÕI ĐỘ HÀI LÒNG THEO TỪNG PHIÊN BẢN APP",
+];
+
+// 24 predetermined floating dust specks with staggered delays, sizes, and natural floating physics
+const FLOATING_PARTICLES = [
+  { id: 1, left: "7%", size: 3, duration: 8.5, delay: 0.2, xOffset: 20 },
+  { id: 2, left: "14%", size: 2.5, duration: 11.2, delay: 2.1, xOffset: -15 },
+  { id: 3, left: "22%", size: 4, duration: 7.8, delay: 1.4, xOffset: 30 },
+  { id: 4, left: "30%", size: 2, duration: 13.0, delay: 3.5, xOffset: -25 },
+  { id: 5, left: "38%", size: 3.5, duration: 9.2, delay: 0.8, xOffset: 15 },
+  { id: 6, left: "46%", size: 2.5, duration: 10.5, delay: 4.2, xOffset: -20 },
+  { id: 7, left: "53%", size: 4.5, duration: 8.0, delay: 1.9, xOffset: 25 },
+  { id: 8, left: "61%", size: 3, duration: 12.1, delay: 2.8, xOffset: -30 },
+  { id: 9, left: "69%", size: 2, duration: 9.7, delay: 0.5, xOffset: 18 },
+  { id: 10, left: "77%", size: 3.5, duration: 11.5, delay: 3.1, xOffset: -12 },
+  { id: 11, left: "84%", size: 4, duration: 8.9, delay: 1.2, xOffset: 22 },
+  { id: 12, left: "91%", size: 2.5, duration: 10.2, delay: 4.7, xOffset: -18 },
+  { id: 13, left: "11%", size: 3, duration: 12.8, delay: 5.3, xOffset: 25 },
+  { id: 14, left: "27%", size: 2, duration: 9.4, delay: 6.1, xOffset: -15 },
+  { id: 15, left: "42%", size: 4, duration: 11.0, delay: 5.8, xOffset: 35 },
+  { id: 16, left: "58%", size: 3.5, duration: 8.3, delay: 6.5, xOffset: -25 },
+  { id: 17, left: "72%", size: 2.5, duration: 13.5, delay: 7.2, xOffset: 15 },
+  { id: 18, left: "87%", size: 3, duration: 9.9, delay: 6.9, xOffset: -20 },
+  { id: 19, left: "18%", size: 3.5, duration: 10.8, delay: 3.8, xOffset: -10 },
+  { id: 20, left: "35%", size: 2.5, duration: 12.3, delay: 4.9, xOffset: 20 },
+  { id: 21, left: "50%", size: 4, duration: 7.5, delay: 2.5, xOffset: -18 },
+  { id: 22, left: "66%", size: 3, duration: 11.8, delay: 5.0, xOffset: 28 },
+  { id: 23, left: "81%", size: 2, duration: 9.1, delay: 1.7, xOffset: -22 },
+  { id: 24, left: "95%", size: 3.5, duration: 10.6, delay: 3.3, xOffset: 16 },
 ];
 
 export function StitchShowcase() {
@@ -114,51 +142,50 @@ export function StitchShowcase() {
           className="relative w-full h-full bg-[#02050e]/98 border border-cyan-500/25 shadow-[0_0_120px_rgba(0,0,0,0.98)] overflow-hidden flex flex-col justify-between p-4 sm:p-6 lg:p-8 select-none"
         >
           {/* =========================================================================
-              DYNAMIC LIVING NEON AURORA BLOOM (Harmonious Cyan & Deep Sapphire Midnight)
-              Quầng sáng neon loang màu chuyển động đa tầng bao bọc logo VDBI
+              DYNAMIC LIVING NEON AURORA BLOOM (Loang màu cực quang MẠNH MẼ & RỰC RỠ)
               ========================================================================= */}
-          {/* Blob 1: Vibrant Cyan & Electric Blue Aurora */}
+          {/* Blob 1: Massive Deep Cyan & Royal Blue Aurora Flood */}
           <motion.div
             animate={{
-              x: [-45, 45, -30, -45],
-              y: [-25, 35, -20, -25],
-              scale: [1, 1.2, 0.95, 1],
+              x: [-60, 60, -40, -60],
+              y: [-35, 45, -30, -35],
+              scale: [1, 1.3, 0.95, 1],
             }}
             transition={{
               duration: 16,
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] sm:w-[950px] md:w-[1100px] h-[380px] sm:h-[500px] bg-gradient-to-r from-cyan-500/30 via-sky-600/25 to-blue-700/30 blur-[130px] rounded-full pointer-events-none"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] sm:w-[1200px] md:w-[1500px] h-[450px] sm:h-[650px] bg-gradient-to-r from-cyan-400/50 via-sky-500/45 to-blue-600/50 blur-[140px] rounded-full pointer-events-none"
           />
 
-          {/* Blob 2: Deep Sapphire & Navy Fluid Atmosphere */}
+          {/* Blob 2: Vibrant Sapphire & Electric Aquamarine Fluid Swirl */}
           <motion.div
             animate={{
-              x: [35, -40, 25, 35],
-              y: [20, -30, 15, 20],
-              scale: [1.1, 0.9, 1.15, 1.1],
+              x: [50, -55, 40, 50],
+              y: [30, -40, 25, 30],
+              scale: [1.15, 0.85, 1.25, 1.15],
             }}
             transition={{
               duration: 18,
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] sm:w-[750px] h-[320px] sm:h-[420px] bg-gradient-to-br from-cyan-400/20 via-blue-600/30 to-indigo-800/20 blur-[105px] rounded-full pointer-events-none"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] sm:w-[950px] md:w-[1200px] h-[400px] sm:h-[550px] bg-gradient-to-br from-teal-300/40 via-cyan-400/55 to-indigo-600/45 blur-[115px] rounded-full pointer-events-none"
           />
 
-          {/* Blob 3: Center Spotlight illuminating directly behind VDBI logo */}
+          {/* Blob 3: Center Radiant Core Spotlight (Intense High-Luminance Focal Neon Glow) */}
           <motion.div
             animate={{
-              scale: [0.9, 1.2, 0.9],
-              opacity: [0.4, 0.75, 0.4],
+              scale: [0.95, 1.3, 0.95],
+              opacity: [0.65, 0.95, 0.65],
             }}
             transition={{
-              duration: 7,
+              duration: 6,
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] sm:w-[550px] h-[240px] sm:h-[340px] bg-gradient-to-tr from-cyan-400/35 via-sky-300/40 to-blue-500/35 blur-[80px] rounded-full pointer-events-none"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] sm:w-[700px] h-[300px] sm:h-[420px] bg-gradient-to-tr from-cyan-300/60 via-sky-300/65 to-blue-400/55 blur-[85px] rounded-full pointer-events-none"
           />
 
           {/* Canvas Dot Matrix Pattern */}
@@ -169,6 +196,39 @@ export function StitchShowcase() {
               backgroundSize: "28px 28px",
             }}
           />
+
+          {/* =========================================================================
+              FLOATING GLOWING PARTICLES (Dấu chấm nhỏ li ti bay từ dưới lên rồi tan biến)
+              ========================================================================= */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden z-10">
+            {FLOATING_PARTICLES.map((p) => (
+              <motion.div
+                key={p.id}
+                initial={{
+                  y: "105vh",
+                  opacity: 0,
+                  x: 0,
+                }}
+                animate={{
+                  y: "-15vh",
+                  opacity: [0, 0.25, 0.9, 0.9, 0.35, 0],
+                  x: [0, p.xOffset, -p.xOffset / 2, 0],
+                }}
+                transition={{
+                  duration: p.duration,
+                  repeat: Infinity,
+                  delay: p.delay,
+                  ease: "easeInOut",
+                }}
+                style={{
+                  left: p.left,
+                  width: p.size,
+                  height: p.size,
+                }}
+                className="absolute rounded-full bg-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.95)]"
+              />
+            ))}
+          </div>
 
           {/* =========================================================================
               FLOATING PREVIEW BADGE (Visible when small, fades out as you zoom full)
@@ -215,14 +275,14 @@ export function StitchShowcase() {
 
           {/* =========================================================================
               CENTER: LARGE VDBI LOGO HERO SHOWCASE & DYNAMIC LIVING TYPOGRAPHY
-              (Logo VDBI to ra, hiệu ứng neon loang màu cực quang và nổi khối siêu đẹp)
+              (Đã căn giữa 100% hoàn hảo, đã xóa nút Khám phá nền tảng theo đúng yêu cầu)
               ========================================================================= */}
           <motion.div
             style={{ scale: centerScale }}
-            className="relative z-20 my-auto text-center flex flex-col items-center max-w-5xl px-4 py-4 sm:py-6"
+            className="relative z-20 my-auto mx-auto w-full max-w-4xl text-center flex flex-col items-center justify-center px-4 py-4 sm:py-6"
           >
             {/* ===================================================================
-                MAJESTIC VDBI LOGO (To rõ, hiệu ứng neon phát quang bồng bềnh 3D)
+                MAJESTIC VDBI LOGO (Căn giữa hoàn hảo, hiệu ứng neon phát quang nổi khối 3D)
                 =================================================================== */}
             <motion.div
               animate={{
@@ -238,10 +298,10 @@ export function StitchShowcase() {
               className="relative mb-6 sm:mb-8 group cursor-pointer"
             >
               {/* Outer Radial Ambient Neon Flare */}
-              <div className="absolute inset-0 -m-6 sm:-m-10 bg-gradient-to-r from-cyan-400/25 via-sky-400/35 to-blue-500/25 blur-2xl rounded-full pointer-events-none group-hover:opacity-100 opacity-80 transition-opacity duration-500" />
+              <div className="absolute inset-0 -m-6 sm:-m-10 bg-gradient-to-r from-cyan-400/40 via-sky-400/50 to-blue-500/40 blur-3xl rounded-full pointer-events-none group-hover:opacity-100 opacity-90 transition-opacity duration-500" />
 
               {/* Glassmorphic Capsule Showcase for VDBI Brand (100% Vector Sharpness, 0% Blur/Grain) */}
-              <div className="relative px-6 sm:px-9 py-4 sm:py-5 rounded-3xl bg-slate-950/65 border border-cyan-400/40 backdrop-blur-2xl shadow-[0_0_50px_rgba(6,182,212,0.35)] transition-all duration-300 group-hover:border-cyan-300 group-hover:shadow-[0_0_80px_rgba(6,182,212,0.6)] flex items-center gap-4 sm:gap-6 md:gap-7 overflow-hidden">
+              <div className="relative px-6 sm:px-9 py-4 sm:py-5 rounded-3xl bg-slate-950/75 border border-cyan-400/50 backdrop-blur-2xl shadow-[0_0_60px_rgba(6,182,212,0.45)] transition-all duration-300 group-hover:border-cyan-300 group-hover:shadow-[0_0_90px_rgba(6,182,212,0.7)] flex items-center justify-center gap-4 sm:gap-6 md:gap-7 overflow-hidden">
                 {/* Laser Top Specular Reflection Line */}
                 <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-300/80 to-transparent pointer-events-none" />
 
@@ -307,19 +367,6 @@ export function StitchShowcase() {
                   {SHOWCASE_WORDS[wordIndex].subtitle}
                 </motion.p>
               </AnimatePresence>
-            </div>
-
-            {/* Play Intro / Explore Dashboard Button (Google Stitch capsule button style) */}
-            <div className="mt-5 sm:mt-7">
-              <Link
-                href="/dashboard"
-                className="inline-flex items-center gap-3 px-8 py-3.5 rounded-full text-sm font-semibold text-cyan-100 bg-[#071329]/90 hover:bg-[#0c1f42] border border-cyan-400/50 hover:border-cyan-300 shadow-[0_0_35px_rgba(6,182,212,0.35)] transition-all duration-300 hover:scale-105 active:scale-95 backdrop-blur-xl group"
-              >
-                <div className="w-6 h-6 rounded-full bg-cyan-400/20 border border-cyan-400/60 flex items-center justify-center text-cyan-300 group-hover:bg-cyan-400 group-hover:text-black transition-all">
-                  <Play className="w-3 h-3 fill-current translate-x-0.5" />
-                </div>
-                <span>Khám phá nền tảng</span>
-              </Link>
             </div>
           </motion.div>
 
