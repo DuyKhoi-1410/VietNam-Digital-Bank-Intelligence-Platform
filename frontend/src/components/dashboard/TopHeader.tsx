@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, ChevronRight } from "lucide-react";
+import { Menu, ChevronRight, ArrowLeft } from "lucide-react";
 import { HealthIndicator } from "./HealthIndicator";
 
 interface TopHeaderProps {
@@ -75,8 +75,17 @@ export function TopHeader({ onToggleMobile }: TopHeaderProps) {
         </div>
       </div>
 
-      {/* Right: Live Health Indicator */}
-      <div className="flex items-center gap-3">
+      {/* Right: Return to Landing Page Button & Live Health Indicator */}
+      <div className="flex items-center gap-2.5 sm:gap-3">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-semibold text-slate-300 hover:text-white bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 hover:border-cyan-500/50 shadow-sm transition-all duration-200 group active:scale-95"
+          title="Về trang giới thiệu (Landing Page)"
+        >
+          <ArrowLeft className="w-3.5 h-3.5 text-cyan-400 group-hover:-translate-x-0.5 transition-transform" />
+          <span>Trang Giới Thiệu</span>
+        </Link>
+
         <HealthIndicator />
       </div>
     </header>
