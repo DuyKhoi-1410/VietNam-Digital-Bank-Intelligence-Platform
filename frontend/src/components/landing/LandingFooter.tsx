@@ -56,14 +56,17 @@ export function LandingFooter() {
           </div>
 
           <div className="flex flex-wrap items-center gap-8 text-xs text-slate-400 font-mono">
-            <a href="#platform" className="hover:text-cyan-400 transition-colors">
-              Nền tảng
+            <a href="#overview" className="hover:text-cyan-400 transition-colors">
+              Tổng Quan
             </a>
             <a href="#modules" className="hover:text-cyan-400 transition-colors">
-              Module phân tích
+              Tiện Ích
             </a>
             <a href="#methodology" className="hover:text-cyan-400 transition-colors">
-              Phương pháp luận
+              Phương Pháp Luận
+            </a>
+            <a href="#faq" className="hover:text-cyan-400 transition-colors">
+              FAQ
             </a>
             <Link href="/dashboard" className="hover:text-cyan-400 transition-colors">
               Dashboard

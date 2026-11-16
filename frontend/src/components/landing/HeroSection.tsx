@@ -20,7 +20,7 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-[85vh] flex flex-col items-center justify-center pt-20 pb-12 px-4 sm:px-6 lg:px-8 overflow-hidden bg-transparent">
+    <section id="overview" className="relative min-h-[85vh] flex flex-col items-center justify-center pt-20 pb-12 px-4 sm:px-6 lg:px-8 overflow-hidden bg-transparent">
       {/* Hero Content Container */}
       <div className="relative z-10 max-w-6xl mx-auto text-center flex flex-col items-center w-full">
         {/* Large Editorial Headline - Siêu to bản, đậm nét chuẩn Keynote Google Stitch */}

@@ -67,28 +67,28 @@ export function LandingNavbar() {
           {/* Desktop Navigation Links */}
           <nav className="hidden md:flex items-center gap-8">
             <a
-              href="#platform"
+              href="#overview"
               className="text-sm text-slate-300 hover:text-white transition-colors tracking-wide"
             >
-              Nền tảng
+              Tổng Quan
             </a>
             <a
               href="#modules"
               className="text-sm text-slate-300 hover:text-white transition-colors tracking-wide"
             >
-              Module phân tích
+              Tiện Ích
             </a>
             <a
               href="#methodology"
               className="text-sm text-slate-300 hover:text-white transition-colors tracking-wide"
             >
-              Phương pháp luận
+              Phương Pháp Luận
             </a>
             <a
               href="#faq"
               className="text-sm text-slate-300 hover:text-white transition-colors tracking-wide"
             >
-              Câu hỏi thường gặp
+              FAQ
             </a>
           </nav>
 
@@ -119,32 +119,32 @@ export function LandingNavbar() {
       {mobileMenuOpen && (
         <div className="md:hidden bg-[#070b14]/95 backdrop-blur-xl border-b border-slate-800 px-6 py-6 space-y-4">
           <a
-            href="#platform"
+            href="#overview"
             onClick={() => setMobileMenuOpen(false)}
             className="block text-base text-slate-200 hover:text-cyan-300 py-1"
           >
-            Nền tảng
+            Tổng Quan
           </a>
           <a
             href="#modules"
             onClick={() => setMobileMenuOpen(false)}
             className="block text-base text-slate-200 hover:text-cyan-300 py-1"
           >
-            Module phân tích
+            Tiện Ích
           </a>
           <a
             href="#methodology"
             onClick={() => setMobileMenuOpen(false)}
             className="block text-base text-slate-200 hover:text-cyan-300 py-1"
           >
-            Phương pháp luận
+            Phương Pháp Luận
           </a>
           <a
-            href="#about"
+            href="#faq"
             onClick={() => setMobileMenuOpen(false)}
             className="block text-base text-slate-200 hover:text-cyan-300 py-1"
           >
-            Về dự án
+            FAQ
           </a>
           <div className="pt-4 border-t border-slate-800">
             <Link
