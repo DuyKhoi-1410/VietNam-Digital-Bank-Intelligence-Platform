@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import {
   motion,
@@ -166,9 +165,9 @@ export function StitchShowcase() {
           className="relative w-full h-full bg-[#02050e]/98 border border-cyan-500/25 shadow-[0_0_120px_rgba(0,0,0,0.98)] overflow-hidden flex flex-col justify-between p-4 sm:p-6 lg:p-8 select-none"
         >
           {/* =========================================================================
-              DYNAMIC LIVING NEON AURORA BLOOM (Loang màu cực quang MẠNH MẼ & RỰC RỠ)
+              DYNAMIC LIVING NEON AURORA BLOOM (Loang màu cực quang XANH - TÍM MẠNH MẼ & RỰC RỠ)
               ========================================================================= */}
-          {/* Blob 1: Massive Deep Cyan & Royal Blue Aurora Flood */}
+          {/* Blob 1: Massive Deep Cyan & Royal Purple Aurora Flood */}
           <motion.div
             animate={{
               x: [-60, 60, -40, -60],
@@ -180,10 +179,10 @@ export function StitchShowcase() {
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] sm:w-[1200px] md:w-[1500px] h-[450px] sm:h-[650px] bg-gradient-to-r from-cyan-400/50 via-sky-500/45 to-blue-600/50 blur-[140px] rounded-full pointer-events-none"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] sm:w-[1200px] md:w-[1500px] h-[450px] sm:h-[650px] bg-gradient-to-r from-cyan-400/45 via-indigo-600/40 to-purple-600/50 blur-[140px] rounded-full pointer-events-none"
           />
 
-          {/* Blob 2: Vibrant Sapphire & Electric Aquamarine Fluid Swirl */}
+          {/* Blob 2: Vibrant Electric Violet & Magenta Swirl */}
           <motion.div
             animate={{
               x: [50, -55, 40, 50],
@@ -195,7 +194,7 @@ export function StitchShowcase() {
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] sm:w-[950px] md:w-[1200px] h-[400px] sm:h-[550px] bg-gradient-to-br from-teal-300/40 via-cyan-400/55 to-indigo-600/45 blur-[115px] rounded-full pointer-events-none"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] sm:w-[950px] md:w-[1200px] h-[400px] sm:h-[550px] bg-gradient-to-br from-cyan-300/35 via-purple-500/50 to-fuchsia-600/45 blur-[125px] rounded-full pointer-events-none"
           />
 
           {/* Blob 3: Center Radiant Core Spotlight (Intense High-Luminance Focal Neon Glow) */}
@@ -209,7 +208,7 @@ export function StitchShowcase() {
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] sm:w-[700px] h-[300px] sm:h-[420px] bg-gradient-to-tr from-cyan-300/60 via-sky-300/65 to-blue-400/55 blur-[85px] rounded-full pointer-events-none"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] sm:w-[700px] h-[300px] sm:h-[420px] bg-gradient-to-tr from-cyan-300/55 via-indigo-400/60 to-purple-500/55 blur-[90px] rounded-full pointer-events-none"
           />
 
           {/* Canvas Dot Matrix Pattern */}
@@ -222,7 +221,7 @@ export function StitchShowcase() {
           />
 
           {/* =========================================================================
-              FLOATING GLOWING PARTICLES (Dấu chấm nhỏ li ti bay từ dưới lên rồi tan biến)
+              FLOATING GLOWING PARTICLES (Dấu chấm nhỏ li ti xanh & tím bay từ dưới lên)
               ========================================================================= */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden z-10">
             {FLOATING_PARTICLES.map((p) => (
@@ -249,7 +248,11 @@ export function StitchShowcase() {
                   width: p.size,
                   height: p.size,
                 }}
-                className="absolute rounded-full bg-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.95)]"
+                className={`absolute rounded-full ${
+                  p.id % 2 === 0
+                    ? "bg-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.95)]"
+                    : "bg-purple-300 shadow-[0_0_12px_rgba(216,180,254,0.95)]"
+                }`}
               />
             ))}
           </div>
@@ -298,82 +301,22 @@ export function StitchShowcase() {
           </div>
 
           {/* =========================================================================
-              CENTER: LARGE VDBI LOGO HERO SHOWCASE & DYNAMIC LIVING TYPOGRAPHY
-              (Đã căn giữa 100% hoàn hảo, đã xóa nút Khám phá nền tảng theo đúng yêu cầu)
+              CENTER: GIGANTIC HERO SHOWCASE (Neon Xanh - Tím Cyber Aurora)
               ========================================================================= */}
           <motion.div
             style={{ scale: centerScale }}
-            className="relative z-20 my-auto mx-auto w-full max-w-5xl text-center flex flex-col items-center justify-center px-4 py-3 sm:py-5"
+            className="relative z-20 my-auto mx-auto w-full max-w-6xl text-center flex flex-col items-center justify-center px-4 py-4"
           >
-            {/* ===================================================================
-                MAJESTIC VDBI LOGO (Thiết kế compact tinh tế, hào quang phát sáng 3D)
-                =================================================================== */}
-            <motion.div
-              animate={{
-                y: [-6, 6, -6],
-                scale: [1, 1.02, 1],
-              }}
-              transition={{
-                duration: 5.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              whileHover={{ scale: 1.04 }}
-              onClick={() => {
-                if (typeof window !== "undefined") {
-                  window.scrollTo({ top: 0, behavior: "smooth" });
-                }
-              }}
-              className="relative mb-3 sm:mb-4 group cursor-pointer"
-            >
-              {/* Outer Radial Ambient Neon Flare */}
-              <div className="absolute inset-0 -m-5 sm:-m-8 bg-gradient-to-r from-cyan-400/35 via-sky-400/45 to-blue-500/35 blur-2xl rounded-full pointer-events-none group-hover:opacity-100 opacity-80 transition-opacity duration-500" />
-
-              {/* Glassmorphic Capsule Showcase for VDBI Brand (Gọn gàng hơn, 100% Vector Sharpness, 0% Grain) */}
-              <div className="relative px-4 sm:px-6 md:px-7 py-2 sm:py-2.5 rounded-2xl bg-slate-950/80 border border-cyan-400/40 backdrop-blur-2xl shadow-[0_0_40px_rgba(6,182,212,0.35)] transition-all duration-300 group-hover:border-cyan-300 group-hover:shadow-[0_0_70px_rgba(6,182,212,0.6)] flex items-center justify-center gap-3 sm:gap-4 md:gap-5 overflow-hidden">
-                {/* Laser Top Specular Reflection Line */}
-                <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-300/80 to-transparent pointer-events-none" />
-
-                {/* VDBI Stylized Emblem Mark (Tỉ lệ thu gọn hài hòa) */}
-                <div className="relative w-11 sm:w-14 md:w-16 h-8 sm:h-10 md:h-11 flex-shrink-0">
-                  <Image
-                    src="/logo-mark.png"
-                    alt="VDBI Emblem"
-                    width={495}
-                    height={223}
-                    className="w-full h-full object-contain filter drop-shadow-[0_0_12px_rgba(6,182,212,0.6)] transition-transform duration-300 group-hover:scale-105"
-                    priority
-                  />
-                </div>
-
-                {/* Laser Vertical Divider */}
-                <div className="h-6 sm:h-8 w-[1px] bg-gradient-to-b from-transparent via-cyan-400/50 to-transparent" />
-
-                {/* Vector Brand Typography (Gọn gàng, siêu nét, rực rỡ neon) */}
-                <div className="flex flex-col text-left select-none tracking-tight">
-                  <span className="text-xs sm:text-base md:text-lg lg:text-xl font-bold text-white leading-tight tracking-tight">
-                    Vietnam Digital
-                  </span>
-                  <div className="text-xs sm:text-base md:text-lg lg:text-xl font-bold leading-tight tracking-tight flex items-center gap-1 sm:gap-1.5">
-                    <span className="text-white">Banking</span>
-                    <span className="text-neon-intelligence">
-                      Intelligence
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Giant Editorial Headline (To hơn, uy lực và nổi bật tuyệt đối) */}
-            <div className="h-[75px] sm:h-[110px] md:h-[135px] lg:h-[155px] flex items-center justify-center">
+            {/* Giant Editorial Headline (Phóng to cực đại, màu Neon Xanh Tím) */}
+            <div className="h-[90px] sm:h-[135px] md:h-[180px] lg:h-[225px] xl:h-[265px] flex items-center justify-center w-full">
               <AnimatePresence mode="wait">
                 <motion.h2
                   key={wordIndex}
-                  initial={{ opacity: 0, y: 24, filter: "blur(10px)" }}
-                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, y: -24, filter: "blur(10px)" }}
-                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight leading-none"
+                  initial={{ opacity: 0, y: 30, filter: "blur(14px)", scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
+                  exit={{ opacity: 0, y: -30, filter: "blur(14px)", scale: 0.95 }}
+                  transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                  className="text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] xl:text-[11.5rem] 2xl:text-[13rem] font-black tracking-tight leading-none drop-shadow-2xl select-none"
                 >
                   <span className="text-gradient-neon-sync">
                     {SHOWCASE_WORDS[wordIndex].word}
@@ -383,15 +326,15 @@ export function StitchShowcase() {
             </div>
 
             {/* Concise statement explaining website application */}
-            <div className="h-[45px] sm:h-[60px] mt-2 sm:mt-3 flex items-center justify-center">
+            <div className="h-[50px] sm:h-[65px] mt-4 sm:mt-6 flex items-center justify-center px-4">
               <AnimatePresence mode="wait">
                 <motion.p
                   key={wordIndex}
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
+                  exit={{ opacity: 0, y: -12 }}
                   transition={{ duration: 0.45, delay: 0.08 }}
-                  className="text-base sm:text-xl md:text-2xl text-slate-100 font-light max-w-2xl leading-relaxed text-center drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]"
+                  className="text-base sm:text-xl md:text-2xl lg:text-3xl text-slate-100/90 font-light max-w-3xl leading-relaxed text-center drop-shadow-[0_4px_20px_rgba(0,0,0,0.95)]"
                 >
                   {SHOWCASE_WORDS[wordIndex].subtitle}
                 </motion.p>

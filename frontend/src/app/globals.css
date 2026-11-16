@@ -227,7 +227,7 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-@keyframes shimmer-neon-cyan {
+@keyframes shimmer-neon-aurora {
   0% {
     background-position: 0% 50%;
   }
@@ -240,12 +240,23 @@ body {
 }
 
 .text-gradient-neon-sync {
-  background: linear-gradient(90deg, #ffffff 0%, #a5f3fc 20%, #38bdf8 45%, #22d3ee 70%, #ffffff 100%);
-  background-size: 200% auto;
-  animation: shimmer-neon-cyan 6s ease-in-out infinite;
+  background: linear-gradient(
+    115deg,
+    #ffffff 0%,
+    #38bdf8 18%,
+    #818cf8 38%,
+    #c084fc 58%,
+    #e879f9 78%,
+    #22d3ee 92%,
+    #ffffff 100%
+  );
+  background-size: 250% auto;
+  animation: shimmer-neon-aurora 7s ease-in-out infinite;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 25px rgba(6, 182, 212, 0.75)) drop-shadow(0 0 50px rgba(14, 165, 233, 0.4));
+  filter: drop-shadow(0 0 35px rgba(56, 189, 248, 0.85))
+    drop-shadow(0 0 75px rgba(168, 85, 247, 0.7))
+    drop-shadow(0 0 120px rgba(217, 70, 239, 0.45));
 }
 
 .text-gradient-animated {
