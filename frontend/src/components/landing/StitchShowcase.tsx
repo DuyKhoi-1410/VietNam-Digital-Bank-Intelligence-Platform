@@ -295,6 +295,11 @@ export function StitchShowcase() {
                 ease: "easeInOut",
               }}
               whileHover={{ scale: 1.05 }}
+              onClick={() => {
+                if (typeof window !== "undefined") {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+              }}
               className="relative mb-6 sm:mb-8 group cursor-pointer"
             >
               {/* Outer Radial Ambient Neon Flare */}

@@ -9,6 +9,7 @@ import { Methodology } from "@/components/landing/Methodology";
 import { BankMarquee } from "@/components/landing/BankMarquee";
 import { FaqSection } from "@/components/landing/FaqSection";
 import { LandingFooter } from "@/components/landing/LandingFooter";
+import { ScrollToTop } from "@/components/landing/ScrollToTop";
 
 export default function LandingPage() {
   return (
@@ -33,6 +34,9 @@ export default function LandingPage() {
 
       {/* Footer & Final CTA */}
       <LandingFooter />
+
+      {/* Floating Scroll To Top Button (Luôn có nút tua ngược lên trang đầu) */}
+      <ScrollToTop />
     </div>
   );
 }

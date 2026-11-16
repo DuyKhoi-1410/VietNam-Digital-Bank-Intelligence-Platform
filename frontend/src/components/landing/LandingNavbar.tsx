@@ -10,12 +10,30 @@ export function LandingNavbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    // Reset scroll to top on every reload
+    if (typeof window !== "undefined") {
+      if ("scrollRestoration" in window.history) {
+        window.history.scrollRestoration = "manual";
+      }
+      window.scrollTo(0, 0);
+
+      const handleScroll = () => {
+        setScrolled(window.scrollY > 20);
+      };
+      window.addEventListener("scroll", handleScroll, { passive: true });
+      return () => window.removeEventListener("scroll", handleScroll);
+    }
   }, []);
+
+  const handleLogoClick = (e: React.MouseEvent) => {
+    if (typeof window !== "undefined") {
+      // If already on landing page, smooth scroll to the very top
+      if (window.location.pathname === "/") {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+  };
 
   return (
     <header
@@ -27,8 +45,12 @@ export function LandingNavbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo Brand Header */}
-          <Link href="/" className="flex items-center gap-3 group">
+          {/* Logo Brand Header - Click to scroll to top */}
+          <Link
+            href="/"
+            onClick={handleLogoClick}
+            className="flex items-center gap-3 group cursor-pointer"
+          >
             <Image
               src="/logo-full.png"
               alt="Vietnam Digital Banking Intelligence"
