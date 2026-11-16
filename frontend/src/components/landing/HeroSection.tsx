@@ -20,17 +20,17 @@ export function HeroSection() {
   };
 
   return (
-    <section id="overview" className="relative min-h-[85vh] flex flex-col items-center justify-center pt-20 pb-12 px-4 sm:px-6 lg:px-8 overflow-hidden bg-transparent">
+    <section id="overview" className="relative min-h-[calc(100vh-4.5rem)] flex flex-col items-center justify-center pt-12 pb-12 sm:pt-16 sm:pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-transparent">
       {/* Hero Content Container */}
-      <div className="relative z-10 max-w-6xl mx-auto text-center flex flex-col items-center w-full">
-        {/* Large Editorial Headline - Siêu to bản, đậm nét chuẩn Keynote Google Stitch */}
-        <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[5.5rem] xl:text-[6.5rem] 2xl:text-[7.5rem] font-black tracking-tight text-white max-w-6xl leading-[1.05] sm:leading-[1.02] drop-shadow-xl select-none">
+      <div className="relative z-10 max-w-5xl mx-auto text-center flex flex-col items-center w-full">
+        {/* Large Editorial Headline - Cân đối, ấn tượng chuẩn Keynote Google Stitch */}
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[4.75rem] 2xl:text-[5.25rem] font-extrabold tracking-tight text-white max-w-5xl leading-[1.08] sm:leading-[1.05] drop-shadow-xl select-none">
           Vietnam Digital Banking <br className="hidden sm:inline" />
           <span className="text-gradient-aurora">Intelligence Platform.</span>
         </h1>
 
         {/* Subtitle Statement */}
-        <p className="mt-6 sm:mt-8 text-lg sm:text-xl md:text-2xl text-slate-300 max-w-3xl font-light leading-relaxed">
+        <p className="mt-4 sm:mt-5 text-base sm:text-lg md:text-xl text-slate-300 max-w-2xl font-light leading-relaxed">
           Chuyển hóa 19,303 phản hồi người dùng thực tế thành dữ liệu thông minh và phân tích cảm xúc đa chiều trên 7 ứng dụng ngân hàng số.
         </p>
 
@@ -38,7 +38,7 @@ export function HeroSection() {
             GOOGLE STITCH SIGNATURE PROMPT & EXPLORATION CARD
             Frosted dark glass, interactive input, bottom control bar, and suggestions
             ========================================================================= */}
-        <div className="mt-10 sm:mt-12 w-full max-w-2xl">
+        <div className="mt-8 sm:mt-9 w-full max-w-2xl">
           <form
             onSubmit={handleSearch}
             className="w-full bg-[#0d1322]/85 backdrop-blur-2xl border border-slate-700/60 hover:border-slate-600 rounded-3xl p-5 shadow-2xl shadow-black/80 transition-all duration-200 text-left"
