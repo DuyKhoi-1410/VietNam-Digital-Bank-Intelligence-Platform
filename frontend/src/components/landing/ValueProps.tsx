@@ -16,29 +16,13 @@ import Link from "next/link";
 
 export function ValueProps() {
   return (
-    <section id="platform" className="relative py-24 sm:py-36 px-4 sm:px-6 lg:px-12 bg-transparent overflow-hidden">
+    <section id="platform" className="relative py-12 sm:py-20 px-4 sm:px-6 lg:px-12 bg-transparent overflow-hidden">
       {/* Background Ambient Radial Glows */}
       <div className="absolute top-1/4 right-10 w-[700px] h-[450px] bg-cyan-600/10 blur-[180px] rounded-full pointer-events-none" />
       <div className="absolute bottom-1/4 left-10 w-[700px] h-[450px] bg-violet-600/10 blur-[180px] rounded-full pointer-events-none" />
 
       {/* Massive Full-Screen Container (Chuẩn Google Stitch Cinematic Full-Width) */}
       <div className="w-full max-w-[1760px] mx-auto">
-        {/* Section Header (Google Stitch Layout - To rõ, đậm chất keynote) */}
-        <div className="flex flex-col items-start max-w-4xl mb-16 sm:mb-20">
-          <span className="font-mono text-xs uppercase tracking-widest text-cyan-400 mb-4 flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/70 border border-cyan-500/40 shadow-xl backdrop-blur-md">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-            Khung Phân Tích Chiến Lược
-          </span>
-          <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-[1.08]">
-            Ba Trụ Cột Thông Minh <br />
-            <span className="text-gradient-cyan">Cho Ngân Hàng Số Việt Nam.</span>
-          </h2>
-          <p className="mt-6 text-lg sm:text-2xl text-slate-300 font-light leading-relaxed max-w-3xl">
-            Hệ thống phân tích toàn diện được thiết kế riêng cho ban lãnh đạo khối ngân hàng số,
-            đội ngũ sản phẩm và chuyên viên nghiên cứu UX/CX để điều hướng từ xu hướng vĩ mô đến từng câu phản hồi chi tiết.
-          </p>
-        </div>
-
         {/* Bento Grid Layout (Bố cục chia ô to bản, trải rộng full màn hình, chuẩn Google Stitch) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
           {/* =========================================================================
