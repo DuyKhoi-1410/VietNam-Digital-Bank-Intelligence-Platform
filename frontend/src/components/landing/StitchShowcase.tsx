@@ -167,19 +167,19 @@ export function StitchShowcase() {
           {/* =========================================================================
               DYNAMIC LIVING NEON AURORA BLOOM (Loang màu cực quang XANH - TÍM MẠNH MẼ & RỰC RỠ)
               ========================================================================= */}
-          {/* Blob 1: Massive Deep Cyan & Royal Purple Aurora Flood (Êm dịu tạo nền sâu, không lóa mắt) */}
+          {/* Blob 1: Massive Deep Cyan & Royal Purple Aurora Flood (Loang màu nền sâu êm ái) */}
           <motion.div
             animate={{
               x: [-60, 60, -40, -60],
               y: [-35, 45, -30, -35],
-              scale: [1, 1.3, 0.95, 1],
+              scale: [1, 1.25, 0.95, 1],
             }}
             transition={{
               duration: 16,
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] sm:w-[1200px] md:w-[1500px] h-[450px] sm:h-[650px] bg-gradient-to-r from-cyan-400/30 via-indigo-600/25 to-purple-600/30 blur-[150px] rounded-full pointer-events-none"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] sm:w-[1300px] md:w-[1550px] h-[500px] sm:h-[650px] bg-gradient-to-r from-cyan-400/35 via-indigo-500/30 to-purple-600/35 blur-[130px] rounded-full pointer-events-none"
           />
 
           {/* Blob 2: Vibrant Electric Violet & Magenta Swirl */}
@@ -194,21 +194,21 @@ export function StitchShowcase() {
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] sm:w-[950px] md:w-[1200px] h-[400px] sm:h-[550px] bg-gradient-to-br from-cyan-300/25 via-purple-500/30 to-fuchsia-600/25 blur-[130px] rounded-full pointer-events-none"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] sm:w-[1000px] md:w-[1250px] h-[420px] sm:h-[550px] bg-gradient-to-br from-cyan-300/30 via-purple-500/35 to-fuchsia-500/30 blur-[110px] rounded-full pointer-events-none"
           />
 
-          {/* Blob 3: Center Radiant Core Spotlight (Ánh sáng nền dịu nhẹ giúp chữ nổi bật tuyệt đối) */}
+          {/* Blob 3: Center Radiant Core Spotlight - Chiếu sáng êm dịu, loang màu ăn khớp chuẩn xác với chữ (Cyan & Violet & Fuchsia) */}
           <motion.div
             animate={{
-              scale: [0.95, 1.2, 0.95],
-              opacity: [0.25, 0.45, 0.25],
+              scale: [0.95, 1.15, 0.95],
+              opacity: [0.45, 0.7, 0.45],
             }}
             transition={{
-              duration: 6,
+              duration: 5.5,
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] sm:w-[700px] h-[300px] sm:h-[400px] bg-gradient-to-tr from-cyan-300/30 via-indigo-400/30 to-purple-500/30 blur-[90px] rounded-full pointer-events-none"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[850px] h-[350px] sm:h-[450px] bg-gradient-to-r from-cyan-400/40 via-violet-500/45 to-fuchsia-400/40 blur-[85px] rounded-full pointer-events-none"
           />
 
           {/* Canvas Dot Matrix Pattern */}
@@ -312,11 +312,11 @@ export function StitchShowcase() {
               <AnimatePresence mode="wait">
                 <motion.h2
                   key={wordIndex}
-                  initial={{ opacity: 0, y: 24, filter: "blur(8px)", scale: 0.98 }}
-                  animate={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
-                  exit={{ opacity: 0, y: -24, filter: "blur(8px)", scale: 0.98 }}
-                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="text-5xl sm:text-7xl md:text-8xl lg:text-[6.5rem] xl:text-[7.5rem] 2xl:text-[8.5rem] font-black tracking-tight leading-none drop-shadow-2xl select-none whitespace-nowrap"
+                  initial={{ opacity: 0, y: 18, scale: 0.97 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -18, scale: 0.97 }}
+                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                  className="text-5xl sm:text-7xl md:text-8xl lg:text-[6.5rem] xl:text-[7.5rem] 2xl:text-[8.5rem] font-black tracking-tight leading-none drop-shadow-[0_10px_35px_rgba(0,0,0,0.95)] select-none whitespace-nowrap"
                 >
                   <span className="text-gradient-neon-sync">
                     {SHOWCASE_WORDS[wordIndex].word}
@@ -334,7 +334,7 @@ export function StitchShowcase() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.45, delay: 0.08 }}
-                  className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-100 font-normal max-w-3xl leading-relaxed text-center drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)]"
+                  className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-100 font-medium max-w-3xl leading-relaxed text-center drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)]"
                 >
                   {SHOWCASE_WORDS[wordIndex].subtitle}
                 </motion.p>
