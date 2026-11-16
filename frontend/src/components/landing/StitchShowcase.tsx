@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import {
   motion,
@@ -11,37 +12,83 @@ import {
 } from "framer-motion";
 import { Play, ArrowRight } from "lucide-react";
 
+interface BankItem {
+  name: string;
+  shortName: string;
+  logo: string;
+  bgClass: string;
+  borderHover: string;
+}
+
+const BANKS: BankItem[] = [
+  {
+    name: "BIDV SmartBanking",
+    shortName: "BIDV",
+    logo: "/banks/bidv.png",
+    bgClass: "bg-white",
+    borderHover: "hover:border-emerald-400 hover:shadow-[0_0_30px_rgba(16,185,129,0.4)]",
+  },
+  {
+    name: "MB Bank",
+    shortName: "MBBank",
+    logo: "/banks/mbbank.png",
+    bgClass: "bg-white",
+    borderHover: "hover:border-blue-400 hover:shadow-[0_0_30px_rgba(59,130,246,0.4)]",
+  },
+  {
+    name: "VCB Digibank",
+    shortName: "Vietcombank",
+    logo: "/banks/vietcombank.png",
+    bgClass: "bg-white",
+    borderHover: "hover:border-emerald-400 hover:shadow-[0_0_30px_rgba(16,185,129,0.4)]",
+  },
+  {
+    name: "VietinBank iPay",
+    shortName: "VietinBank",
+    logo: "/banks/vietinbank.png",
+    bgClass: "bg-white",
+    borderHover: "hover:border-sky-400 hover:shadow-[0_0_30px_rgba(14,165,233,0.4)]",
+  },
+  {
+    name: "TPBank Mobile",
+    shortName: "TPBank",
+    logo: "/banks/tpbank.png",
+    bgClass: "bg-[#5b2384]",
+    borderHover: "hover:border-purple-400 hover:shadow-[0_0_30px_rgba(168,85,247,0.4)]",
+  },
+  {
+    name: "TNEX",
+    shortName: "TNEX",
+    logo: "/banks/tnex.png",
+    bgClass: "bg-white",
+    borderHover: "hover:border-cyan-400 hover:shadow-[0_0_30px_rgba(6,182,212,0.4)]",
+  },
+  {
+    name: "Liobank",
+    shortName: "Liobank",
+    logo: "/banks/liobank.png",
+    bgClass: "bg-black border border-slate-700/80",
+    borderHover: "hover:border-amber-400 hover:shadow-[0_0_30px_rgba(245,158,11,0.4)]",
+  },
+];
+
 const SHOWCASE_WORDS = [
   {
     word: "Intelligence.",
     subtitle: "Lắng nghe tiếng nói thật. Bóc tách 7 khía cạnh trải nghiệm bằng AI.",
-    badge: "TRÍ TUỆ NHÂN TẠO • TRẢI NGHIỆM KHÁCH HÀNG SỐ",
   },
   {
     word: "Experience.",
     subtitle: "Giải mã hành trình khách hàng số & khắc phục triệt để điểm nghẽn.",
-    badge: "PHÂN TÍCH CHUYÊN SÂU • 7 KHÍA CẠNH NGÂN HÀNG",
   },
   {
     word: "Benchmark.",
     subtitle: "Đối sánh năng lực cạnh tranh trực quan giữa 7 ngân hàng thương mại.",
-    badge: "MA TRẬN CẠNH TRANH • DỮ LIỆU THỰC CHỨNG",
   },
   {
     word: "Sentiment.",
     subtitle: "Định lượng chỉ số cảm xúc ròng (NSS) theo từng phiên bản ứng dụng.",
-    badge: "CHỈ SỐ CẢM XÚC RÒNG • GOOGLE PLAY REVIEWS",
   },
-];
-
-const RUNNING_APPLICATIONS_1 = [
-  "LẮNG NGHE TIẾNG NÓI NGƯỜI DÙNG THẬT",
-  "BÓC TÁCH CẢM XÚC 7 KHÍA CẠNH BẰNG AI (ABSA)",
-  "ĐỊNH LƯỢNG ĐIỂM NGHẼN BẢO MẬT & SINH TRẮC HỌC",
-  "TỐC ĐỘ GIAO DỊCH & CHUYỂN TIỀN 24/7",
-  "ĐỐI SÁNH NĂNG LỰC CẠNH TRANH 7 NGÂN HÀNG SỐ",
-  "RA QUYẾT ĐỊNH NÂNG CẤP SẢN PHẨM CHÍNH XÁC",
-  "100% DỮ LIỆU THỰC CHỨNG TỪ GOOGLE PLAY",
 ];
 
 export function StitchShowcase() {
@@ -98,6 +145,9 @@ export function StitchShowcase() {
   // Center typography scale & depth on scroll
   const centerScale = useTransform(smoothProgress, [0, 0.95], [0.92, 1.0]);
 
+  // Duplicate bank items 3 times for seamless infinite horizontal loop
+  const marqueeBanks = [...BANKS, ...BANKS, ...BANKS];
+
   return (
     <section
       ref={containerRef}
@@ -113,11 +163,10 @@ export function StitchShowcase() {
             borderRadius,
             opacity,
           }}
-          className="relative w-full h-full bg-[#02050e]/98 border border-cyan-500/25 shadow-[0_0_120px_rgba(0,0,0,0.98)] overflow-hidden flex flex-col justify-between p-4 sm:p-6 lg:p-8 select-none"
+          className="relative w-full h-full bg-[#02050e]/98 border border-cyan-500/25 shadow-[0_0_120px_rgba(0,0,0,0.98)] overflow-hidden flex flex-col justify-between p-4 sm:p-6 lg:p-7 select-none"
         >
           {/* =========================================================================
               DYNAMIC LIVING NEON AURORA BLOOM (Harmonious Cyan & Deep Sapphire Midnight)
-              Màu neon khớp hoàn toàn với màu chữ neon, êm dịu, dễ nhìn, không chói gắt
               ========================================================================= */}
           {/* Blob 1: Vibrant Cyan & Electric Blue Aurora */}
           <motion.div
@@ -187,7 +236,6 @@ export function StitchShowcase() {
 
           {/* =========================================================================
               TOP ROW: Clean Brand Identity (Left) + Dashboard Link (Right)
-              (Đã loại bỏ thẻ hộp thông báo theo đúng ảnh đính kèm của người dùng)
               ========================================================================= */}
           <div className="relative z-20 flex items-center justify-between w-full">
             {/* Top-Left: Minimal Brand Tag like Stitch BETA */}
@@ -218,45 +266,28 @@ export function StitchShowcase() {
 
           {/* =========================================================================
               CENTER: DYNAMIC LIVING TYPOGRAPHY & INTRO BUTTON
-              Màu chữ neon trắng-cyan rực rỡ, sắc nét, đồng bộ tuyệt đối với nền neon
+              (Đã bỏ hoàn toàn các badge con phía trên theo đúng yêu cầu)
               ========================================================================= */}
           <motion.div
             style={{ scale: centerScale }}
             animate={{
-              y: [-6, 6, -6],
+              y: [-5, 5, -5],
             }}
             transition={{
               duration: 5,
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="relative z-20 my-auto text-center flex flex-col items-center max-w-4xl px-4 py-8"
+            className="relative z-20 my-auto text-center flex flex-col items-center max-w-4xl px-4 py-4 sm:py-6"
           >
-            {/* Superpower Category Badge with AnimatePresence */}
-            <div className="h-8 mb-4 sm:mb-6 flex items-center justify-center">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={wordIndex}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.35 }}
-                  className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-cyan-400/50 text-[11px] sm:text-xs font-mono text-cyan-300 shadow-[0_0_20px_rgba(6,182,212,0.3)] backdrop-blur-md"
-                >
-                  <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-                  <span>{SHOWCASE_WORDS[wordIndex].badge}</span>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
             {/* Giant Editorial Headline (High-Contrast Neon Cyan Gradient - Crystal Clear) */}
-            <div className="h-[90px] sm:h-[130px] md:h-[160px] flex items-center justify-center">
+            <div className="h-[75px] sm:h-[110px] md:h-[140px] flex items-center justify-center">
               <AnimatePresence mode="wait">
                 <motion.h2
                   key={wordIndex}
-                  initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
+                  initial={{ opacity: 0, y: 28, filter: "blur(8px)" }}
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, y: -30, filter: "blur(8px)" }}
+                  exit={{ opacity: 0, y: -28, filter: "blur(8px)" }}
                   transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
                   className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight leading-none"
                 >
@@ -268,13 +299,13 @@ export function StitchShowcase() {
             </div>
 
             {/* Concise statement explaining website application */}
-            <div className="h-[60px] sm:h-[70px] mt-4 flex items-center justify-center">
+            <div className="h-[50px] sm:h-[60px] mt-3 sm:mt-4 flex items-center justify-center">
               <AnimatePresence mode="wait">
                 <motion.p
                   key={wordIndex}
-                  initial={{ opacity: 0, y: 12 }}
+                  initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -12 }}
+                  exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.45, delay: 0.08 }}
                   className="text-base sm:text-xl md:text-2xl text-slate-100 font-light max-w-2xl leading-relaxed text-center drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]"
                 >
@@ -284,7 +315,7 @@ export function StitchShowcase() {
             </div>
 
             {/* Play Intro / Explore Dashboard Button (Google Stitch capsule button style) */}
-            <div className="mt-8 sm:mt-10">
+            <div className="mt-6 sm:mt-8">
               <Link
                 href="/dashboard"
                 className="inline-flex items-center gap-3 px-8 py-3.5 rounded-full text-sm font-semibold text-cyan-100 bg-[#071329]/90 hover:bg-[#0c1f42] border border-cyan-400/50 hover:border-cyan-300 shadow-[0_0_35px_rgba(6,182,212,0.35)] transition-all duration-300 hover:scale-105 active:scale-95 backdrop-blur-xl group"
@@ -298,26 +329,51 @@ export function StitchShowcase() {
           </motion.div>
 
           {/* =========================================================================
-              BOTTOM: CONTINUOUS HORIZONTAL RUNNING TEXT TICKER (Chữ chạy ngang nói về ứng dụng)
+              BOTTOM: BIG, GLOWING BANK LOGOS MARQUEE INSIDE VIDEO CANVAS
+              (Ảnh logo ngân hàng to ra, hiệu ứng neon kính cực đẹp, di chuyển tự động)
               ========================================================================= */}
-          <div className="relative z-20 w-full overflow-hidden py-3 border-t border-cyan-500/20 bg-slate-950/40 backdrop-blur-md">
-            {/* Left & Right Fade Masks */}
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#02050e] to-transparent z-10" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#02050e] to-transparent z-10" />
+          <div className="relative z-20 w-full overflow-hidden pt-3 pb-2 border-t border-cyan-500/20 bg-slate-950/50 backdrop-blur-md">
+            {/* Left & Right Fade Masks for smooth gradient entry/exit */}
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-24 sm:w-36 bg-gradient-to-r from-[#02050e] to-transparent z-10" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-36 bg-gradient-to-l from-[#02050e] to-transparent z-10" />
 
-            {/* Horizontal Continuous Marquee Row */}
-            <div className="animate-marquee-infinite flex gap-8 items-center text-xs font-mono font-bold tracking-wider text-cyan-300/90 whitespace-nowrap">
-              {RUNNING_APPLICATIONS_1.concat(RUNNING_APPLICATIONS_1).map(
-                (item, idx) => (
-                  <span
-                    key={idx}
-                    className="flex items-center gap-3 hover:text-white transition-colors cursor-default"
+            {/* Continuous Infinite Marquee of Large Bank Logos */}
+            <div className="animate-marquee-infinite flex gap-4 sm:gap-6 items-center select-none py-1">
+              {marqueeBanks.map((bank, idx) => (
+                <Link
+                  key={idx}
+                  href={`/dashboard/banks?bank=${encodeURIComponent(bank.shortName)}`}
+                  className={`group relative flex items-center gap-3.5 px-4 sm:px-5 py-2 sm:py-2.5 rounded-2xl bg-gradient-to-b from-slate-900/90 to-[#050a18]/95 border border-cyan-500/25 ${bank.borderHover} shadow-[0_4px_24px_rgba(0,0,0,0.6)] backdrop-blur-xl transition-all duration-300 hover:scale-105 flex-shrink-0 cursor-pointer overflow-hidden`}
+                >
+                  {/* Top Specular Neon Laser Line */}
+                  <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent pointer-events-none" />
+
+                  {/* Big Bank Logo Image Box */}
+                  <div
+                    className={`relative w-28 sm:w-36 h-10 sm:h-12 rounded-xl ${bank.bgClass} flex items-center justify-center p-2 shadow-inner overflow-hidden transition-transform duration-300 group-hover:scale-105`}
                   >
-                    <span className="text-cyan-400 text-sm">✦</span>
-                    <span>{item}</span>
-                  </span>
-                )
-              )}
+                    <Image
+                      src={bank.logo}
+                      alt={bank.name}
+                      width={140}
+                      height={48}
+                      className="w-full h-full object-contain"
+                      priority={idx < 7}
+                    />
+                  </div>
+
+                  {/* Bank Label Details */}
+                  <div className="flex flex-col text-left pr-2">
+                    <span className="text-xs sm:text-sm font-bold text-white group-hover:text-cyan-200 transition-colors tracking-wide whitespace-nowrap">
+                      {bank.name}
+                    </span>
+                    <span className="text-[10px] font-mono text-cyan-400/90 flex items-center gap-1.5 whitespace-nowrap">
+                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                      <span>Đối sánh AI</span>
+                    </span>
+                  </div>
+                </Link>
+              ))}
             </div>
           </div>
         </motion.div>
