@@ -256,22 +256,22 @@ function ReviewExplorerContent() {
         {/* Search Bar - Styled exactly like the Landing Page with frosted dark glass and Send button */}
         <form
           onSubmit={handleSearchSubmit}
-          className="w-full bg-[#0d1322]/85 backdrop-blur-2xl border border-slate-700/60 hover:border-slate-600 rounded-3xl p-3 sm:p-3.5 pl-5 sm:pl-6 shadow-2xl shadow-black/80 transition-all duration-200 flex items-center gap-3 text-left"
+          className="w-full min-h-[66px] sm:min-h-[74px] bg-[#0d1322]/85 backdrop-blur-2xl border border-slate-700/60 hover:border-slate-600 rounded-3xl p-4 sm:p-5 pl-6 sm:pl-7 shadow-2xl shadow-black/80 transition-all duration-200 flex items-center gap-3.5 text-left"
         >
-          <Search className="w-5 h-5 text-slate-400 flex-shrink-0" />
+          <Search className="w-5 h-5 sm:w-6 sm:h-6 text-slate-400 flex-shrink-0" />
           <input
             type="text"
             placeholder="Tìm kiếm ngân hàng, khía cạnh hoặc từ khóa (VD: Vietcombank, MB, Giao diện, OTP, lỗi đăng nhập...)"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
-            className="w-full bg-transparent border-none outline-none text-white placeholder-slate-400 text-sm sm:text-base font-normal py-1"
+            className="w-full bg-transparent border-none outline-none text-white placeholder-slate-400 text-sm sm:text-base font-normal py-2"
           />
           <button
             type="submit"
-            className="w-10 h-10 rounded-full bg-white hover:bg-slate-200 text-black flex items-center justify-center transition active:scale-95 shadow-lg shadow-white/20 flex-shrink-0"
+            className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white hover:bg-slate-200 text-black flex items-center justify-center transition active:scale-95 shadow-lg shadow-white/20 flex-shrink-0"
             title="Gửi câu lệnh tìm kiếm"
           >
-            <ArrowUp className="w-4.5 h-4.5 font-bold" />
+            <ArrowUp className="w-5 h-5 sm:w-6 sm:h-6 font-bold" />
           </button>
         </form>
 
