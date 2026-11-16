@@ -62,10 +62,10 @@ export function HeroSection() {
             GOOGLE STITCH SIGNATURE PROMPT & EXPLORATION CARD
             Frosted dark glass, interactive input, and Send button
             ========================================================================= */}
-        <div className="mt-7 sm:mt-8 w-full max-w-2xl">
+        <div className="mt-6 sm:mt-7 w-full max-w-2xl">
           <form
             onSubmit={handleSearch}
-            className="w-full min-h-[110px] sm:min-h-[125px] bg-[#0d1322]/85 backdrop-blur-2xl border border-slate-700/60 hover:border-slate-600 rounded-3xl p-5 sm:p-6 shadow-2xl shadow-black/80 transition-all duration-200 flex flex-col justify-between text-left"
+            className="w-full min-h-[78px] sm:min-h-[86px] bg-[#0d1322]/85 backdrop-blur-2xl border border-slate-700/60 hover:border-slate-600 rounded-2xl sm:rounded-3xl p-3.5 sm:p-4 shadow-xl shadow-black/80 transition-all duration-200 flex flex-col justify-between text-left"
           >
             {/* Input field */}
             <div className="w-full">
@@ -74,18 +74,18 @@ export function HeroSection() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Bạn muốn phân tích ngân hàng hay khía cạnh nào? (VD: Vietcombank, MB, Giao diện, OTP, Chuyển tiền...)"
-                className="w-full bg-transparent border-none outline-none text-white placeholder-slate-400 text-base sm:text-lg font-normal py-1"
+                className="w-full bg-transparent border-none outline-none text-white placeholder-slate-400 text-sm sm:text-base font-normal py-0.5"
               />
             </div>
 
             {/* Bottom row with ONLY the Send Button at the bottom right */}
-            <div className="flex items-center justify-end mt-4 pt-2">
+            <div className="flex items-center justify-end mt-2">
               <button
                 type="submit"
-                className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white hover:bg-slate-200 text-black flex items-center justify-center transition active:scale-95 shadow-lg shadow-white/20"
+                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white hover:bg-slate-200 text-black flex items-center justify-center transition active:scale-95 shadow-md shadow-white/20"
                 title="Gửi câu lệnh tìm kiếm"
               >
-                <ArrowUp className="w-4.5 h-4.5 sm:w-5 sm:h-5 font-bold" />
+                <ArrowUp className="w-4 h-4 font-bold" />
               </button>
             </div>
           </form>
