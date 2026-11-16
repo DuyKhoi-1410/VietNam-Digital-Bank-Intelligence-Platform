@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { MessageSquareText, ShieldAlert, Cpu, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export function StorySection() {
   return (
@@ -31,38 +31,7 @@ export function StorySection() {
           </Link>
         </div>
 
-        {/* 3 Core Capability Columns */}
-        <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 w-full pt-14 border-t border-slate-800/80 text-left">
-          <div className="flex flex-col gap-3">
-            <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-1">
-              <MessageSquareText className="w-5 h-5" />
-            </div>
-            <h3 className="text-lg font-semibold text-white">Tiếng Nói Người Dùng Thật</h3>
-            <p className="text-sm text-slate-400 leading-relaxed">
-              19,303 phản hồi thực tế từ Google Play được khử trùng lặp, phản ánh chính xác từng va chạm trải nghiệm hàng ngày.
-            </p>
-          </div>
 
-          <div className="flex flex-col gap-3">
-            <div className="w-10 h-10 rounded-xl bg-violet-500/10 border border-violet-500/30 flex items-center justify-center text-violet-400 mb-1">
-              <Cpu className="w-5 h-5" />
-            </div>
-            <h3 className="text-lg font-semibold text-white">Phân Tích ABSA 7 Khía Cạnh</h3>
-            <p className="text-sm text-slate-400 leading-relaxed">
-              Tách nhỏ từng câu đánh giá phức tạp thành các khía cạnh độc lập: Đăng nhập, Giao dịch, UI/UX, Hiệu năng, Phí, Hỗ trợ, Ưu đãi.
-            </p>
-          </div>
-
-          <div className="flex flex-col gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-1">
-              <ShieldAlert className="w-5 h-5" />
-            </div>
-            <h3 className="text-lg font-semibold text-white">Đối Sánh Minh Chứng Rõ Ràng</h3>
-            <p className="text-sm text-slate-400 leading-relaxed">
-              Mọi chỉ số đều đối chiếu trực tiếp với câu bình luận nguyên bản, không dùng dữ liệu giả lập hay phỏng đoán chủ quan.
-            </p>
-          </div>
-        </div>
       </div>
     </section>
   );
