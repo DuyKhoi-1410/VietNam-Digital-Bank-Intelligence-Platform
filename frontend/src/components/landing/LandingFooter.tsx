@@ -2,91 +2,223 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Database, Cpu } from "lucide-react";
+import {
+  ArrowRight,
+  Database,
+  Cpu,
+  Layers,
+  Sparkles,
+  ShieldCheck,
+  BarChart3,
+  Search,
+  FileText,
+  Activity,
+  CheckCircle2,
+} from "lucide-react";
 
 export function LandingFooter() {
   return (
-    <footer id="about" className="relative bg-[#030508] border-t border-slate-900 overflow-hidden">
-      {/* Final CTA Banner */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20">
-        <div className="relative glass-panel rounded-3xl p-10 sm:p-16 overflow-hidden border border-slate-800 text-center flex flex-col items-center">
-          {/* Neon Aurora Glow in CTA Banner */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[350px] bg-gradient-to-r from-cyan-500/20 via-blue-600/25 to-violet-600/20 blur-[130px] rounded-full pointer-events-none" />
-
-          <span className="font-mono text-xs uppercase tracking-widest text-cyan-400 mb-4 flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-            Nền Tảng Phân Tích Thực Chiến Cho Doanh Nghiệp
-          </span>
-
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6 max-w-3xl">
-            Vượt Qua Con Số <span className="text-gradient-aurora">Sao Đơn Thuần.</span>
-          </h2>
-
-          <p className="text-base sm:text-lg text-slate-300 max-w-2xl mb-10 leading-relaxed">
-            Khám phá các tín hiệu thực tế phía sau trải nghiệm ứng dụng ngân hàng số tại Việt Nam.
-            Phân tích 19.303 đánh giá đã xác thực trên 7 ngân hàng thương mại với mô hình cảm xúc khía cạnh (ABSA) chuẩn mực.
-          </p>
-
-          <Link
-            href="/dashboard"
-            className="group inline-flex items-center gap-3 px-8 py-4 rounded-xl text-sm font-semibold tracking-wide text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 shadow-2xl shadow-cyan-500/30 transition-all duration-200"
-          >
-            <span>Trải nghiệm Dashboard Ngay</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </div>
+    <footer id="about" className="relative bg-[#02050e] text-slate-300 overflow-hidden select-none">
+      {/* Sleek Aurora Top Glowing Border */}
+      <div className="relative w-full">
+        <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" />
+        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[700px] sm:w-[900px] h-[100px] bg-cyan-500/10 blur-[100px] pointer-events-none rounded-full" />
       </div>
 
-      {/* Main Footer Links & Metadata */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 pt-6 border-t border-slate-900/80">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-8">
-          <div className="flex flex-col">
-            <Link href="/" className="inline-block mb-3 group">
-              <Image
-                src="/logo-full.png"
-                alt="Vietnam Digital Banking Intelligence"
-                width={210}
-                height={35}
-                className="h-7 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.01]"
-              />
-            </Link>
-            <p className="text-xs text-slate-400 max-w-sm leading-relaxed">
-              Nền tảng trí tuệ thị trường và phân tích cảm xúc khía cạnh (ABSA) chuyên sâu cho các ứng dụng ngân hàng số tại Việt Nam.
+      {/* Main Footer Container */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 mb-14">
+          
+          {/* Col 1: Brand & Identity (Span 4) */}
+          <div className="lg:col-span-4 flex flex-col justify-between space-y-5">
+            <div>
+              <Link href="/" className="inline-block group">
+                <Image
+                  src="/logo-full.png"
+                  alt="Vietnam Digital Banking Intelligence"
+                  width={220}
+                  height={38}
+                  className="h-8 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
+                />
+              </Link>
+              <p className="mt-3.5 text-xs sm:text-sm text-slate-400 leading-relaxed max-w-sm font-light">
+                Nền tảng Trí tuệ Thị trường và Phân tích Cảm xúc Khía cạnh (ABSA) chuyên sâu cho 7 ứng dụng ngân hàng số hàng đầu Việt Nam.
+              </p>
+            </div>
+
+            {/* System Status Pill */}
+            <div className="space-y-2 pt-1">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/90 border border-slate-800 text-xs text-slate-300">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                </span>
+                <span className="font-mono text-[11px] text-slate-300">
+                  Hệ thống hoạt động • 19,303 Dữ liệu thực
+                </span>
+              </div>
+              <p className="text-[11px] font-mono text-slate-500">
+                Trường Đại học Kinh tế – ĐH Đà Nẵng (DUE)
+              </p>
+            </div>
+          </div>
+
+          {/* Col 2: Dashboard Modules (Span 3) */}
+          <div className="lg:col-span-3 space-y-4">
+            <h3 className="text-xs font-mono font-bold uppercase tracking-widest text-cyan-400 flex items-center gap-2">
+              <Layers className="w-3.5 h-3.5" />
+              <span>Tiện Ích Dashboard</span>
+            </h3>
+            <ul className="space-y-2.5 text-xs sm:text-sm">
+              <li>
+                <Link
+                  href="/dashboard"
+                  className="text-slate-400 hover:text-white transition-colors flex items-center gap-2 group"
+                >
+                  <BarChart3 className="w-3.5 h-3.5 text-slate-500 group-hover:text-cyan-400 transition-colors" />
+                  <span>Module 1: Tổng quan Thị trường</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/dashboard/banks"
+                  className="text-slate-400 hover:text-white transition-colors flex items-center gap-2 group"
+                >
+                  <ShieldCheck className="w-3.5 h-3.5 text-slate-500 group-hover:text-cyan-400 transition-colors" />
+                  <span>Module 2: Hồ sơ 7 Ngân hàng</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/dashboard/benchmark"
+                  className="text-slate-400 hover:text-white transition-colors flex items-center gap-2 group"
+                >
+                  <Activity className="w-3.5 h-3.5 text-slate-500 group-hover:text-cyan-400 transition-colors" />
+                  <span>Module 3: Đối sánh Benchmark</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/dashboard/reviews"
+                  className="text-slate-400 hover:text-white transition-colors flex items-center gap-2 group"
+                >
+                  <Search className="w-3.5 h-3.5 text-slate-500 group-hover:text-cyan-400 transition-colors" />
+                  <span>Module 4: Tra cứu Đánh giá</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/dashboard/reports"
+                  className="text-slate-400 hover:text-white transition-colors flex items-center gap-2 group"
+                >
+                  <FileText className="w-3.5 h-3.5 text-slate-500 group-hover:text-cyan-400 transition-colors" />
+                  <span>Module 5: Báo cáo Chuyên sâu</span>
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Col 3: 7 Ngân hàng Số (Span 2) */}
+          <div className="lg:col-span-2 space-y-4">
+            <h3 className="text-xs font-mono font-bold uppercase tracking-widest text-cyan-400 flex items-center gap-2">
+              <Database className="w-3.5 h-3.5" />
+              <span>7 Ngân Hàng</span>
+            </h3>
+            <ul className="space-y-2 text-xs text-slate-400 font-mono">
+              <li>
+                <Link href="/dashboard/banks?bank=Vietcombank" className="hover:text-cyan-300 transition-colors">
+                  Vietcombank
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/banks?bank=MB%20Bank" className="hover:text-cyan-300 transition-colors">
+                  MB Bank
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/banks?bank=Techcombank" className="hover:text-cyan-300 transition-colors">
+                  Techcombank
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/banks?bank=VPBank" className="hover:text-cyan-300 transition-colors">
+                  VPBank NEO
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/banks?bank=BIDV" className="hover:text-cyan-300 transition-colors">
+                  BIDV SmartBanking
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/banks?bank=ACB" className="hover:text-cyan-300 transition-colors">
+                  ACB ONE
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard/banks?bank=TPBank" className="hover:text-cyan-300 transition-colors">
+                  TPBank Mobile
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Col 4: Công nghệ & Truy cập nhanh (Span 3) */}
+          <div className="lg:col-span-3 space-y-4">
+            <h3 className="text-xs font-mono font-bold uppercase tracking-widest text-cyan-400 flex items-center gap-2">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Nền Tảng AI</span>
+            </h3>
+            <p className="text-xs text-slate-400 leading-relaxed font-light">
+              Mô hình học sâu bóc tách cảm xúc đa khía cạnh (ABSA) kết hợp chuẩn mực chỉ số Net Sentiment Score (NSS).
             </p>
+            <div className="pt-1">
+              <Link
+                href="/dashboard"
+                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-100 bg-slate-900/90 hover:bg-cyan-950/60 border border-slate-700 hover:border-cyan-500/50 transition-all duration-200 shadow-md group active:scale-98"
+              >
+                <span>Mở Nền Tảng Dashboard</span>
+                <ArrowRight className="w-3.5 h-3.5 text-cyan-400 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+            </div>
+            <div className="flex flex-wrap gap-x-4 gap-y-1.5 pt-1 text-[11px] text-slate-500 font-mono">
+              <a href="#methodology" className="hover:text-cyan-400 transition-colors">
+                Phương Pháp Luận
+              </a>
+              <span className="text-slate-700">•</span>
+              <a href="#faq" className="hover:text-cyan-400 transition-colors">
+                FAQ
+              </a>
+              <span className="text-slate-700">•</span>
+              <a href="#platform" className="hover:text-cyan-400 transition-colors">
+                Trực Quan Hóa
+              </a>
+            </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-8 text-xs text-slate-400 font-mono">
-            <a href="#overview" className="hover:text-cyan-400 transition-colors">
-              Tổng Quan
-            </a>
-            <a href="#modules" className="hover:text-cyan-400 transition-colors">
-              Tiện Ích
-            </a>
-            <a href="#methodology" className="hover:text-cyan-400 transition-colors">
-              Phương Pháp Luận
-            </a>
-            <a href="#faq" className="hover:text-cyan-400 transition-colors">
-              FAQ
-            </a>
-            <Link href="/dashboard" className="hover:text-cyan-400 transition-colors">
-              Dashboard
-            </Link>
-          </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-slate-900/60 text-xs text-slate-400">
-          <p>© 2026 Vietnam Digital Banking Intelligence. Mọi quyền được bảo lưu.</p>
-          <div className="flex items-center gap-4 text-[11px] font-mono">
-            <span className="flex items-center gap-1.5 text-slate-400">
+        {/* Bottom Sub-Footer Bar */}
+        <div className="pt-8 border-t border-slate-900/90 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+          <p className="text-center sm:text-left">
+            © 2026 <span className="text-slate-300 font-medium">Vietnam Digital Banking Intelligence</span>. Mọi quyền được bảo lưu.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-5 text-[11px] font-mono">
+            <span className="inline-flex items-center gap-1.5 text-slate-400">
               <Database className="w-3 h-3 text-cyan-400" />
-              Kho Dữ Liệu Thực Chứng
+              <span>19,303 Google Play Reviews</span>
             </span>
-            <span className="flex items-center gap-1.5 text-slate-400">
+            <span className="inline-flex items-center gap-1.5 text-slate-400">
               <Cpu className="w-3 h-3 text-emerald-400" />
-              Mô Hình ABSA Engine
+              <span>ABSA Multi-Aspect Engine</span>
+            </span>
+            <span className="inline-flex items-center gap-1.5 text-slate-400">
+              <CheckCircle2 className="w-3 h-3 text-blue-400" />
+              <span>Quyết định 2345/QĐ-NHNN</span>
             </span>
           </div>
         </div>
+
       </div>
     </footer>
   );
