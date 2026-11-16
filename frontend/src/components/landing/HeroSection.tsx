@@ -20,11 +20,11 @@ export function HeroSection() {
   };
 
   return (
-    <section id="overview" className="relative min-h-screen flex flex-col items-center justify-start pt-24 sm:pt-[calc(50vh-175px)] pb-20 sm:pb-28 px-4 sm:px-6 lg:px-8 overflow-hidden bg-transparent">
+    <section id="overview" className="relative min-h-screen flex flex-col items-center justify-start pt-28 sm:pt-[calc(50vh-190px)] pb-20 sm:pb-28 px-4 sm:px-6 lg:px-8 overflow-hidden bg-transparent">
       {/* Hero Content Container */}
-      <div className="relative z-10 max-w-6xl mx-auto text-center flex flex-col items-center w-full">
+      <div className="relative z-10 max-w-7xl mx-auto text-center flex flex-col items-center w-full">
         {/* Large Editorial Headline - Đảm bảo chuẩn xác đúng 2 dòng, kích thước to rõ, đậm nét */}
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] xl:text-[4.85rem] 2xl:text-[5.4rem] font-extrabold tracking-tight text-white max-w-6xl leading-[1.08] sm:leading-[1.04] drop-shadow-2xl select-none">
+        <h1 className="text-4xl sm:text-5xl md:text-[4.25rem] lg:text-[4.85rem] xl:text-[5.5rem] 2xl:text-[6.15rem] font-extrabold tracking-tight text-white max-w-7xl leading-[1.08] sm:leading-[1.04] drop-shadow-2xl select-none">
           <span className="block whitespace-nowrap">Vietnam Digital Banking</span>
           <span className="block whitespace-nowrap text-gradient-aurora">Intelligence Platform.</span>
         </h1>

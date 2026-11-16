@@ -39,54 +39,54 @@ export function LandingNavbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#05070b]/85 backdrop-blur-md border-b border-slate-800/80 shadow-lg shadow-black/50 py-3.5"
-          : "bg-transparent py-5"
+          ? "bg-[#05070b]/90 backdrop-blur-md border-b border-slate-800/80 shadow-lg shadow-black/50 py-4 sm:py-5"
+          : "bg-transparent py-6 sm:py-7"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12">
         <div className="flex items-center justify-between">
           {/* Logo Brand Header - Click to scroll to top */}
           <Link
             href="/"
             onClick={handleLogoClick}
-            className="flex items-center gap-3 group cursor-pointer"
+            className="flex items-center gap-3.5 group cursor-pointer"
           >
             <Image
               src="/logo-full.png"
               alt="Vietnam Digital Banking Intelligence"
-              width={220}
-              height={37}
-              className="h-8 sm:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
+              width={260}
+              height={44}
+              className="h-9 sm:h-11 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
               priority
             />
-            <span className="hidden sm:inline-block px-2 py-0.5 rounded-full text-[10px] font-mono tracking-wider uppercase border border-cyan-500/30 bg-cyan-950/40 text-cyan-300">
+            <span className="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-xs font-mono tracking-wider uppercase border border-cyan-500/30 bg-cyan-950/40 text-cyan-300">
               BETA
             </span>
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-10 lg:gap-12">
             <a
               href="#overview"
-              className="text-sm text-slate-300 hover:text-white transition-colors tracking-wide"
+              className="text-base lg:text-[1.05rem] font-medium text-slate-300 hover:text-white transition-colors tracking-wide"
             >
               Tổng Quan
             </a>
             <a
               href="#modules"
-              className="text-sm text-slate-300 hover:text-white transition-colors tracking-wide"
+              className="text-base lg:text-[1.05rem] font-medium text-slate-300 hover:text-white transition-colors tracking-wide"
             >
               Tiện Ích
             </a>
             <a
               href="#methodology"
-              className="text-sm text-slate-300 hover:text-white transition-colors tracking-wide"
+              className="text-base lg:text-[1.05rem] font-medium text-slate-300 hover:text-white transition-colors tracking-wide"
             >
               Phương Pháp Luận
             </a>
             <a
               href="#faq"
-              className="text-sm text-slate-300 hover:text-white transition-colors tracking-wide"
+              className="text-base lg:text-[1.05rem] font-medium text-slate-300 hover:text-white transition-colors tracking-wide"
             >
               FAQ
             </a>
@@ -96,7 +96,7 @@ export function LandingNavbar() {
           <div className="hidden md:flex items-center gap-4">
             <Link
               href="/dashboard"
-              className="px-5 py-2 rounded-full text-sm font-semibold tracking-wide text-black bg-white hover:bg-slate-200 transition-all duration-200 shadow-md shadow-white/10 active:scale-95"
+              className="px-6 sm:px-7 py-2.5 sm:py-3 rounded-full text-sm sm:text-base font-semibold tracking-wide text-black bg-white hover:bg-slate-200 transition-all duration-200 shadow-md shadow-white/10 active:scale-95"
             >
               Trải nghiệm Dashboard
             </Link>
