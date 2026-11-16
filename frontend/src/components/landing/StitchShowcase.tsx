@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
 import {
   MousePointer,
   ZoomIn,
@@ -10,22 +10,28 @@ import {
   Sparkles,
   ArrowUp,
   Plus,
-  MessageSquareText,
+  Play,
+  Pause,
   BrainCircuit,
   GitCompare,
   ArrowRight,
-  ShieldCheck,
+  Radio,
+  Layers,
   CheckCircle2,
   AlertTriangle,
   Flame,
-  Layers,
-  Radio,
-  SlidersHorizontal,
+  Volume2,
+  Scan,
+  Compass,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 export function StitchShowcase() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [activeCard, setActiveCard] = useState(1); // 0: Lắng nghe, 1: AI ABSA, 2: Đối sánh
+  const [isPlaying, setIsPlaying] = useState(true);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -33,6 +39,15 @@ export function StitchShowcase() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  // Auto-cycle through the 3 cards like a dynamic product demo video
+  useEffect(() => {
+    if (!isPlaying) return;
+    const interval = setInterval(() => {
+      setActiveCard((prev) => (prev + 1) % 3);
+    }, 4500);
+    return () => clearInterval(interval);
+  }, [isPlaying]);
 
   // Track scroll progress as soon as the component enters the screen (start 90%) until it locks to top (start start)
   const { scrollYProgress } = useScroll({
@@ -67,9 +82,6 @@ export function StitchShowcase() {
 
   // Floating parallax and depth scale for the 3 internal cards
   const cardsScale = useTransform(smoothProgress, [0, 0.95], [0.92, 1.0]);
-  const cardY1 = useTransform(smoothProgress, [0, 0.95], [25, 0]);
-  const cardY2 = useTransform(smoothProgress, [0, 0.95], [0, 0]);
-  const cardY3 = useTransform(smoothProgress, [0, 0.95], [30, 0]);
 
   // Prompt note (top left): slides and fades in as canvas approaches full screen
   const noteOpacity = useTransform(smoothProgress, [0.35, 0.85], [0, 1]);
@@ -98,18 +110,20 @@ export function StitchShowcase() {
             borderRadius,
             opacity,
           }}
-          className="relative w-full h-full bg-[#070b14]/95 border border-cyan-500/30 shadow-[0_0_90px_rgba(0,0,0,0.95)] overflow-hidden flex flex-col justify-between p-4 sm:p-6 lg:p-8 select-none"
+          className="relative w-full h-full bg-[#050811]/95 border border-cyan-500/30 shadow-[0_0_100px_rgba(0,0,0,0.98)] overflow-hidden flex flex-col justify-between p-4 sm:p-6 lg:p-8 select-none"
         >
-          {/* Canvas Ambient Aurora Lighting */}
-          <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[380px] bg-cyan-500/15 blur-[130px] rounded-full pointer-events-none" />
-          <div className="absolute top-1/2 right-1/4 translate-x-1/2 -translate-y-1/2 w-[480px] h-[380px] bg-violet-600/15 blur-[140px] rounded-full pointer-events-none" />
-          <div className="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-[620px] h-[260px] bg-emerald-500/10 blur-[150px] rounded-full pointer-events-none" />
+          {/* =========================================================================
+              CANVAS AMBIENT LIQUID NEON AURORA (Google Stitch Signature Glow)
+              ========================================================================= */}
+          <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-cyan-500/20 blur-[140px] rounded-full pointer-events-none animate-pulse" style={{ animationDuration: "6s" }} />
+          <div className="absolute top-1/2 right-1/4 translate-x-1/2 -translate-y-1/2 w-[550px] h-[400px] bg-violet-600/20 blur-[150px] rounded-full pointer-events-none animate-pulse" style={{ animationDuration: "8s" }} />
+          <div className="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-emerald-500/15 blur-[160px] rounded-full pointer-events-none animate-pulse" style={{ animationDuration: "7s" }} />
 
           {/* Canvas Dot Matrix Pattern */}
           <div
-            className="absolute inset-0 pointer-events-none opacity-25"
+            className="absolute inset-0 pointer-events-none opacity-20"
             style={{
-              backgroundImage: `radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.3) 1px, transparent 0)`,
+              backgroundImage: `radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.35) 1px, transparent 0)`,
               backgroundSize: "28px 28px",
             }}
           />
@@ -131,7 +145,7 @@ export function StitchShowcase() {
               TOP ROW: Floating Prompt Note (Google Stitch signature) + Canvas Badge
               ========================================================================= */}
           <div className="relative z-20 flex items-start justify-between w-full">
-            {/* Top-Left Floating Prompt Note (Google Stitch UX: Purpose Statement) */}
+            {/* Top-Left Floating Prompt Note (Exact Google Stitch UX: Purpose Note) */}
             <motion.div
               style={{ opacity: noteOpacity, y: noteY }}
               className="max-w-xs sm:max-w-sm rounded-2xl bg-[#0b1120]/90 backdrop-blur-xl border border-slate-700/70 p-4 shadow-2xl text-left hidden md:block"
@@ -152,7 +166,7 @@ export function StitchShowcase() {
             <div className="flex items-center gap-2 ml-auto">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono text-cyan-300 bg-cyan-950/50 border border-cyan-500/30">
                 <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
-                <span>3 Trụ Cột Năng Lực Cốt Lõi</span>
+                <span>3 Trụ Cột Năng Lực Trực Quan</span>
               </span>
               <Link
                 href="/dashboard"
@@ -165,263 +179,316 @@ export function StitchShowcase() {
           </div>
 
           {/* =========================================================================
-              CENTER: 3 ANIMATED 3D FLOATING CARDS (Introducing Platform Purpose)
+              CENTER: 3D DYNAMIC FLOATING CARDS (AUTO-CYCLE & INTERACTIVE SWAPPING)
               ========================================================================= */}
-          <div className="relative z-10 flex-1 flex items-center justify-center my-4 sm:my-6 overflow-hidden perspective-[1000px]">
+          <div className="relative z-10 flex-1 flex flex-col items-center justify-center my-2 sm:my-4 overflow-hidden perspective-[1200px]">
+            {/* The 3 Tall Canvas Displays with Neon Aura (Matches Google Stitch Image) */}
             <motion.div
               style={{ scale: cardsScale }}
-              className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 w-full max-w-5xl items-stretch"
+              className="flex items-center justify-center gap-4 sm:gap-6 md:gap-8 w-full max-w-5xl"
             >
-              {/* =========================================================================
-                  CARD 1: LẮNG NGHE NGƯỜI DÙNG THỰC (Voice of Customer)
-                  ========================================================================= */}
+              {/* =====================================================================
+                  CARD 0: LẮNG NGHE NGƯỜI DÙNG THẬT (Cyan / Electric Blue Neon)
+                  ===================================================================== */}
               <motion.div
-                style={{ y: cardY1 }}
+                onClick={() => setActiveCard(0)}
                 animate={{
-                  y: [0, -8, 0],
-                  rotateZ: [-0.4, 0.4, -0.4],
+                  scale: activeCard === 0 ? 1.05 : 0.94,
+                  y: activeCard === 0 ? -10 : 10,
+                  rotateY: activeCard === 0 ? 0 : 6,
+                  opacity: activeCard === 0 ? 1 : 0.65,
                 }}
-                transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                whileHover={{
-                  scale: 1.03,
-                  rotateY: 4,
-                  rotateX: -2,
-                  transition: { duration: 0.2 },
-                }}
-                className="hidden md:flex flex-col justify-between rounded-2xl bg-gradient-to-b from-[#0e172a]/95 via-[#0b1220]/95 to-[#080d16]/95 border border-cyan-500/30 hover:border-cyan-400/70 p-5 shadow-2xl backdrop-blur-xl transition-all duration-300 group cursor-pointer relative overflow-hidden"
+                transition={{ type: "spring", stiffness: 120, damping: 18 }}
+                className={`relative flex-shrink-0 w-[260px] sm:w-[280px] md:w-[300px] h-[400px] sm:h-[430px] rounded-3xl p-5 flex flex-col justify-between cursor-pointer transition-shadow duration-500 overflow-hidden backdrop-blur-2xl ${
+                  activeCard === 0
+                    ? "bg-[#0b152a]/95 border-2 border-cyan-400 shadow-[0_0_60px_rgba(6,182,212,0.45)] z-30"
+                    : "bg-[#080e1c]/80 border border-slate-800 hover:border-cyan-500/40 z-10"
+                }`}
               >
-                {/* 3D Glass Glow Background Accent */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 blur-2xl rounded-full pointer-events-none group-hover:bg-cyan-500/20 transition-all duration-300" />
+                {/* Internal Fluid Neon Glow */}
+                <div className="absolute -top-10 -left-10 w-48 h-48 bg-cyan-500/25 blur-3xl rounded-full pointer-events-none" />
+                <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-blue-600/25 blur-3xl rounded-full pointer-events-none" />
 
-                <div>
-                  {/* Top Header Badge */}
-                  <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] font-mono font-bold text-cyan-300 bg-cyan-950/60 border border-cyan-500/30">
+                {/* Card Header */}
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between pb-3 border-b border-cyan-500/20">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-bold text-cyan-300 bg-cyan-950/70 border border-cyan-500/40">
                       <Radio className="w-3 h-3 text-cyan-400 animate-pulse" />
                       TRỤ CỘT 01
                     </span>
-                    <span className="text-[10px] font-mono text-slate-400">Tiếng nói khách hàng</span>
+                    <span className="text-[10px] font-mono text-cyan-400 flex items-center gap-1">
+                      <Volume2 className="w-3 h-3" />
+                      Lắng nghe
+                    </span>
                   </div>
 
-                  {/* Title & Purpose Description */}
-                  <h3 className="mt-4 text-base font-bold text-white tracking-tight group-hover:text-cyan-300 transition-colors">
+                  <h3 className="mt-4 text-base sm:text-lg font-bold text-white tracking-tight">
                     Lắng Nghe Người Dùng Thật
                   </h3>
-                  <p className="mt-1.5 text-xs text-slate-300 leading-relaxed font-normal">
-                    Thu thập hàng ngàn phản hồi thực tế trên kho ứng dụng, khử trùng lặp và làm sạch để nắm bắt chính xác trải nghiệm người dùng mỗi ngày.
+                  <p className="mt-1 text-xs text-slate-300 leading-relaxed font-normal">
+                    Thu thập hàng ngàn phản hồi thực tế từ kho ứng dụng, khử trùng lặp và làm sạch để thấu cảm trải nghiệm người dùng.
                   </p>
-
-                  {/* 3D Visual Floating Interaction Elements (Speech Bubbles Mockup) */}
-                  <div className="mt-5 space-y-2.5">
-                    <div className="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-[11px] text-slate-200 flex items-center justify-between shadow-sm group-hover:border-cyan-500/30 transition">
-                      <div className="flex items-center gap-2 truncate">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
-                        <span className="truncate">&quot;Giao diện mới chuyển tiền rất mượt&quot;</span>
-                      </div>
-                      <span className="text-[9px] font-mono text-emerald-400 px-1.5 py-0.5 rounded bg-emerald-500/10 flex-shrink-0">Khen</span>
-                    </div>
-
-                    <div className="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-[11px] text-slate-200 flex items-center justify-between shadow-sm group-hover:border-cyan-500/30 transition">
-                      <div className="flex items-center gap-2 truncate">
-                        <AlertTriangle className="w-3.5 h-3.5 text-rose-400 flex-shrink-0" />
-                        <span className="truncate">&quot;Xác thực khuôn mặt báo lỗi liên tục&quot;</span>
-                      </div>
-                      <span className="text-[9px] font-mono text-rose-400 px-1.5 py-0.5 rounded bg-rose-500/10 flex-shrink-0">Điểm nghẽn</span>
-                    </div>
-
-                    <div className="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-[11px] text-slate-200 flex items-center justify-between shadow-sm group-hover:border-cyan-500/30 transition">
-                      <div className="flex items-center gap-2 truncate">
-                        <Flame className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
-                        <span className="truncate">&quot;Vừa cập nhật phiên bản mới là bị văng&quot;</span>
-                      </div>
-                      <span className="text-[9px] font-mono text-amber-400 px-1.5 py-0.5 rounded bg-amber-500/10 flex-shrink-0">Cần sửa</span>
-                    </div>
-                  </div>
                 </div>
 
-                {/* Bottom Card Footer */}
-                <div className="mt-5 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-cyan-400 font-mono">
-                  <span>Khám phá tiếng nói thật</span>
+                {/* Animated Interactive Visual: Floating Feedback Stream */}
+                <div className="relative z-10 space-y-2.5 my-auto">
+                  <motion.div
+                    animate={{ x: activeCard === 0 ? [0, 4, 0] : 0 }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    className="p-3 rounded-2xl bg-[#0e1c36]/90 border border-cyan-500/30 text-[11px] text-slate-200 shadow-lg flex items-center gap-2.5"
+                  >
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                    <span className="truncate">&quot;Giao diện chuyển tiền nhanh, mượt&quot;</span>
+                  </motion.div>
+
+                  <motion.div
+                    animate={{ x: activeCard === 0 ? [0, -4, 0] : 0 }}
+                    transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+                    className="p-3 rounded-2xl bg-[#0e1c36]/90 border border-rose-500/30 text-[11px] text-slate-200 shadow-lg flex items-center gap-2.5"
+                  >
+                    <AlertTriangle className="w-4 h-4 text-rose-400 flex-shrink-0" />
+                    <span className="truncate">&quot;Quét khuôn mặt hay báo lỗi liên tục&quot;</span>
+                  </motion.div>
+
+                  <motion.div
+                    animate={{ x: activeCard === 0 ? [0, 4, 0] : 0 }}
+                    transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+                    className="p-3 rounded-2xl bg-[#0e1c36]/90 border border-amber-500/30 text-[11px] text-slate-200 shadow-lg flex items-center gap-2.5"
+                  >
+                    <Flame className="w-4 h-4 text-amber-400 flex-shrink-0" />
+                    <span className="truncate">&quot;Cập nhật bản mới hay bị văng đột ngột&quot;</span>
+                  </motion.div>
+                </div>
+
+                {/* Card Footer */}
+                <div className="relative z-10 pt-3 border-t border-cyan-500/20 flex items-center justify-between text-xs text-cyan-300 font-mono">
+                  <span>Tiếng nói xác thực</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </div>
               </motion.div>
 
-              {/* =========================================================================
-                  CARD 2: TRÍ TUỆ NHẬN THỨC ABSA (Core AI Engine - Centerpiece)
-                  ========================================================================= */}
+              {/* =====================================================================
+                  CARD 1: AI BÓC TÁCH 7 KHÍA CẠNH ABSA (Emerald / Cyan Neon Centerpiece)
+                  ===================================================================== */}
               <motion.div
-                style={{ y: cardY2 }}
+                onClick={() => setActiveCard(1)}
                 animate={{
-                  y: [-3, 5, -3],
-                  scale: [1, 1.015, 1],
+                  scale: activeCard === 1 ? 1.05 : 0.94,
+                  y: activeCard === 1 ? -10 : 10,
+                  rotateY: activeCard === 1 ? 0 : 0,
+                  opacity: activeCard === 1 ? 1 : 0.65,
                 }}
-                transition={{
-                  duration: 6,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                whileHover={{
-                  scale: 1.04,
-                  rotateY: 0,
-                  rotateX: -3,
-                  transition: { duration: 0.2 },
-                }}
-                className="flex flex-col justify-between rounded-2xl bg-gradient-to-b from-[#111e38]/98 via-[#0c1424]/98 to-[#070b14]/98 border-2 border-cyan-400/60 shadow-[0_0_50px_rgba(6,182,212,0.3)] p-5 backdrop-blur-2xl transition-all duration-300 relative group cursor-pointer overflow-hidden"
+                transition={{ type: "spring", stiffness: 120, damping: 18 }}
+                className={`relative flex-shrink-0 w-[260px] sm:w-[280px] md:w-[300px] h-[400px] sm:h-[430px] rounded-3xl p-5 flex flex-col justify-between cursor-pointer transition-shadow duration-500 overflow-hidden backdrop-blur-2xl ${
+                  activeCard === 1
+                    ? "bg-[#091a24]/95 border-2 border-emerald-400 shadow-[0_0_60px_rgba(16,185,129,0.45)] z-30"
+                    : "bg-[#06121a]/80 border border-slate-800 hover:border-emerald-500/40 z-10"
+                }`}
               >
                 {/* Center Highlight Badge */}
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-600 text-[10px] font-bold text-white uppercase tracking-wider shadow-lg flex items-center gap-1">
-                  <Sparkles className="w-3 h-3 text-cyan-200" />
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-gradient-to-r from-emerald-400 via-teal-500 to-cyan-500 text-[10px] font-bold text-slate-950 uppercase tracking-wider shadow-lg flex items-center gap-1 z-30">
+                  <Sparkles className="w-3 h-3" />
                   <span>Trọng Tâm Công Nghệ</span>
                 </div>
 
-                {/* 3D Glass Glow Background Accent */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-cyan-400/15 blur-3xl rounded-full pointer-events-none group-hover:bg-cyan-400/25 transition-all duration-300" />
+                {/* Internal Fluid Neon Glow */}
+                <div className="absolute -top-10 -right-10 w-48 h-48 bg-emerald-500/25 blur-3xl rounded-full pointer-events-none" />
+                <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-cyan-500/25 blur-3xl rounded-full pointer-events-none" />
 
-                <div>
-                  {/* Top Header Badge */}
-                  <div className="flex items-center justify-between pb-3 pt-1 border-b border-slate-800">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] font-mono font-bold text-cyan-300 bg-cyan-950/70 border border-cyan-400/40">
-                      <BrainCircuit className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
+                {/* Card Header */}
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between pb-3 pt-1 border-b border-emerald-500/20">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-bold text-emerald-300 bg-emerald-950/70 border border-emerald-400/40">
+                      <BrainCircuit className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
                       TRỤ CỘT 02
                     </span>
-                    <span className="text-[10px] font-mono text-cyan-300">Mô hình AI đa chiều</span>
+                    <span className="text-[10px] font-mono text-emerald-300">AI Đa chiều</span>
                   </div>
 
-                  {/* Title & Purpose Description */}
-                  <h3 className="mt-4 text-base font-bold text-white tracking-tight group-hover:text-cyan-300 transition-colors">
+                  <h3 className="mt-4 text-base sm:text-lg font-bold text-white tracking-tight">
                     Bóc Tách Khía Cạnh Bằng AI
                   </h3>
-                  <p className="mt-1.5 text-xs text-slate-300 leading-relaxed font-normal">
-                    Mô hình ABSA tự động chẻ nhỏ từng câu phức tạp thành 7 khía cạnh độc lập, tách bạch giữa điểm sao cảm tính và bản chất từng tính năng.
+                  <p className="mt-1 text-xs text-slate-300 leading-relaxed font-normal">
+                    Mô hình ABSA tự động chẻ nhỏ từng câu phức tạp thành 7 khía cạnh độc lập, tách bạch giữa điểm số sao và bản chất tính năng.
                   </p>
+                </div>
 
-                  {/* 3D Visual Slicing Metaphor (ABSA Decomposition) */}
-                  <div className="mt-4 p-3 rounded-xl bg-slate-950/80 border border-cyan-500/30 text-xs space-y-2">
-                    <div className="text-[10px] font-mono text-slate-400 flex items-center justify-between">
-                      <span>CÂU ĐÁNH GIÁ NGUYÊN BẢN</span>
-                      <span className="text-cyan-400">AI BÓC TÁCH</span>
+                {/* Animated Interactive Visual: AI Sentence Decomposition */}
+                <div className="relative z-10 space-y-2 my-auto">
+                  <div className="p-2.5 rounded-xl bg-slate-950/80 border border-emerald-500/30 text-xs">
+                    <div className="flex items-center justify-between text-[10px] font-mono text-slate-400 mb-1.5">
+                      <span>CÂU NGUYÊN BẢN</span>
+                      <span className="text-emerald-400 font-bold">AI CHẺ NHỎ</span>
                     </div>
 
-                    {/* Sliced item 1 */}
-                    <div className="flex items-center justify-between p-1.5 rounded-lg bg-slate-900/90 border border-slate-800/80">
-                      <span className="text-[11px] text-slate-200 truncate">&quot;Giao diện trực quan đẹp&quot;</span>
-                      <span className="text-[10px] font-mono font-semibold text-emerald-400 px-1.5 py-0.5 rounded bg-emerald-500/10 flex-shrink-0">
-                        UI/UX • Khen
-                      </span>
-                    </div>
+                    <div className="space-y-1.5">
+                      <div className="flex items-center justify-between p-1.5 rounded-lg bg-[#0e2424]/90 border border-emerald-500/20">
+                        <span className="text-[10px] text-slate-200 truncate">&quot;Giao diện trực quan đẹp&quot;</span>
+                        <span className="text-[9px] font-mono font-semibold text-emerald-400 px-1 py-0.5 rounded bg-emerald-500/10 flex-shrink-0">
+                          UI/UX • Khen
+                        </span>
+                      </div>
 
-                    {/* Sliced item 2 */}
-                    <div className="flex items-center justify-between p-1.5 rounded-lg bg-slate-900/90 border border-slate-800/80">
-                      <span className="text-[11px] text-slate-200 truncate">&quot;nhưng chuyển tiền bị chậm&quot;</span>
-                      <span className="text-[10px] font-mono font-semibold text-rose-400 px-1.5 py-0.5 rounded bg-rose-500/10 flex-shrink-0">
-                        Chuyển tiền • Lỗi
-                      </span>
-                    </div>
+                      <div className="flex items-center justify-between p-1.5 rounded-lg bg-[#0e2424]/90 border border-rose-500/20">
+                        <span className="text-[10px] text-slate-200 truncate">&quot;nhưng chuyển tiền chậm&quot;</span>
+                        <span className="text-[9px] font-mono font-semibold text-rose-400 px-1 py-0.5 rounded bg-rose-500/10 flex-shrink-0">
+                          Chuyển tiền • Lỗi
+                        </span>
+                      </div>
 
-                    {/* Sliced item 3 */}
-                    <div className="flex items-center justify-between p-1.5 rounded-lg bg-slate-900/90 border border-slate-800/80">
-                      <span className="text-[11px] text-slate-200 truncate">&quot;quét vân tay hay đơ&quot;</span>
-                      <span className="text-[10px] font-mono font-semibold text-amber-400 px-1.5 py-0.5 rounded bg-amber-500/10 flex-shrink-0">
-                        Bảo mật • Chê
-                      </span>
+                      <div className="flex items-center justify-between p-1.5 rounded-lg bg-[#0e2424]/90 border border-amber-500/20">
+                        <span className="text-[10px] text-slate-200 truncate">&quot;quét vân tay hay đơ&quot;</span>
+                        <span className="text-[9px] font-mono font-semibold text-amber-400 px-1 py-0.5 rounded bg-amber-500/10 flex-shrink-0">
+                          Bảo mật • Sửa
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Bottom Card Footer */}
-                <div className="mt-5 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-cyan-300 font-mono">
+                {/* Card Footer */}
+                <div className="relative z-10 pt-3 border-t border-emerald-500/20 flex items-center justify-between text-xs text-emerald-300 font-mono">
                   <span className="flex items-center gap-1.5">
-                    <Layers className="w-3.5 h-3.5 text-cyan-400" />
-                    Bóc tách 7 khía cạnh
+                    <Layers className="w-3.5 h-3.5 text-emerald-400" />
+                    7 khía cạnh độc lập
                   </span>
-                  <span className="flex items-center gap-1 hover:underline">
-                    Xem mô hình →
-                  </span>
+                  <span>Khám phá →</span>
                 </div>
               </motion.div>
 
-              {/* =========================================================================
-                  CARD 3: ĐỐI SÁNH VỊ THẾ CẠNH TRANH (Competitive Benchmarking & Action)
-                  ========================================================================= */}
+              {/* =====================================================================
+                  CARD 2: ĐỐI SÁNH & RA QUYẾT ĐỊNH (Violet / Fuchsia Neon)
+                  ===================================================================== */}
               <motion.div
-                style={{ y: cardY3 }}
+                onClick={() => setActiveCard(2)}
                 animate={{
-                  y: [0, -10, 0],
-                  rotateZ: [0.4, -0.4, 0.4],
+                  scale: activeCard === 2 ? 1.05 : 0.94,
+                  y: activeCard === 2 ? -10 : 10,
+                  rotateY: activeCard === 2 ? 0 : -6,
+                  opacity: activeCard === 2 ? 1 : 0.65,
                 }}
-                transition={{
-                  duration: 5.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                whileHover={{
-                  scale: 1.03,
-                  rotateY: -4,
-                  rotateX: -2,
-                  transition: { duration: 0.2 },
-                }}
-                className="hidden md:flex flex-col justify-between rounded-2xl bg-gradient-to-b from-[#13112a]/95 via-[#0e0d1f]/95 to-[#080712]/95 border border-violet-500/30 hover:border-violet-400/70 p-5 shadow-2xl backdrop-blur-xl transition-all duration-300 group cursor-pointer relative overflow-hidden"
+                transition={{ type: "spring", stiffness: 120, damping: 18 }}
+                className={`relative flex-shrink-0 w-[260px] sm:w-[280px] md:w-[300px] h-[400px] sm:h-[430px] rounded-3xl p-5 flex flex-col justify-between cursor-pointer transition-shadow duration-500 overflow-hidden backdrop-blur-2xl ${
+                  activeCard === 2
+                    ? "bg-[#18112c]/95 border-2 border-violet-400 shadow-[0_0_60px_rgba(168,85,247,0.45)] z-30"
+                    : "bg-[#110c20]/80 border border-slate-800 hover:border-violet-500/40 z-10"
+                }`}
               >
-                {/* 3D Glass Glow Background Accent */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-violet-500/10 blur-2xl rounded-full pointer-events-none group-hover:bg-violet-500/20 transition-all duration-300" />
+                {/* Internal Fluid Neon Glow */}
+                <div className="absolute -top-10 -left-10 w-48 h-48 bg-violet-600/25 blur-3xl rounded-full pointer-events-none" />
+                <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-fuchsia-600/25 blur-3xl rounded-full pointer-events-none" />
 
-                <div>
-                  {/* Top Header Badge */}
-                  <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] font-mono font-bold text-violet-300 bg-violet-950/60 border border-violet-500/30">
-                      <GitCompare className="w-3 h-3 text-violet-400 animate-pulse" />
+                {/* Card Header */}
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between pb-3 border-b border-violet-500/20">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-bold text-violet-300 bg-violet-950/70 border border-violet-500/40">
+                      <GitCompare className="w-3.5 h-3.5 text-violet-400 animate-pulse" />
                       TRỤ CỘT 03
                     </span>
-                    <span className="text-[10px] font-mono text-slate-400">Đối sánh & Ra quyết định</span>
+                    <span className="text-[10px] font-mono text-violet-300 flex items-center gap-1">
+                      <Compass className="w-3 h-3" />
+                      Đối sánh
+                    </span>
                   </div>
 
-                  {/* Title & Purpose Description */}
-                  <h3 className="mt-4 text-base font-bold text-white tracking-tight group-hover:text-violet-300 transition-colors">
+                  <h3 className="mt-4 text-base sm:text-lg font-bold text-white tracking-tight">
                     Đối Sánh & Ra Quyết Định
                   </h3>
-                  <p className="mt-1.5 text-xs text-slate-300 leading-relaxed font-normal">
-                    Đặt các ngân hàng lên cùng ma trận đối sánh trực quan, tìm ra ưu thế vượt trội và phát hiện khoảng cách trải nghiệm so với đối thủ.
+                  <p className="mt-1 text-xs text-slate-300 leading-relaxed font-normal">
+                    Đặt các ngân hàng lên cùng ma trận đối sánh trực quan, nhận diện điểm mạnh, điểm nghẽn và đưa ra quyết định nâng cấp sản phẩm.
                   </p>
+                </div>
 
-                  {/* 3D Visual Floating Action Items */}
-                  <div className="mt-5 space-y-2.5">
-                    <div className="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-[11px] text-slate-200 flex items-center justify-between shadow-sm group-hover:border-violet-500/30 transition">
-                      <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-violet-400" />
-                        <span>Đối sánh trực tiếp 2-4 ngân hàng</span>
+                {/* Animated Interactive Visual: Benchmark Gauges */}
+                <div className="relative z-10 space-y-2.5 my-auto">
+                  <div className="p-3 rounded-2xl bg-[#201438]/90 border border-violet-500/30 text-xs space-y-2">
+                    <div>
+                      <div className="flex items-center justify-between text-[11px] mb-1">
+                        <span className="text-slate-300">Ma trận đối sánh trực tiếp</span>
+                        <span className="text-violet-300 font-mono font-bold">2-4 Ngân hàng</span>
                       </div>
-                      <span className="text-[9px] font-mono text-violet-300 px-1.5 py-0.5 rounded bg-violet-500/10">Ma trận</span>
+                      <div className="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden">
+                        <div className="bg-gradient-to-r from-violet-500 to-fuchsia-500 h-full w-[85%]" />
+                      </div>
                     </div>
 
-                    <div className="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-[11px] text-slate-200 flex items-center justify-between shadow-sm group-hover:border-violet-500/30 transition">
-                      <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-cyan-400" />
-                        <span>Xác định khoảng cách năng lực tính năng</span>
+                    <div>
+                      <div className="flex items-center justify-between text-[11px] mb-1">
+                        <span className="text-slate-300">Xác định khoảng cách năng lực</span>
+                        <span className="text-cyan-300 font-mono font-bold">Chênh lệch</span>
                       </div>
-                      <span className="text-[9px] font-mono text-cyan-300 px-1.5 py-0.5 rounded bg-cyan-500/10">Chênh lệch</span>
+                      <div className="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden">
+                        <div className="bg-gradient-to-r from-cyan-400 to-blue-500 h-full w-[70%]" />
+                      </div>
                     </div>
 
-                    <div className="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-[11px] text-slate-200 flex items-center justify-between shadow-sm group-hover:border-violet-500/30 transition">
-                      <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                        <span>Đề xuất ưu tiên xử lý cho đội Product</span>
+                    <div>
+                      <div className="flex items-center justify-between text-[11px] mb-1">
+                        <span className="text-slate-300">Đề xuất ưu tiên xử lý cho Product</span>
+                        <span className="text-emerald-300 font-mono font-bold">Hành động</span>
                       </div>
-                      <span className="text-[9px] font-mono text-emerald-300 px-1.5 py-0.5 rounded bg-emerald-500/10">Hành động</span>
+                      <div className="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden">
+                        <div className="bg-gradient-to-r from-emerald-400 to-teal-400 h-full w-[90%]" />
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Bottom Card Footer */}
-                <div className="mt-5 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-violet-400 font-mono">
-                  <span>Khám phá công cụ đối sánh</span>
+                {/* Card Footer */}
+                <div className="relative z-10 pt-3 border-t border-violet-500/20 flex items-center justify-between text-xs text-violet-300 font-mono">
+                  <span>Vị thế cạnh tranh</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </div>
               </motion.div>
             </motion.div>
+
+            {/* Video-style Demo Switcher Controls (Auto-cycle pills + Play/Pause) */}
+            <div className="mt-4 sm:mt-5 flex items-center gap-2 sm:gap-3 z-30">
+              <button
+                type="button"
+                onClick={() => setIsPlaying(!isPlaying)}
+                className="p-1.5 rounded-full bg-slate-900/90 border border-slate-700/80 hover:border-cyan-400/60 text-slate-300 hover:text-white transition shadow-lg flex items-center justify-center"
+                title={isPlaying ? "Tạm dừng tự động chuyển" : "Tiếp tục tự động chuyển như video"}
+              >
+                {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-current" />}
+              </button>
+
+              <div className="flex items-center gap-1.5 p-1 rounded-full bg-slate-900/90 border border-slate-800 shadow-xl backdrop-blur-md">
+                <button
+                  type="button"
+                  onClick={() => setActiveCard(0)}
+                  className={`px-3 py-1 rounded-full text-xs font-mono font-medium transition ${
+                    activeCard === 0
+                      ? "bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 shadow-sm"
+                      : "text-slate-400 hover:text-slate-200"
+                  }`}
+                >
+                  01 Lắng nghe
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveCard(1)}
+                  className={`px-3 py-1 rounded-full text-xs font-mono font-medium transition ${
+                    activeCard === 1
+                      ? "bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 shadow-sm"
+                      : "text-slate-400 hover:text-slate-200"
+                  }`}
+                >
+                  02 Bóc tách ABSA
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveCard(2)}
+                  className={`px-3 py-1 rounded-full text-xs font-mono font-medium transition ${
+                    activeCard === 2
+                      ? "bg-violet-500/20 text-violet-300 border border-violet-400/40 shadow-sm"
+                      : "text-slate-400 hover:text-slate-200"
+                  }`}
+                >
+                  03 Đối sánh
+                </button>
+              </div>
+            </div>
           </div>
 
           {/* =========================================================================
