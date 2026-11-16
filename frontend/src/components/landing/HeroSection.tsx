@@ -4,6 +4,17 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Plus, SlidersHorizontal, ArrowUp, Sparkles } from "lucide-react";
 import { SlidingToggle } from "@/components/ui/SlidingToggle";
+import { resolveBankSearch, CANONICAL_BANKS } from "@/lib/bankMatcher";
+
+const ASPECT_PREVIEWS = [
+  "Bảo mật & Đăng nhập",
+  "Giao dịch & Chuyển tiền",
+  "Hệ thống & Hiệu năng",
+  "Giao diện & UI/UX",
+  "CSKH & Phí dịch vụ",
+  "Tính năng khác",
+  "Trải nghiệm chung",
+];
 
 export function HeroSection() {
   const router = useRouter();
@@ -13,10 +24,31 @@ export function HeroSection() {
   const handleSearch = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     if (!query.trim()) {
-      router.push("/dashboard");
+      router.push("/dashboard/reviews");
       return;
     }
-    router.push(`/dashboard/reviews?q=${encodeURIComponent(query.trim())}`);
+
+    // Resolve bank alias variants and clean remaining keywords
+    const { canonicalName, cleanKeyword } = resolveBankSearch(query);
+
+    const params = new URLSearchParams();
+    if (canonicalName) {
+      params.set("bank", canonicalName);
+    }
+    if (cleanKeyword) {
+      params.set("keyword", cleanKeyword);
+    }
+
+    const queryString = params.toString();
+    router.push(`/dashboard/reviews${queryString ? `?${queryString}` : ""}`);
+  };
+
+  const handleQuickBankSelect = (bank: string) => {
+    router.push(`/dashboard/reviews?bank=${encodeURIComponent(bank)}`);
+  };
+
+  const handleQuickAspectSelect = (aspect: string) => {
+    router.push(`/dashboard/reviews?aspect=${encodeURIComponent(aspect)}`);
   };
 
   return (
@@ -49,7 +81,7 @@ export function HeroSection() {
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Bạn muốn phân tích trải nghiệm ngân hàng nào? (Ví dụ: Vietcombank, Techcombank, MBBank...)"
+                placeholder="Tìm ngân hàng hoặc từ khóa (VD: Vietcombank, MB, BIDV, OTP, lỗi đăng nhập...)"
                 className="w-full bg-transparent border-none outline-none text-white placeholder-slate-400 text-base sm:text-lg font-normal py-2"
               />
             </div>
@@ -62,7 +94,7 @@ export function HeroSection() {
                   type="button"
                   onClick={() => router.push("/dashboard/reviews")}
                   className="w-8 h-8 rounded-full bg-slate-800/80 hover:bg-slate-700 border border-slate-700/70 flex items-center justify-center text-slate-300 hover:text-white transition"
-                  title="Thêm bộ lọc"
+                  title="Mở tất cả đánh giá"
                 >
                   <Plus className="w-4 h-4" />
                 </button>
@@ -105,6 +137,35 @@ export function HeroSection() {
               </div>
             </div>
           </form>
+
+          {/* Quick interactive chips based on activeTab */}
+          <div className="mt-3.5 flex flex-wrap items-center justify-center gap-1.5 px-1">
+            <span className="text-[11px] font-mono text-slate-400 mr-1 flex items-center gap-1">
+              <Sparkles className="w-3 h-3 text-cyan-400" />
+              Truy cập nhanh:
+            </span>
+            {activeTab === "banks"
+              ? CANONICAL_BANKS.map((b) => (
+                  <button
+                    key={b}
+                    type="button"
+                    onClick={() => handleQuickBankSelect(b)}
+                    className="px-2.5 py-1 rounded-full text-xs font-medium bg-slate-900/80 hover:bg-cyan-950/80 border border-slate-800 hover:border-cyan-500/50 text-slate-300 hover:text-cyan-300 transition-all shadow-sm active:scale-95"
+                  >
+                    {b}
+                  </button>
+                ))
+              : ASPECT_PREVIEWS.map((a) => (
+                  <button
+                    key={a}
+                    type="button"
+                    onClick={() => handleQuickAspectSelect(a)}
+                    className="px-2.5 py-1 rounded-full text-xs font-medium bg-slate-900/80 hover:bg-cyan-950/80 border border-slate-800 hover:border-cyan-500/50 text-slate-300 hover:text-cyan-300 transition-all shadow-sm active:scale-95"
+                  >
+                    {a}
+                  </button>
+                ))}
+          </div>
         </div>
       </div>
     </section>

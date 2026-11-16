@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { api } from "@/lib/api";
+import { resolveBankSearch, CANONICAL_BANKS } from "@/lib/bankMatcher";
 import {
   PaginatedReviewsResponse,
   FilterOptionsResponse,
@@ -18,17 +20,48 @@ import {
   ExternalLink,
 } from "lucide-react";
 
-export default function ReviewExplorerPage() {
+function ReviewExplorerContent() {
+  const searchParams = useSearchParams();
+
+  // Parse initial filter params from URL
+  const rawBankParam = searchParams.get("bank");
+  const rawKeywordParam = searchParams.get("keyword") || searchParams.get("q");
+  const rawAspectParam = searchParams.get("aspect");
+  const rawRatingParam = searchParams.get("rating");
+  const rawSentimentParam = searchParams.get("sentiment");
+
+  // Robust bank alias resolution from URL query params
+  let initialBank = "";
+  if (rawBankParam) {
+    const resolved = resolveBankSearch(rawBankParam);
+    initialBank = resolved.canonicalName || rawBankParam;
+  }
+
+  let initialKeyword = "";
+  if (rawKeywordParam) {
+    if (!initialBank) {
+      const resolved = resolveBankSearch(rawKeywordParam);
+      if (resolved.canonicalName) {
+        initialBank = resolved.canonicalName;
+        initialKeyword = resolved.cleanKeyword;
+      } else {
+        initialKeyword = rawKeywordParam;
+      }
+    } else {
+      initialKeyword = rawKeywordParam;
+    }
+  }
+
   const [filterOptions, setFilterOptions] = useState<FilterOptionsResponse | null>(null);
   const [results, setResults] = useState<PaginatedReviewsResponse | null>(null);
 
   // Filter States
-  const [selectedBank, setSelectedBank] = useState<string>("");
-  const [selectedRating, setSelectedRating] = useState<string>("");
-  const [selectedSentiment, setSelectedSentiment] = useState<string>("");
-  const [selectedAspect, setSelectedAspect] = useState<string>("");
+  const [selectedBank, setSelectedBank] = useState<string>(initialBank);
+  const [selectedRating, setSelectedRating] = useState<string>(rawRatingParam || "");
+  const [selectedSentiment, setSelectedSentiment] = useState<string>(rawSentimentParam || "");
+  const [selectedAspect, setSelectedAspect] = useState<string>(rawAspectParam || "");
   const [selectedVersion, setSelectedVersion] = useState<string>("");
-  const [keyword, setKeyword] = useState<string>("");
+  const [keyword, setKeyword] = useState<string>(initialKeyword);
   const [page, setPage] = useState<number>(1);
   const pageSize = 15;
 
@@ -40,6 +73,38 @@ export default function ReviewExplorerPage() {
   const [loading, setLoading] = useState(true);
   const [loadingSearch, setLoadingSearch] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Synchronize state when searchParams changes dynamically
+  useEffect(() => {
+    const b = searchParams.get("bank");
+    const k = searchParams.get("keyword") || searchParams.get("q");
+    const a = searchParams.get("aspect");
+    const r = searchParams.get("rating");
+    const s = searchParams.get("sentiment");
+
+    let resolvedBank = "";
+    if (b !== null) {
+      const res = resolveBankSearch(b);
+      resolvedBank = res.canonicalName || b;
+      setSelectedBank(resolvedBank);
+    }
+    if (k !== null) {
+      if (!b) {
+        const res = resolveBankSearch(k);
+        if (res.canonicalName) {
+          setSelectedBank(res.canonicalName);
+          setKeyword(res.cleanKeyword);
+        } else {
+          setKeyword(k);
+        }
+      } else {
+        setKeyword(k);
+      }
+    }
+    if (a !== null) setSelectedAspect(a);
+    if (r !== null) setSelectedRating(r);
+    if (s !== null) setSelectedSentiment(s);
+  }, [searchParams]);
 
   // Load filter options once
   useEffect(() => {
@@ -55,18 +120,35 @@ export default function ReviewExplorerPage() {
     };
   }, []);
 
-  // Execute review search
-  const executeSearch = async (targetPage: number = 1) => {
+  // Execute review search with optional parameter overrides
+  const executeSearch = async (
+    targetPage: number = 1,
+    overrides?: {
+      bank?: string;
+      rating?: string;
+      sentiment?: string;
+      aspect?: string;
+      app_version?: string;
+      keyword?: string;
+    }
+  ) => {
     setLoadingSearch(true);
     setError(null);
     try {
+      const bankToUse = overrides && "bank" in overrides ? overrides.bank : selectedBank;
+      const ratingToUse = overrides && "rating" in overrides ? overrides.rating : selectedRating;
+      const sentimentToUse = overrides && "sentiment" in overrides ? overrides.sentiment : selectedSentiment;
+      const aspectToUse = overrides && "aspect" in overrides ? overrides.aspect : selectedAspect;
+      const versionToUse = overrides && "app_version" in overrides ? overrides.app_version : selectedVersion;
+      const keywordToUse = overrides && "keyword" in overrides ? overrides.keyword : keyword;
+
       const data = await api.searchReviews({
-        bank: selectedBank || undefined,
-        rating: selectedRating ? parseInt(selectedRating) : undefined,
-        sentiment: selectedSentiment || undefined,
-        aspect: selectedAspect || undefined,
-        app_version: selectedVersion || undefined,
-        keyword: keyword.trim() || undefined,
+        bank: bankToUse || undefined,
+        rating: ratingToUse ? parseInt(ratingToUse) : undefined,
+        sentiment: sentimentToUse || undefined,
+        aspect: aspectToUse || undefined,
+        app_version: versionToUse || undefined,
+        keyword: keywordToUse ? keywordToUse.trim() : undefined,
         page: targetPage,
         page_size: pageSize,
       });
@@ -96,6 +178,14 @@ export default function ReviewExplorerPage() {
     setSelectedAspect("");
     setSelectedVersion("");
     setKeyword("");
+    executeSearch(1, {
+      bank: "",
+      rating: "",
+      sentiment: "",
+      aspect: "",
+      app_version: "",
+      keyword: "",
+    });
   };
 
   const openReviewDetail = async (id: string) => {
@@ -170,7 +260,7 @@ export default function ReviewExplorerPage() {
               className="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-white text-xs focus:border-cyan-400 focus:outline-none"
             >
               <option value="">Tất cả 7 ngân hàng</option>
-              {filterOptions?.banks.map((b) => (
+              {(filterOptions?.banks || CANONICAL_BANKS).map((b) => (
                 <option key={b} value={b}>
                   {b}
                 </option>
@@ -258,19 +348,60 @@ export default function ReviewExplorerPage() {
         </div>
 
         {/* Active Filters Summary & Reset */}
-        <div className="flex items-center justify-between pt-2 border-t border-slate-800 text-xs">
-          <div className="text-slate-400 font-mono text-[11px]">
-            {selectedAspect && (
-              <span className="text-cyan-400 mr-2">
-                • Đang lọc theo khía cạnh: &ldquo;{getAspectViName(selectedAspect)}&rdquo; (Đảm bảo không nhân bản dòng)
+        <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-800 text-xs">
+          <div className="text-slate-400 font-mono text-[11px] flex flex-wrap items-center gap-2">
+            {selectedBank && (
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-cyan-950/80 border border-cyan-800/80 text-cyan-300 font-semibold text-xs">
+                <span>🏛️ {selectedBank}</span>
+                <button
+                  type="button"
+                  onClick={() => setSelectedBank("")}
+                  className="hover:text-white transition-colors"
+                  title="Xóa bộ lọc ngân hàng"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
               </span>
+            )}
+            {selectedAspect && (
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-800/80 border border-slate-700 text-cyan-400 text-xs">
+                <span>Khía cạnh: &ldquo;{getAspectViName(selectedAspect)}&rdquo;</span>
+                <button
+                  type="button"
+                  onClick={() => setSelectedAspect("")}
+                  className="hover:text-white transition-colors"
+                  title="Xóa bộ lọc khía cạnh"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              </span>
+            )}
+            {keyword && (
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-800/80 border border-slate-700 text-slate-200 text-xs">
+                <span>Từ khóa: &ldquo;{keyword}&rdquo;</span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setKeyword("");
+                    executeSearch(1, { keyword: "" });
+                  }}
+                  className="hover:text-white transition-colors"
+                  title="Xóa từ khóa"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              </span>
+            )}
+            {!selectedBank && !selectedAspect && !keyword && (
+              <span className="text-slate-500 italic">Hiển thị toàn bộ đánh giá 7 ngân hàng</span>
             )}
           </div>
           <button
             onClick={handleResetFilters}
-            className="text-slate-400 hover:text-white font-mono text-xs underline"
+            className="flex items-center gap-1 text-slate-400 hover:text-white font-mono text-xs hover:underline transition-colors ml-auto"
           >
-            Đặt Lại Bộ Lọc
+            <RefreshCw className="w-3.5 h-3.5" />
+            <span>Đặt Lại Bộ Lọc</span>
           </button>
         </div>
       </div>
@@ -496,5 +627,20 @@ export default function ReviewExplorerPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function ReviewExplorerPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex flex-col items-center justify-center min-h-[400px] text-slate-400 font-mono text-xs gap-3">
+          <RefreshCw className="w-5 h-5 animate-spin text-cyan-400" />
+          <span>Đang đồng bộ bộ lọc và tải dữ liệu đánh giá...</span>
+        </div>
+      }
+    >
+      <ReviewExplorerContent />
+    </Suspense>
   );
 }
