@@ -12,66 +12,6 @@ import {
 } from "framer-motion";
 import { Play, ArrowRight } from "lucide-react";
 
-interface BankItem {
-  name: string;
-  shortName: string;
-  logo: string;
-  bgClass: string;
-  borderHover: string;
-}
-
-const BANKS: BankItem[] = [
-  {
-    name: "BIDV SmartBanking",
-    shortName: "BIDV",
-    logo: "/banks/bidv.png",
-    bgClass: "bg-white",
-    borderHover: "hover:border-emerald-400 hover:shadow-[0_0_30px_rgba(16,185,129,0.4)]",
-  },
-  {
-    name: "MB Bank",
-    shortName: "MBBank",
-    logo: "/banks/mbbank.png",
-    bgClass: "bg-white",
-    borderHover: "hover:border-blue-400 hover:shadow-[0_0_30px_rgba(59,130,246,0.4)]",
-  },
-  {
-    name: "VCB Digibank",
-    shortName: "Vietcombank",
-    logo: "/banks/vietcombank.png",
-    bgClass: "bg-white",
-    borderHover: "hover:border-emerald-400 hover:shadow-[0_0_30px_rgba(16,185,129,0.4)]",
-  },
-  {
-    name: "VietinBank iPay",
-    shortName: "VietinBank",
-    logo: "/banks/vietinbank.png",
-    bgClass: "bg-white",
-    borderHover: "hover:border-sky-400 hover:shadow-[0_0_30px_rgba(14,165,233,0.4)]",
-  },
-  {
-    name: "TPBank Mobile",
-    shortName: "TPBank",
-    logo: "/banks/tpbank.png",
-    bgClass: "bg-[#5b2384]",
-    borderHover: "hover:border-purple-400 hover:shadow-[0_0_30px_rgba(168,85,247,0.4)]",
-  },
-  {
-    name: "TNEX",
-    shortName: "TNEX",
-    logo: "/banks/tnex.png",
-    bgClass: "bg-white",
-    borderHover: "hover:border-cyan-400 hover:shadow-[0_0_30px_rgba(6,182,212,0.4)]",
-  },
-  {
-    name: "Liobank",
-    shortName: "Liobank",
-    logo: "/banks/liobank.png",
-    bgClass: "bg-black border border-slate-700/80",
-    borderHover: "hover:border-amber-400 hover:shadow-[0_0_30px_rgba(245,158,11,0.4)]",
-  },
-];
-
 const SHOWCASE_WORDS = [
   {
     word: "Intelligence.",
@@ -89,6 +29,17 @@ const SHOWCASE_WORDS = [
     word: "Sentiment.",
     subtitle: "Định lượng chỉ số cảm xúc ròng (NSS) theo từng phiên bản ứng dụng.",
   },
+];
+
+const RUNNING_APPLICATIONS = [
+  "LẮNG NGHE TIẾNG NÓI NGƯỜI DÙNG THẬT",
+  "BÓC TÁCH CẢM XÚC 7 KHÍA CẠNH BẰNG AI (ABSA)",
+  "ĐỊNH LƯỢNG ĐIỂM NGHẼN BẢO MẬT & SINH TRẮC HỌC",
+  "TỐC ĐỘ GIAO DỊCH & CHUYỂN TIỀN 24/7",
+  "ĐỐI SÁNH NĂNG LỰC CẠNH TRANH 7 NGÂN HÀNG SỐ",
+  "RA QUYẾT ĐỊNH NÂNG CẤP SẢN PHẨM CHÍNH XÁC",
+  "100% DỮ LIỆU THỰC CHỨNG TỪ GOOGLE PLAY",
+  "THEO DÕI ĐỘ HÀI LÒNG THEO TỪNG PHIÊN BẢN APP",
 ];
 
 export function StitchShowcase() {
@@ -145,9 +96,6 @@ export function StitchShowcase() {
   // Center typography scale & depth on scroll
   const centerScale = useTransform(smoothProgress, [0, 0.95], [0.92, 1.0]);
 
-  // Duplicate bank items 3 times for seamless infinite horizontal loop
-  const marqueeBanks = [...BANKS, ...BANKS, ...BANKS];
-
   return (
     <section
       ref={containerRef}
@@ -163,10 +111,11 @@ export function StitchShowcase() {
             borderRadius,
             opacity,
           }}
-          className="relative w-full h-full bg-[#02050e]/98 border border-cyan-500/25 shadow-[0_0_120px_rgba(0,0,0,0.98)] overflow-hidden flex flex-col justify-between p-4 sm:p-6 lg:p-7 select-none"
+          className="relative w-full h-full bg-[#02050e]/98 border border-cyan-500/25 shadow-[0_0_120px_rgba(0,0,0,0.98)] overflow-hidden flex flex-col justify-between p-4 sm:p-6 lg:p-8 select-none"
         >
           {/* =========================================================================
               DYNAMIC LIVING NEON AURORA BLOOM (Harmonious Cyan & Deep Sapphire Midnight)
+              Quầng sáng neon loang màu chuyển động đa tầng bao bọc logo VDBI
               ========================================================================= */}
           {/* Blob 1: Vibrant Cyan & Electric Blue Aurora */}
           <motion.div
@@ -198,18 +147,18 @@ export function StitchShowcase() {
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] sm:w-[750px] h-[320px] sm:h-[420px] bg-gradient-to-br from-cyan-400/20 via-blue-600/30 to-indigo-800/20 blur-[105px] rounded-full pointer-events-none"
           />
 
-          {/* Blob 3: Center Focal Spotlight directly illuminating behind text */}
+          {/* Blob 3: Center Spotlight illuminating directly behind VDBI logo */}
           <motion.div
             animate={{
               scale: [0.9, 1.2, 0.9],
-              opacity: [0.35, 0.65, 0.35],
+              opacity: [0.4, 0.75, 0.4],
             }}
             transition={{
               duration: 7,
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[360px] sm:w-[500px] h-[220px] sm:h-[300px] bg-gradient-to-tr from-cyan-400/30 via-sky-300/35 to-blue-500/30 blur-[75px] rounded-full pointer-events-none"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] sm:w-[550px] h-[240px] sm:h-[340px] bg-gradient-to-tr from-cyan-400/35 via-sky-300/40 to-blue-500/35 blur-[80px] rounded-full pointer-events-none"
           />
 
           {/* Canvas Dot Matrix Pattern */}
@@ -235,10 +184,10 @@ export function StitchShowcase() {
           </motion.div>
 
           {/* =========================================================================
-              TOP ROW: Clean Brand Identity (Left) + Dashboard Link (Right)
+              TOP ROW: Minimal Brand Header (Left) + Direct Dashboard Action (Right)
               ========================================================================= */}
           <div className="relative z-20 flex items-center justify-between w-full">
-            {/* Top-Left: Minimal Brand Tag like Stitch BETA */}
+            {/* Top-Left: Minimal Brand Tag */}
             <div className="flex items-center gap-2.5">
               <span className="font-mono text-sm tracking-wider font-extrabold text-white">
                 VDBI
@@ -265,31 +214,59 @@ export function StitchShowcase() {
           </div>
 
           {/* =========================================================================
-              CENTER: DYNAMIC LIVING TYPOGRAPHY & INTRO BUTTON
-              (Đã bỏ hoàn toàn các badge con phía trên theo đúng yêu cầu)
+              CENTER: LARGE VDBI LOGO HERO SHOWCASE & DYNAMIC LIVING TYPOGRAPHY
+              (Logo VDBI to ra, hiệu ứng neon loang màu cực quang và nổi khối siêu đẹp)
               ========================================================================= */}
           <motion.div
             style={{ scale: centerScale }}
-            animate={{
-              y: [-5, 5, -5],
-            }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="relative z-20 my-auto text-center flex flex-col items-center max-w-4xl px-4 py-4 sm:py-6"
+            className="relative z-20 my-auto text-center flex flex-col items-center max-w-5xl px-4 py-4 sm:py-6"
           >
-            {/* Giant Editorial Headline (High-Contrast Neon Cyan Gradient - Crystal Clear) */}
-            <div className="h-[75px] sm:h-[110px] md:h-[140px] flex items-center justify-center">
+            {/* ===================================================================
+                MAJESTIC VDBI LOGO (To rõ, hiệu ứng neon phát quang bồng bềnh 3D)
+                =================================================================== */}
+            <motion.div
+              animate={{
+                y: [-7, 7, -7],
+                scale: [1, 1.025, 1],
+              }}
+              transition={{
+                duration: 5.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              whileHover={{ scale: 1.05 }}
+              className="relative mb-6 sm:mb-8 group cursor-pointer"
+            >
+              {/* Outer Radial Ambient Neon Flare */}
+              <div className="absolute inset-0 -m-6 sm:-m-10 bg-gradient-to-r from-cyan-400/25 via-sky-400/35 to-blue-500/25 blur-2xl rounded-full pointer-events-none group-hover:opacity-100 opacity-80 transition-opacity duration-500" />
+
+              {/* Glassmorphic Capsule Showcase for VDBI Logo */}
+              <div className="relative px-6 sm:px-10 py-4 sm:py-5 rounded-3xl bg-slate-950/50 border border-cyan-400/40 backdrop-blur-2xl shadow-[0_0_50px_rgba(6,182,212,0.4)] transition-all duration-300 group-hover:border-cyan-300 group-hover:shadow-[0_0_80px_rgba(6,182,212,0.65)] overflow-hidden">
+                {/* Laser Top Specular Reflection Line */}
+                <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-300/80 to-transparent pointer-events-none" />
+
+                {/* Big High-Res VDBI Logo Image */}
+                <Image
+                  src="/logo-full.png"
+                  alt="Vietnam Digital Banking Intelligence - VDBI Official Logo"
+                  width={1328}
+                  height={223}
+                  className="w-[280px] sm:w-[440px] md:w-[560px] lg:w-[640px] h-auto object-contain filter drop-shadow-[0_0_30px_rgba(6,182,212,0.85)] transition-transform duration-300 group-hover:scale-[1.02]"
+                  priority
+                />
+              </div>
+            </motion.div>
+
+            {/* Giant Editorial Headline (High-Contrast Neon Cyan Gradient) */}
+            <div className="h-[60px] sm:h-[80px] md:h-[95px] flex items-center justify-center">
               <AnimatePresence mode="wait">
                 <motion.h2
                   key={wordIndex}
-                  initial={{ opacity: 0, y: 28, filter: "blur(8px)" }}
+                  initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, y: -28, filter: "blur(8px)" }}
-                  transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-                  className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight leading-none"
+                  exit={{ opacity: 0, y: -20, filter: "blur(8px)" }}
+                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-none"
                 >
                   <span className="text-gradient-neon-sync">
                     {SHOWCASE_WORDS[wordIndex].word}
@@ -299,7 +276,7 @@ export function StitchShowcase() {
             </div>
 
             {/* Concise statement explaining website application */}
-            <div className="h-[50px] sm:h-[60px] mt-3 sm:mt-4 flex items-center justify-center">
+            <div className="h-[45px] sm:h-[55px] mt-2 sm:mt-3 flex items-center justify-center">
               <AnimatePresence mode="wait">
                 <motion.p
                   key={wordIndex}
@@ -315,7 +292,7 @@ export function StitchShowcase() {
             </div>
 
             {/* Play Intro / Explore Dashboard Button (Google Stitch capsule button style) */}
-            <div className="mt-6 sm:mt-8">
+            <div className="mt-5 sm:mt-7">
               <Link
                 href="/dashboard"
                 className="inline-flex items-center gap-3 px-8 py-3.5 rounded-full text-sm font-semibold text-cyan-100 bg-[#071329]/90 hover:bg-[#0c1f42] border border-cyan-400/50 hover:border-cyan-300 shadow-[0_0_35px_rgba(6,182,212,0.35)] transition-all duration-300 hover:scale-105 active:scale-95 backdrop-blur-xl group"
@@ -329,51 +306,27 @@ export function StitchShowcase() {
           </motion.div>
 
           {/* =========================================================================
-              BOTTOM: BIG, GLOWING BANK LOGOS MARQUEE INSIDE VIDEO CANVAS
-              (Ảnh logo ngân hàng to ra, hiệu ứng neon kính cực đẹp, di chuyển tự động)
+              BOTTOM: CONTINUOUS HORIZONTAL RUNNING APPLICATIONS TICKER
+              (Dải chữ chạy ngang vô tận tóm tắt các ứng dụng thực tế của VDBI)
               ========================================================================= */}
-          <div className="relative z-20 w-full overflow-hidden pt-3 pb-2 border-t border-cyan-500/20 bg-slate-950/50 backdrop-blur-md">
+          <div className="relative z-20 w-full overflow-hidden py-3 border-t border-cyan-500/20 bg-slate-950/50 backdrop-blur-md">
             {/* Left & Right Fade Masks for smooth gradient entry/exit */}
             <div className="pointer-events-none absolute inset-y-0 left-0 w-24 sm:w-36 bg-gradient-to-r from-[#02050e] to-transparent z-10" />
             <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-36 bg-gradient-to-l from-[#02050e] to-transparent z-10" />
 
-            {/* Continuous Infinite Marquee of Large Bank Logos */}
-            <div className="animate-marquee-infinite flex gap-4 sm:gap-6 items-center select-none py-1">
-              {marqueeBanks.map((bank, idx) => (
-                <Link
-                  key={idx}
-                  href={`/dashboard/banks?bank=${encodeURIComponent(bank.shortName)}`}
-                  className={`group relative flex items-center gap-3.5 px-4 sm:px-5 py-2 sm:py-2.5 rounded-2xl bg-gradient-to-b from-slate-900/90 to-[#050a18]/95 border border-cyan-500/25 ${bank.borderHover} shadow-[0_4px_24px_rgba(0,0,0,0.6)] backdrop-blur-xl transition-all duration-300 hover:scale-105 flex-shrink-0 cursor-pointer overflow-hidden`}
-                >
-                  {/* Top Specular Neon Laser Line */}
-                  <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent pointer-events-none" />
-
-                  {/* Big Bank Logo Image Box */}
-                  <div
-                    className={`relative w-28 sm:w-36 h-10 sm:h-12 rounded-xl ${bank.bgClass} flex items-center justify-center p-2 shadow-inner overflow-hidden transition-transform duration-300 group-hover:scale-105`}
+            {/* Continuous Infinite Marquee Track */}
+            <div className="animate-marquee-infinite flex gap-8 items-center text-xs font-mono font-bold tracking-wider text-cyan-300/90 whitespace-nowrap">
+              {RUNNING_APPLICATIONS.concat(RUNNING_APPLICATIONS).map(
+                (item, idx) => (
+                  <span
+                    key={idx}
+                    className="flex items-center gap-3 hover:text-white transition-colors cursor-default"
                   >
-                    <Image
-                      src={bank.logo}
-                      alt={bank.name}
-                      width={140}
-                      height={48}
-                      className="w-full h-full object-contain"
-                      priority={idx < 7}
-                    />
-                  </div>
-
-                  {/* Bank Label Details */}
-                  <div className="flex flex-col text-left pr-2">
-                    <span className="text-xs sm:text-sm font-bold text-white group-hover:text-cyan-200 transition-colors tracking-wide whitespace-nowrap">
-                      {bank.name}
-                    </span>
-                    <span className="text-[10px] font-mono text-cyan-400/90 flex items-center gap-1.5 whitespace-nowrap">
-                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-                      <span>Đối sánh AI</span>
-                    </span>
-                  </div>
-                </Link>
-              ))}
+                    <span className="text-cyan-400 text-sm">✦</span>
+                    <span>{item}</span>
+                  </span>
+                )
+              )}
             </div>
           </div>
         </motion.div>

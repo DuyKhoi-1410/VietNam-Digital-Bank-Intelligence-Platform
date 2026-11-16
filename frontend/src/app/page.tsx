@@ -6,6 +6,7 @@ import { StorySection } from "@/components/landing/StorySection";
 import { ValueProps } from "@/components/landing/ValueProps";
 import { ModulesPreview } from "@/components/landing/ModulesPreview";
 import { Methodology } from "@/components/landing/Methodology";
+import { BankMarquee } from "@/components/landing/BankMarquee";
 import { FaqSection } from "@/components/landing/FaqSection";
 import { LandingFooter } from "@/components/landing/LandingFooter";
 
@@ -26,6 +27,7 @@ export default function LandingPage() {
         <ValueProps />
         <ModulesPreview />
         <Methodology />
+        <BankMarquee />
         <FaqSection />
       </main>
 
