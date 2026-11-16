@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -70,16 +70,79 @@ const MODULES_DATA: ShowcaseModule[] = [
 
 export function ModulesShowcase() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const isPausedRef = useRef(false);
+  const wheelTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Smooth continuous auto-scroll that pauses on hover (rà chuột vào là dừng lại)
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    let animationFrameId: number;
+    let lastTimestamp: number | null = null;
+    const speed = 36; // 36px per second - chuyển động chầm chậm, mượt mà và thanh thoát
+
+    const step = (timestamp: number) => {
+      if (lastTimestamp === null) lastTimestamp = timestamp;
+      const delta = (timestamp - lastTimestamp) / 1000;
+      lastTimestamp = timestamp;
+
+      if (!isPausedRef.current && container) {
+        container.scrollLeft += speed * delta;
+
+        // Vòng lặp vô tận mượt mà: khi cuộn hết 1 bộ dữ liệu, nhảy lùi về không giật lag
+        const oneSetWidth = container.scrollWidth / 3;
+        if (oneSetWidth > 0 && container.scrollLeft >= oneSetWidth) {
+          container.scrollLeft -= oneSetWidth;
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(step);
+    };
+
+    animationFrameId = requestAnimationFrame(step);
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      if (wheelTimeoutRef.current) clearTimeout(wheelTimeoutRef.current);
+    };
+  }, []);
+
+  const handleMouseEnter = () => {
+    isPausedRef.current = true;
+  };
+
+  const handleMouseLeave = () => {
+    isPausedRef.current = false;
+  };
+
+  const handleWheel = () => {
+    isPausedRef.current = true;
+    if (wheelTimeoutRef.current) clearTimeout(wheelTimeoutRef.current);
+    wheelTimeoutRef.current = setTimeout(() => {
+      isPausedRef.current = false;
+    }, 1200);
+  };
 
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: -520, behavior: "smooth" });
+      const container = scrollContainerRef.current;
+      const oneSetWidth = container.scrollWidth / 3;
+      if (container.scrollLeft - 520 <= 0 && oneSetWidth > 0) {
+        container.scrollLeft += oneSetWidth;
+      }
+      container.scrollBy({ left: -520, behavior: "smooth" });
     }
   };
 
   const scrollRight = () => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: 520, behavior: "smooth" });
+      const container = scrollContainerRef.current;
+      const oneSetWidth = container.scrollWidth / 3;
+      if (container.scrollLeft + 520 >= oneSetWidth * 2 && oneSetWidth > 0) {
+        container.scrollLeft -= oneSetWidth;
+      }
+      container.scrollBy({ left: 520, behavior: "smooth" });
     }
   };
 
@@ -110,7 +173,11 @@ export function ModulesShowcase() {
           </div>
 
           {/* Carousel Arrow Controls on Right (Exact Google Stitch style from image) */}
-          <div className="flex items-center gap-3 self-end md:self-auto">
+          <div
+            className="flex items-center gap-3 self-end md:self-auto"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
             <button
               onClick={scrollLeft}
               aria-label="Cuộn sang trái"
@@ -129,15 +196,20 @@ export function ModulesShowcase() {
         </div>
       </div>
 
-      {/* Horizontal Carousel Track of Large Module Cards */}
+      {/* Horizontal Carousel Track of Large Module Cards (Tự động di chuyển chầm chậm, rà chuột vào là đứng lại) */}
       <div
         ref={scrollContainerRef}
-        className="flex gap-6 sm:gap-8 overflow-x-auto px-4 sm:px-6 lg:px-8 pb-8 pt-2 scroll-smooth select-none cursor-grab active:cursor-grabbing no-scrollbar"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onTouchStart={handleMouseEnter}
+        onTouchEnd={handleMouseLeave}
+        onWheel={handleWheel}
+        className="flex gap-6 sm:gap-8 overflow-x-auto px-4 sm:px-6 lg:px-8 pb-8 pt-2 select-none cursor-grab active:cursor-grabbing no-scrollbar"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
-        {MODULES_DATA.map((item, idx) => (
+        {[...MODULES_DATA, ...MODULES_DATA, ...MODULES_DATA].map((item, idx) => (
           <div
-            key={item.id}
+            key={`${item.id}-${idx}`}
             className="flex-shrink-0 w-[340px] sm:w-[440px] md:w-[480px] lg:w-[520px] flex flex-col group"
           >
             {/* The Big Module Card Showcase (Đã bỏ badge trên đầu & bỏ chữ bên dưới card theo đúng yêu cầu) */}
