@@ -37,8 +37,10 @@ export function LandingNavbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 bg-transparent transition-all duration-300 ${
-        scrolled ? "py-4 sm:py-5" : "py-6 sm:py-7"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-black/40 backdrop-blur-md border-b border-white/[0.06] shadow-lg shadow-black/20 py-4 sm:py-5"
+          : "bg-transparent py-6 sm:py-7"
       }`}
     >
       <div className="max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12">
