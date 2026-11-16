@@ -14,7 +14,7 @@ export function HeroSection() {
   const handleSearch = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     if (!query.trim()) {
-      router.push("/dashboard/reviews");
+      router.push("/dashboard/reviews?hide_sidebar=1");
       return;
     }
 
@@ -31,17 +31,18 @@ export function HeroSection() {
     if (cleanKeyword) {
       params.set("keyword", cleanKeyword);
     }
+    params.set("hide_sidebar", "1");
 
     const queryString = params.toString();
     router.push(`/dashboard/reviews${queryString ? `?${queryString}` : ""}`);
   };
 
   const handleQuickBankSelect = (bank: string) => {
-    router.push(`/dashboard/reviews?bank=${encodeURIComponent(bank)}`);
+    router.push(`/dashboard/reviews?bank=${encodeURIComponent(bank)}&hide_sidebar=1`);
   };
 
   const handleQuickAspectSelect = (aspect: string) => {
-    router.push(`/dashboard/reviews?aspect=${encodeURIComponent(aspect)}`);
+    router.push(`/dashboard/reviews?aspect=${encodeURIComponent(aspect)}&hide_sidebar=1`);
   };
 
   return (
@@ -89,7 +90,7 @@ export function HeroSection() {
               <div className="flex items-center gap-2">
                 <button
                   type="button"
-                  onClick={() => router.push("/dashboard/reviews")}
+                  onClick={() => router.push("/dashboard/reviews?hide_sidebar=1")}
                   className="w-8 h-8 rounded-full bg-slate-800/80 hover:bg-slate-700 border border-slate-700/70 flex items-center justify-center text-slate-300 hover:text-white transition"
                   title="Mở tất cả đánh giá"
                 >

@@ -3,11 +3,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, ChevronRight, ArrowLeft } from "lucide-react";
+import { Menu, ChevronRight, ArrowLeft, PanelLeftOpen, PanelLeftClose } from "lucide-react";
 import { HealthIndicator } from "./HealthIndicator";
 
 interface TopHeaderProps {
-  onToggleMobile: () => void;
+  sidebarVisible?: boolean;
+  onToggleSidebar?: () => void;
+  onToggleMobile?: () => void;
 }
 
 const ROUTE_TITLES: Record<string, { title: string; subtitle: string }> = {
@@ -33,27 +35,47 @@ const ROUTE_TITLES: Record<string, { title: string; subtitle: string }> = {
   },
 };
 
-export function TopHeader({ onToggleMobile }: TopHeaderProps) {
+export function TopHeader({
+  sidebarVisible = true,
+  onToggleSidebar,
+  onToggleMobile,
+}: TopHeaderProps) {
   const pathname = usePathname();
   const current = ROUTE_TITLES[pathname] || {
     title: "Dashboard",
     subtitle: "Nền Tảng Trí Tuệ Dữ Liệu Ngân Hàng Số",
   };
 
+  const handleToggle = () => {
+    if (onToggleSidebar) onToggleSidebar();
+    else if (onToggleMobile) onToggleMobile();
+  };
+
   return (
     <header className="h-16 bg-[#070b14]/90 backdrop-blur-md border-b border-slate-800/80 sticky top-0 z-30 flex items-center justify-between px-4 sm:px-6">
-      {/* Left: Mobile Toggle, Mobile Brand Mark & Breadcrumb */}
+      {/* Left: Sidebar Toggle, Brand Mark & Breadcrumb */}
       <div className="flex items-center gap-3">
         <button
-          onClick={onToggleMobile}
-          className="lg:hidden p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg"
-          aria-label="Mở thanh điều hướng"
+          onClick={handleToggle}
+          className="p-2 text-slate-400 hover:text-white hover:bg-slate-800/80 rounded-xl transition-all duration-200 border border-slate-800 hover:border-slate-700 flex items-center justify-center gap-1.5 active:scale-95"
+          title={sidebarVisible ? "Ẩn thanh điều hướng (Sidebar)" : "Hiện thanh điều hướng (Sidebar)"}
+          aria-label={sidebarVisible ? "Ẩn thanh điều hướng" : "Hiện thanh điều hướng"}
         >
-          <Menu className="w-5 h-5 text-cyan-400" />
+          {sidebarVisible ? (
+            <PanelLeftClose className="w-5 h-5 text-cyan-400" />
+          ) : (
+            <PanelLeftOpen className="w-5 h-5 text-cyan-400" />
+          )}
         </button>
 
-        {/* Mobile Brand Mark */}
-        <Link href="/" className="lg:hidden flex items-center pr-2 border-r border-slate-800" title="Về trang chủ">
+        {/* Brand Mark (always visible on mobile, or on desktop when sidebar is hidden) */}
+        <Link
+          href="/"
+          className={`items-center pr-2 border-r border-slate-800 transition-opacity hover:opacity-80 ${
+            sidebarVisible ? "flex lg:hidden" : "flex"
+          }`}
+          title="Về trang chủ"
+        >
           <Image
             src="/logo-mark.png"
             alt="Vietnam Digital Banking Intelligence"
