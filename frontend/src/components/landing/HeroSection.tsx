@@ -20,7 +20,7 @@ export function HeroSection() {
   };
 
   return (
-    <section id="overview" className="relative min-h-[82vh] flex flex-col items-center justify-center pt-8 pb-14 sm:pt-10 sm:pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-transparent">
+    <section id="overview" className="relative min-h-screen flex flex-col items-center justify-start pt-24 sm:pt-[calc(50vh-130px)] pb-20 sm:pb-28 px-4 sm:px-6 lg:px-8 overflow-hidden bg-transparent">
       {/* Hero Content Container */}
       <div className="relative z-10 max-w-6xl mx-auto text-center flex flex-col items-center w-full">
         {/* Large Editorial Headline - Đảm bảo chuẩn xác đúng 2 dòng, kích thước to rõ, đậm nét */}
