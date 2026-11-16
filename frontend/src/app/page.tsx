@@ -2,9 +2,9 @@ import { StitchBackground } from "@/components/landing/StitchBackground";
 import { LandingNavbar } from "@/components/landing/LandingNavbar";
 import { HeroSection } from "@/components/landing/HeroSection";
 import { StitchShowcase } from "@/components/landing/StitchShowcase";
+import { ModulesShowcase } from "@/components/landing/ModulesShowcase";
 import { StorySection } from "@/components/landing/StorySection";
 import { ValueProps } from "@/components/landing/ValueProps";
-import { ModulesPreview } from "@/components/landing/ModulesPreview";
 import { Methodology } from "@/components/landing/Methodology";
 import { BankMarquee } from "@/components/landing/BankMarquee";
 import { FaqSection } from "@/components/landing/FaqSection";
@@ -23,9 +23,9 @@ export default function LandingPage() {
       <main className="relative z-10 flex flex-col">
         <HeroSection />
         <StitchShowcase />
+        <ModulesShowcase />
         <StorySection />
         <ValueProps />
-        <ModulesPreview />
         <Methodology />
         <BankMarquee />
         <FaqSection />
