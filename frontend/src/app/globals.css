@@ -227,6 +227,26 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
+@keyframes shimmer-aurora {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.text-gradient-animated {
+  background: linear-gradient(90deg, #2dd4bf 0%, #38bdf8 25%, #818cf8 50%, #c084fc 75%, #2dd4bf 100%);
+  background-size: 200% auto;
+  animation: shimmer-aurora 6s ease-in-out infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 /* =========================================================================
    INFINITE HORIZONTAL MARQUEE TICKER (PAUSE ON HOVER)
    ========================================================================= */
