@@ -4,7 +4,6 @@ import { HeroSection } from "@/components/landing/HeroSection";
 import { StitchShowcase } from "@/components/landing/StitchShowcase";
 import { ModulesShowcase } from "@/components/landing/ModulesShowcase";
 import { StorySection } from "@/components/landing/StorySection";
-import { ValueProps } from "@/components/landing/ValueProps";
 import { Methodology } from "@/components/landing/Methodology";
 import { BankMarquee } from "@/components/landing/BankMarquee";
 import { FaqSection } from "@/components/landing/FaqSection";
@@ -26,7 +25,6 @@ export default function LandingPage() {
         <StitchShowcase />
         <ModulesShowcase />
         <StorySection />
-        <ValueProps />
         <Methodology />
         <BankMarquee />
         <FaqSection />

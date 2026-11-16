@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 
 export function StorySection() {
   return (
-    <section id="story" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-transparent overflow-hidden">
+    <section id="platform" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-transparent overflow-hidden">
       {/* Background ambient lighting */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-indigo-600/10 blur-[160px] rounded-full pointer-events-none" />
 
