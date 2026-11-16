@@ -9,7 +9,7 @@ import {
   useSpring,
   AnimatePresence,
 } from "framer-motion";
-import { Play, Sparkles, ArrowRight } from "lucide-react";
+import { Play, ArrowRight } from "lucide-react";
 
 const SHOWCASE_WORDS = [
   {
@@ -98,10 +98,6 @@ export function StitchShowcase() {
   // Center typography scale & depth on scroll
   const centerScale = useTransform(smoothProgress, [0, 0.95], [0.92, 1.0]);
 
-  // Prompt note (top left): slides and fades in as canvas approaches full screen
-  const noteOpacity = useTransform(smoothProgress, [0.35, 0.85], [0, 1]);
-  const noteY = useTransform(smoothProgress, [0.35, 0.85], [-12, 0]);
-
   return (
     <section
       ref={containerRef}
@@ -117,62 +113,61 @@ export function StitchShowcase() {
             borderRadius,
             opacity,
           }}
-          className="relative w-full h-full bg-[#03060f]/98 border border-cyan-500/30 shadow-[0_0_120px_rgba(0,0,0,0.98)] overflow-hidden flex flex-col justify-between p-4 sm:p-6 lg:p-8 select-none"
+          className="relative w-full h-full bg-[#02050e]/98 border border-cyan-500/25 shadow-[0_0_120px_rgba(0,0,0,0.98)] overflow-hidden flex flex-col justify-between p-4 sm:p-6 lg:p-8 select-none"
         >
           {/* =========================================================================
-              DYNAMIC LIVING NEON AURORA BLOOM (Moving, Morphing & Orbiting Light)
+              DYNAMIC LIVING NEON AURORA BLOOM (Harmonious Cyan & Deep Sapphire Midnight)
+              Màu neon khớp hoàn toàn với màu chữ neon, êm dịu, dễ nhìn, không chói gắt
               ========================================================================= */}
-          {/* Blob 1: Deep Cyan & Blue Orbiting Plasma */}
+          {/* Blob 1: Vibrant Cyan & Electric Blue Aurora */}
           <motion.div
             animate={{
-              x: [-60, 50, -40, -60],
-              y: [-35, 45, -25, -35],
-              scale: [1, 1.22, 0.96, 1],
-              rotate: [0, 90, 180, 270, 360],
+              x: [-45, 45, -30, -45],
+              y: [-25, 35, -20, -25],
+              scale: [1, 1.2, 0.95, 1],
+            }}
+            transition={{
+              duration: 16,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] sm:w-[950px] md:w-[1100px] h-[380px] sm:h-[500px] bg-gradient-to-r from-cyan-500/30 via-sky-600/25 to-blue-700/30 blur-[130px] rounded-full pointer-events-none"
+          />
+
+          {/* Blob 2: Deep Sapphire & Navy Fluid Atmosphere */}
+          <motion.div
+            animate={{
+              x: [35, -40, 25, 35],
+              y: [20, -30, 15, 20],
+              scale: [1.1, 0.9, 1.15, 1.1],
             }}
             transition={{
               duration: 18,
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] sm:w-[950px] md:w-[1100px] h-[400px] sm:h-[550px] bg-gradient-to-r from-cyan-500/35 via-blue-600/40 to-violet-600/35 blur-[130px] rounded-full pointer-events-none"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] sm:w-[750px] h-[320px] sm:h-[420px] bg-gradient-to-br from-cyan-400/20 via-blue-600/30 to-indigo-800/20 blur-[105px] rounded-full pointer-events-none"
           />
 
-          {/* Blob 2: Violet, Indigo & Emerald Undulating Field */}
+          {/* Blob 3: Center Focal Spotlight directly illuminating behind text */}
           <motion.div
             animate={{
-              x: [50, -40, 35, 50],
-              y: [30, -40, 20, 30],
-              scale: [1.15, 0.9, 1.2, 1.15],
-              rotate: [360, 270, 180, 90, 0],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] sm:w-[750px] h-[350px] sm:h-[450px] bg-gradient-to-br from-emerald-400/25 via-cyan-400/35 to-indigo-500/30 blur-[95px] rounded-full pointer-events-none"
-          />
-
-          {/* Blob 3: Pulsating Core Light Breathing */}
-          <motion.div
-            animate={{
-              scale: [0.85, 1.3, 0.85],
-              opacity: [0.35, 0.7, 0.35],
+              scale: [0.9, 1.2, 0.9],
+              opacity: [0.35, 0.65, 0.35],
             }}
             transition={{
               duration: 7,
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] sm:w-[520px] h-[240px] sm:h-[340px] bg-gradient-to-tr from-cyan-300/35 via-teal-400/30 to-sky-500/35 blur-[75px] rounded-full pointer-events-none"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[360px] sm:w-[500px] h-[220px] sm:h-[300px] bg-gradient-to-tr from-cyan-400/30 via-sky-300/35 to-blue-500/30 blur-[75px] rounded-full pointer-events-none"
           />
 
           {/* Canvas Dot Matrix Pattern */}
           <div
             className="absolute inset-0 pointer-events-none opacity-20"
             style={{
-              backgroundImage: `radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.4) 1px, transparent 0)`,
+              backgroundImage: `radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.35) 1px, transparent 0)`,
               backgroundSize: "28px 28px",
             }}
           />
@@ -191,35 +186,29 @@ export function StitchShowcase() {
           </motion.div>
 
           {/* =========================================================================
-              TOP ROW: Floating Prompt Note (Google Stitch signature) + Canvas Badge
+              TOP ROW: Clean Brand Identity (Left) + Dashboard Link (Right)
+              (Đã loại bỏ thẻ hộp thông báo theo đúng ảnh đính kèm của người dùng)
               ========================================================================= */}
-          <div className="relative z-20 flex items-start justify-between w-full">
-            {/* Top-Left Floating Prompt Note */}
-            <motion.div
-              style={{ opacity: noteOpacity, y: noteY }}
-              className="max-w-xs sm:max-w-sm rounded-2xl bg-[#0b1120]/90 backdrop-blur-xl border border-slate-700/70 p-4 shadow-2xl text-left hidden md:block"
-            >
-              <div className="flex items-center justify-between text-slate-400 mb-2">
-                <div className="flex items-center gap-1.5 font-mono text-[10px] text-cyan-400 font-bold uppercase tracking-wider">
-                  <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                  <span>Ứng Dụng Nền Tảng VDBI</span>
-                </div>
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-              </div>
-              <p className="text-xs text-slate-300 leading-relaxed font-sans">
-                Giải mã tiếng nói khách hàng trên 7 ứng dụng ngân hàng số thương mại. Bóc tách 7 khía cạnh nghiệp vụ bằng AI để tối ưu sản phẩm và nâng cao năng lực cạnh tranh.
-              </p>
-            </motion.div>
+          <div className="relative z-20 flex items-center justify-between w-full">
+            {/* Top-Left: Minimal Brand Tag like Stitch BETA */}
+            <div className="flex items-center gap-2.5">
+              <span className="font-mono text-sm tracking-wider font-extrabold text-white">
+                VDBI
+              </span>
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold tracking-widest text-cyan-300 bg-cyan-950/70 border border-cyan-500/40 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
+                AI INTELLIGENCE
+              </span>
+            </div>
 
-            {/* Top-Right Canvas Actions */}
-            <div className="flex items-center gap-2 ml-auto">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono text-cyan-300 bg-cyan-950/50 border border-cyan-500/30">
+            {/* Top-Right: Direct Dashboard Action */}
+            <div className="flex items-center gap-3">
+              <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono text-cyan-300 bg-cyan-950/40 border border-cyan-500/30">
                 <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
-                <span>Không Dùng Dữ Liệu Ảo</span>
+                <span>100% Dữ Liệu Thực</span>
               </span>
               <Link
                 href="/dashboard"
-                className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-semibold text-black bg-white hover:bg-slate-200 transition shadow-md shadow-white/10"
+                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold text-black bg-white hover:bg-slate-200 transition shadow-md shadow-white/10"
               >
                 <span>Mở Dashboard</span>
                 <ArrowRight className="w-3 h-3" />
@@ -228,7 +217,8 @@ export function StitchShowcase() {
           </div>
 
           {/* =========================================================================
-              CENTER: DYNAMIC LIVING TYPOGRAPHY & INTRO BUTTON (Chuyển động mượt mà)
+              CENTER: DYNAMIC LIVING TYPOGRAPHY & INTRO BUTTON
+              Màu chữ neon trắng-cyan rực rỡ, sắc nét, đồng bộ tuyệt đối với nền neon
               ========================================================================= */}
           <motion.div
             style={{ scale: centerScale }}
@@ -242,7 +232,7 @@ export function StitchShowcase() {
             }}
             className="relative z-20 my-auto text-center flex flex-col items-center max-w-4xl px-4 py-8"
           >
-            {/* Dynamic Superpower Category Badge with AnimatePresence */}
+            {/* Superpower Category Badge with AnimatePresence */}
             <div className="h-8 mb-4 sm:mb-6 flex items-center justify-center">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -250,8 +240,8 @@ export function StitchShowcase() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.4 }}
-                  className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-cyan-500/40 text-[11px] sm:text-xs font-mono text-cyan-300 shadow-xl backdrop-blur-md"
+                  transition={{ duration: 0.35 }}
+                  className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-cyan-400/50 text-[11px] sm:text-xs font-mono text-cyan-300 shadow-[0_0_20px_rgba(6,182,212,0.3)] backdrop-blur-md"
                 >
                   <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
                   <span>{SHOWCASE_WORDS[wordIndex].badge}</span>
@@ -259,25 +249,25 @@ export function StitchShowcase() {
               </AnimatePresence>
             </div>
 
-            {/* Giant Editorial Headline (Dynamic Morphing Words with Animated Aurora Shimmer) */}
+            {/* Giant Editorial Headline (High-Contrast Neon Cyan Gradient - Crystal Clear) */}
             <div className="h-[90px] sm:h-[130px] md:h-[160px] flex items-center justify-center">
               <AnimatePresence mode="wait">
                 <motion.h2
                   key={wordIndex}
-                  initial={{ opacity: 0, y: 35, filter: "blur(10px)" }}
+                  initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, y: -35, filter: "blur(10px)" }}
-                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  exit={{ opacity: 0, y: -30, filter: "blur(8px)" }}
+                  transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
                   className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight leading-none"
                 >
-                  <span className="text-gradient-animated drop-shadow-[0_0_55px_rgba(34,211,238,0.65)]">
+                  <span className="text-gradient-neon-sync">
                     {SHOWCASE_WORDS[wordIndex].word}
                   </span>
                 </motion.h2>
               </AnimatePresence>
             </div>
 
-            {/* Punchy concise statement explaining website application */}
+            {/* Concise statement explaining website application */}
             <div className="h-[60px] sm:h-[70px] mt-4 flex items-center justify-center">
               <AnimatePresence mode="wait">
                 <motion.p
@@ -285,8 +275,8 @@ export function StitchShowcase() {
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -12 }}
-                  transition={{ duration: 0.5, delay: 0.1 }}
-                  className="text-base sm:text-xl md:text-2xl text-slate-200 font-light max-w-2xl leading-relaxed text-center"
+                  transition={{ duration: 0.45, delay: 0.08 }}
+                  className="text-base sm:text-xl md:text-2xl text-slate-100 font-light max-w-2xl leading-relaxed text-center drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]"
                 >
                   {SHOWCASE_WORDS[wordIndex].subtitle}
                 </motion.p>
@@ -297,9 +287,9 @@ export function StitchShowcase() {
             <div className="mt-8 sm:mt-10">
               <Link
                 href="/dashboard"
-                className="inline-flex items-center gap-3 px-8 py-3.5 rounded-full text-sm font-medium text-slate-100 bg-[#0a1224]/85 hover:bg-[#111e3b] border border-cyan-500/40 hover:border-cyan-300 shadow-[0_0_35px_rgba(6,182,212,0.3)] transition-all duration-300 hover:scale-105 active:scale-95 backdrop-blur-xl group"
+                className="inline-flex items-center gap-3 px-8 py-3.5 rounded-full text-sm font-semibold text-cyan-100 bg-[#071329]/90 hover:bg-[#0c1f42] border border-cyan-400/50 hover:border-cyan-300 shadow-[0_0_35px_rgba(6,182,212,0.35)] transition-all duration-300 hover:scale-105 active:scale-95 backdrop-blur-xl group"
               >
-                <div className="w-6 h-6 rounded-full bg-cyan-400/20 border border-cyan-400/50 flex items-center justify-center text-cyan-300 group-hover:bg-cyan-400 group-hover:text-black transition-all">
+                <div className="w-6 h-6 rounded-full bg-cyan-400/20 border border-cyan-400/60 flex items-center justify-center text-cyan-300 group-hover:bg-cyan-400 group-hover:text-black transition-all">
                   <Play className="w-3 h-3 fill-current translate-x-0.5" />
                 </div>
                 <span>Khám phá nền tảng</span>
@@ -312,8 +302,8 @@ export function StitchShowcase() {
               ========================================================================= */}
           <div className="relative z-20 w-full overflow-hidden py-3 border-t border-cyan-500/20 bg-slate-950/40 backdrop-blur-md">
             {/* Left & Right Fade Masks */}
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#03060f] to-transparent z-10" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#03060f] to-transparent z-10" />
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#02050e] to-transparent z-10" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#02050e] to-transparent z-10" />
 
             {/* Horizontal Continuous Marquee Row */}
             <div className="animate-marquee-infinite flex gap-8 items-center text-xs font-mono font-bold tracking-wider text-cyan-300/90 whitespace-nowrap">
