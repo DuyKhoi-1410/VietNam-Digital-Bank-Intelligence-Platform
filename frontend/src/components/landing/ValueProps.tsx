@@ -45,14 +45,13 @@ export function ValueProps() {
               BENTO CARD 1: THÔNG MINH THỊ TRƯỜNG (Span 7) - Google Stitch "Easy edits" style
               To bản, cao thoáng, có lưới chấm li ti và UI Mockup phong cách ứng dụng di động
               ========================================================================= */}
-          <div className="lg:col-span-7 rounded-[36px] sm:rounded-[44px] bg-[#202124] border border-slate-700/60 hover:border-cyan-500/60 p-8 sm:p-12 lg:p-14 flex flex-col justify-between overflow-hidden relative group hover:shadow-[0_0_60px_rgba(6,182,212,0.25)] transition-all duration-500 backdrop-blur-2xl min-h-[540px] sm:min-h-[620px]">
-            {/* Exact Dot Matrix Background from User Uploaded Pattern */}
+          <div className="lg:col-span-7 rounded-[36px] sm:rounded-[44px] bg-[#2b2d34] border border-slate-700/60 hover:border-cyan-500/60 p-8 sm:p-12 lg:p-14 flex flex-col justify-between overflow-hidden relative group hover:shadow-[0_0_60px_rgba(6,182,212,0.25)] transition-all duration-500 backdrop-blur-2xl min-h-[540px] sm:min-h-[620px]">
+            {/* White Dot Matrix - Chấm trắng sắc nét chuẩn nền sau cùng */}
             <div
               className="absolute inset-0 pointer-events-none"
               style={{
-                backgroundImage: "url('/stitch-card-bg.png')",
-                backgroundRepeat: "repeat",
-                backgroundPosition: "top left",
+                backgroundImage: "radial-gradient(circle at center, rgba(255, 255, 255, 0.22) 1px, transparent 1.2px)",
+                backgroundSize: "19px 19px",
               }}
             />
 
@@ -142,14 +141,13 @@ export function ValueProps() {
               BENTO CARD 2: THÔNG MINH SẢN PHẨM (Span 5) - Google Stitch "Export code" style
               To bản, cao thoáng, có lưới chấm li ti và Code Inspector Panel Mockup
               ========================================================================= */}
-          <div className="lg:col-span-5 rounded-[36px] sm:rounded-[44px] bg-[#202124] border border-slate-700/60 hover:border-violet-500/60 p-8 sm:p-12 lg:p-14 flex flex-col justify-between overflow-hidden relative group hover:shadow-[0_0_60px_rgba(139,92,246,0.25)] transition-all duration-500 backdrop-blur-2xl min-h-[540px] sm:min-h-[620px]">
-            {/* Exact Dot Matrix Background from User Uploaded Pattern */}
+          <div className="lg:col-span-5 rounded-[36px] sm:rounded-[44px] bg-[#2b2d34] border border-slate-700/60 hover:border-violet-500/60 p-8 sm:p-12 lg:p-14 flex flex-col justify-between overflow-hidden relative group hover:shadow-[0_0_60px_rgba(139,92,246,0.25)] transition-all duration-500 backdrop-blur-2xl min-h-[540px] sm:min-h-[620px]">
+            {/* White Dot Matrix - Chấm trắng sắc nét chuẩn nền sau cùng */}
             <div
               className="absolute inset-0 pointer-events-none"
               style={{
-                backgroundImage: "url('/stitch-card-bg.png')",
-                backgroundRepeat: "repeat",
-                backgroundPosition: "top left",
+                backgroundImage: "radial-gradient(circle at center, rgba(255, 255, 255, 0.22) 1px, transparent 1.2px)",
+                backgroundSize: "19px 19px",
               }}
             />
 
@@ -219,14 +217,13 @@ export function ValueProps() {
               BENTO CARD 3: TRÍ TUỆ NHÂN TẠO ABSA (Span 5) - Google Stitch "Build with Gemini" style
               To bản, biểu tượng ngôi sao 4 cánh phát quang cực lớn giữa các vòng tròn neon
               ========================================================================= */}
-          <div className="lg:col-span-5 rounded-[36px] sm:rounded-[44px] bg-[#202124] border border-slate-700/60 hover:border-fuchsia-500/60 p-8 sm:p-12 lg:p-14 flex flex-col justify-between overflow-hidden relative group hover:shadow-[0_0_60px_rgba(217,70,239,0.25)] transition-all duration-500 backdrop-blur-2xl min-h-[480px] sm:min-h-[560px]">
-            {/* Exact Dot Matrix Background from User Uploaded Pattern */}
+          <div className="lg:col-span-5 rounded-[36px] sm:rounded-[44px] bg-[#2b2d34] border border-slate-700/60 hover:border-fuchsia-500/60 p-8 sm:p-12 lg:p-14 flex flex-col justify-between overflow-hidden relative group hover:shadow-[0_0_60px_rgba(217,70,239,0.25)] transition-all duration-500 backdrop-blur-2xl min-h-[480px] sm:min-h-[560px]">
+            {/* White Dot Matrix - Chấm trắng sắc nét chuẩn nền sau cùng */}
             <div
               className="absolute inset-0 pointer-events-none"
               style={{
-                backgroundImage: "url('/stitch-card-bg.png')",
-                backgroundRepeat: "repeat",
-                backgroundPosition: "top left",
+                backgroundImage: "radial-gradient(circle at center, rgba(255, 255, 255, 0.22) 1px, transparent 1.2px)",
+                backgroundSize: "19px 19px",
               }}
             />
 
@@ -276,14 +273,13 @@ export function ValueProps() {
               BENTO CARD 4: THÔNG MINH CẠNH TRANH (Span 7) - Google Stitch "Own your design" style
               To bản, widget thước đo Blueprint kỹ thuật với thanh đối đầu trực diện
               ========================================================================= */}
-          <div className="lg:col-span-7 rounded-[36px] sm:rounded-[44px] bg-[#202124] border border-slate-700/60 hover:border-cyan-500/60 p-8 sm:p-12 lg:p-14 flex flex-col justify-between overflow-hidden relative group hover:shadow-[0_0_60px_rgba(6,182,212,0.25)] transition-all duration-500 backdrop-blur-2xl min-h-[480px] sm:min-h-[560px]">
-            {/* Exact Dot Matrix Background from User Uploaded Pattern */}
+          <div className="lg:col-span-7 rounded-[36px] sm:rounded-[44px] bg-[#2b2d34] border border-slate-700/60 hover:border-cyan-500/60 p-8 sm:p-12 lg:p-14 flex flex-col justify-between overflow-hidden relative group hover:shadow-[0_0_60px_rgba(6,182,212,0.25)] transition-all duration-500 backdrop-blur-2xl min-h-[480px] sm:min-h-[560px]">
+            {/* White Dot Matrix - Chấm trắng sắc nét chuẩn nền sau cùng */}
             <div
               className="absolute inset-0 pointer-events-none"
               style={{
-                backgroundImage: "url('/stitch-card-bg.png')",
-                backgroundRepeat: "repeat",
-                backgroundPosition: "top left",
+                backgroundImage: "radial-gradient(circle at center, rgba(255, 255, 255, 0.22) 1px, transparent 1.2px)",
+                backgroundSize: "19px 19px",
               }}
             />
 
