@@ -129,7 +129,7 @@ export function ModulesShowcase() {
         </div>
       </div>
 
-      {/* Horizontal Carousel Track of Large Module Cards (Exact Google Stitch Card Format) */}
+      {/* Horizontal Carousel Track of Large Module Cards */}
       <div
         ref={scrollContainerRef}
         className="flex gap-6 sm:gap-8 overflow-x-auto px-4 sm:px-6 lg:px-8 pb-8 pt-2 scroll-smooth select-none cursor-grab active:cursor-grabbing no-scrollbar"
@@ -140,7 +140,7 @@ export function ModulesShowcase() {
             key={item.id}
             className="flex-shrink-0 w-[340px] sm:w-[440px] md:w-[480px] lg:w-[520px] flex flex-col group"
           >
-            {/* The Big Module Card Showcase (Ảnh trừu tượng nghệ thuật 3D kích thước lớn) */}
+            {/* The Big Module Card Showcase (Đã bỏ badge trên đầu & bỏ chữ bên dưới card theo đúng yêu cầu) */}
             <div className="relative h-[420px] sm:h-[480px] md:h-[520px] rounded-[32px] overflow-hidden border border-slate-800/90 group-hover:border-cyan-500/50 shadow-2xl transition-all duration-500 group-hover:shadow-[0_0_50px_rgba(6,182,212,0.3)] group-hover:-translate-y-1 bg-[#050814]">
               {/* Full-bleed Abstract 3D Artwork Image */}
               <div className="absolute inset-0 w-full h-full">
@@ -154,21 +154,10 @@ export function ModulesShowcase() {
                 />
                 {/* Ethereal Gradient Overlay for Depth & Contrast */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#02050e] via-[#02050e]/30 to-transparent" />
-                <div className="absolute inset-0 bg-slate-950/20 group-hover:bg-transparent transition-colors duration-300" />
+                <div className="absolute inset-0 bg-slate-950/15 group-hover:bg-transparent transition-colors duration-300" />
               </div>
 
-              {/* Top Badge: Category & Module Number */}
-              <div className="relative z-10 p-5 sm:p-6 flex items-start justify-between">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider bg-slate-950/80 border border-white/20 text-white backdrop-blur-md shadow-lg">
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-                  <span>Module {item.number}</span>
-                </span>
-                <span className="text-[11px] font-mono px-3 py-1.5 rounded-full bg-slate-950/80 border border-white/10 text-slate-200 backdrop-blur-md">
-                  {item.category}
-                </span>
-              </div>
-
-              {/* Hover Center Overlay with "Mở module" Capsule Button (Exact Stitch "Use template" style) */}
+              {/* Hover Center Overlay with "Khám phá module" Capsule Button */}
               <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none group-hover:pointer-events-auto">
                 <Link
                   href={item.route}
@@ -179,7 +168,7 @@ export function ModulesShowcase() {
                 </Link>
               </div>
 
-              {/* Bottom Card Title Overlay inside card */}
+              {/* Bottom Card Title Overlay inside card (Chỉ giữ lại Tiêu đề & Toàn cảnh...) */}
               <div className="absolute inset-x-0 bottom-0 z-10 p-6 sm:p-7 bg-gradient-to-t from-[#02050e] via-[#02050e]/90 to-transparent">
                 <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight group-hover:text-cyan-300 transition-colors">
                   {item.title}
@@ -188,16 +177,6 @@ export function ModulesShowcase() {
                   {item.tagline}
                 </p>
               </div>
-            </div>
-
-            {/* Card Metadata Info Below (Underneath Card as in Google Stitch) */}
-            <div className="mt-3 sm:mt-4 px-2 text-left">
-              <span className="text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider block mb-0.5">
-                {item.category}
-              </span>
-              <span className="text-sm sm:text-base font-semibold text-slate-200 group-hover:text-white transition-colors">
-                {item.title}
-              </span>
             </div>
           </div>
         ))}
