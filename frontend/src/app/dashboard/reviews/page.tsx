@@ -256,23 +256,30 @@ function ReviewExplorerContent() {
         {/* Search Bar - Styled exactly like the Landing Page with frosted dark glass and Send button */}
         <form
           onSubmit={handleSearchSubmit}
-          className="w-full min-h-[66px] sm:min-h-[74px] bg-[#0d1322]/85 backdrop-blur-2xl border border-slate-700/60 hover:border-slate-600 rounded-3xl p-4 sm:p-5 pl-6 sm:pl-7 shadow-2xl shadow-black/80 transition-all duration-200 flex items-center gap-3.5 text-left"
+          className="w-full min-h-[110px] sm:min-h-[125px] bg-[#0d1322]/85 backdrop-blur-2xl border border-slate-700/60 hover:border-slate-600 rounded-3xl p-5 sm:p-6 shadow-2xl shadow-black/80 transition-all duration-200 flex flex-col justify-between text-left"
         >
-          <Search className="w-5 h-5 sm:w-6 sm:h-6 text-slate-400 flex-shrink-0" />
-          <input
-            type="text"
-            placeholder="Tìm kiếm ngân hàng, khía cạnh hoặc từ khóa (VD: Vietcombank, MB, Giao diện, OTP, lỗi đăng nhập...)"
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-            className="w-full bg-transparent border-none outline-none text-white placeholder-slate-400 text-sm sm:text-base font-normal py-2"
-          />
-          <button
-            type="submit"
-            className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white hover:bg-slate-200 text-black flex items-center justify-center transition active:scale-95 shadow-lg shadow-white/20 flex-shrink-0"
-            title="Gửi câu lệnh tìm kiếm"
-          >
-            <ArrowUp className="w-5 h-5 sm:w-6 sm:h-6 font-bold" />
-          </button>
+          {/* Top: Search icon & input */}
+          <div className="flex items-center gap-3 w-full">
+            <Search className="w-5 h-5 text-slate-400 flex-shrink-0" />
+            <input
+              type="text"
+              placeholder="Tìm kiếm ngân hàng, khía cạnh hoặc từ khóa (VD: Vietcombank, MB, Giao diện, OTP, lỗi đăng nhập...)"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              className="w-full bg-transparent border-none outline-none text-white placeholder-slate-400 text-sm sm:text-base font-normal py-1"
+            />
+          </div>
+
+          {/* Bottom row: ONLY the Send button at the bottom right */}
+          <div className="flex items-center justify-end mt-4 pt-2">
+            <button
+              type="submit"
+              className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white hover:bg-slate-200 text-black flex items-center justify-center transition active:scale-95 shadow-lg shadow-white/20"
+              title="Gửi câu lệnh tìm kiếm"
+            >
+              <ArrowUp className="w-4.5 h-4.5 sm:w-5 sm:h-5 font-bold" />
+            </button>
+          </div>
         </form>
 
         {/* Multi-Criteria Selectors Grid */}
