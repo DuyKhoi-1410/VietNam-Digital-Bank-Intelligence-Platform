@@ -18,6 +18,7 @@ import {
   ChevronRight,
   Info,
   ExternalLink,
+  ArrowUp,
 } from "lucide-react";
 
 function ReviewExplorerContent() {
@@ -65,6 +66,7 @@ function ReviewExplorerContent() {
   const [selectedAspect, setSelectedAspect] = useState<string>(initialAspect);
   const [selectedVersion, setSelectedVersion] = useState<string>("");
   const [keyword, setKeyword] = useState<string>(initialKeyword);
+  const [searchInput, setSearchInput] = useState<string>(initialKeyword || "");
   const [page, setPage] = useState<number>(1);
   const pageSize = 15;
 
@@ -102,6 +104,7 @@ function ReviewExplorerContent() {
         setSelectedAspect(res.canonicalAspect);
       }
       setKeyword(res.cleanKeyword || k);
+      setSearchInput(res.cleanKeyword || k);
     }
     if (r !== null) setSelectedRating(r);
     if (s !== null) setSelectedSentiment(s);
@@ -169,7 +172,29 @@ function ReviewExplorerContent() {
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    executeSearch(1);
+    const query = searchInput.trim();
+    if (!query) {
+      setKeyword("");
+      executeSearch(1, { keyword: "" });
+      return;
+    }
+
+    // Resolve query through universal search resolver
+    const { canonicalBank, canonicalAspect, cleanKeyword } = resolveUniversalSearch(query);
+
+    const targetBank = canonicalBank !== null ? canonicalBank : selectedBank;
+    const targetAspect = canonicalAspect !== null ? canonicalAspect : selectedAspect;
+    const targetKeyword = cleanKeyword;
+
+    if (canonicalBank) setSelectedBank(canonicalBank);
+    if (canonicalAspect) setSelectedAspect(canonicalAspect);
+    setKeyword(targetKeyword);
+
+    executeSearch(1, {
+      bank: targetBank,
+      aspect: targetAspect,
+      keyword: targetKeyword,
+    });
   };
 
   const handleResetFilters = () => {
@@ -179,6 +204,7 @@ function ReviewExplorerContent() {
     setSelectedAspect("");
     setSelectedVersion("");
     setKeyword("");
+    setSearchInput("");
     executeSearch(1, {
       bank: "",
       rating: "",
@@ -227,24 +253,25 @@ function ReviewExplorerContent() {
 
       {/* Filter Controls Bar */}
       <div className="glass-panel rounded-2xl p-5 border border-slate-800 space-y-4">
-        {/* Keyword Search Row */}
-        <form onSubmit={handleSearchSubmit} className="flex gap-2">
-          <div className="relative flex-1">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-            <input
-              type="text"
-              placeholder="Tìm kiếm nội dung nhận xét theo từ khóa (vd: OTP, sinh trắc học, lỗi đăng nhập, chuyển tiền, giao diện)..."
-              value={keyword}
-              onChange={(e) => setKeyword(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs placeholder:text-slate-500 focus:border-cyan-400 focus:outline-none"
-            />
-          </div>
+        {/* Search Bar - Styled exactly like the Landing Page with frosted dark glass and Send button */}
+        <form
+          onSubmit={handleSearchSubmit}
+          className="w-full bg-[#0d1322]/85 backdrop-blur-2xl border border-slate-700/60 hover:border-slate-600 rounded-3xl p-3 sm:p-3.5 pl-5 sm:pl-6 shadow-2xl shadow-black/80 transition-all duration-200 flex items-center gap-3 text-left"
+        >
+          <Search className="w-5 h-5 text-slate-400 flex-shrink-0" />
+          <input
+            type="text"
+            placeholder="Tìm kiếm ngân hàng, khía cạnh hoặc từ khóa (VD: Vietcombank, MB, Giao diện, OTP, lỗi đăng nhập...)"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            className="w-full bg-transparent border-none outline-none text-white placeholder-slate-400 text-sm sm:text-base font-normal py-1"
+          />
           <button
             type="submit"
-            className="px-5 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 transition-colors"
+            className="w-10 h-10 rounded-full bg-white hover:bg-slate-200 text-black flex items-center justify-center transition active:scale-95 shadow-lg shadow-white/20 flex-shrink-0"
+            title="Gửi câu lệnh tìm kiếm"
           >
-            <Search className="w-3.5 h-3.5" />
-            <span>Tìm Kiếm</span>
+            <ArrowUp className="w-4.5 h-4.5 font-bold" />
           </button>
         </form>
 
@@ -394,6 +421,7 @@ function ReviewExplorerContent() {
                   type="button"
                   onClick={() => {
                     setKeyword("");
+                    setSearchInput("");
                     executeSearch(1, { keyword: "" });
                   }}
                   className="hover:text-white transition-colors"

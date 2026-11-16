@@ -2,14 +2,12 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Plus, SlidersHorizontal, ArrowUp, Sparkles } from "lucide-react";
-import { SlidingToggle } from "@/components/ui/SlidingToggle";
+import { ArrowUp, Sparkles } from "lucide-react";
 import { resolveUniversalSearch, CANONICAL_BANKS, CANONICAL_ASPECTS } from "@/lib/bankMatcher";
 
 export function HeroSection() {
   const router = useRouter();
   const [query, setQuery] = useState("");
-  const [activeTab, setActiveTab] = useState<"banks" | "aspects">("banks");
 
   const handleSearch = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -19,7 +17,7 @@ export function HeroSection() {
     }
 
     // Resolve bank and aspect aliases with universal search resolver
-    const { canonicalBank, canonicalAspect, cleanKeyword } = resolveUniversalSearch(query, activeTab);
+    const { canonicalBank, canonicalAspect, cleanKeyword } = resolveUniversalSearch(query);
 
     const params = new URLSearchParams();
     if (canonicalBank) {
@@ -62,107 +60,48 @@ export function HeroSection() {
 
         {/* =========================================================================
             GOOGLE STITCH SIGNATURE PROMPT & EXPLORATION CARD
-            Frosted dark glass, interactive input, bottom control bar, and suggestions
+            Frosted dark glass, interactive input, and Send button
             ========================================================================= */}
         <div className="mt-7 sm:mt-8 w-full max-w-2xl">
           <form
             onSubmit={handleSearch}
-            className="w-full bg-[#0d1322]/85 backdrop-blur-2xl border border-slate-700/60 hover:border-slate-600 rounded-3xl p-5 shadow-2xl shadow-black/80 transition-all duration-200 text-left"
+            className="w-full bg-[#0d1322]/85 backdrop-blur-2xl border border-slate-700/60 hover:border-slate-600 rounded-3xl p-3 sm:p-3.5 pl-5 sm:pl-6 shadow-2xl shadow-black/80 transition-all duration-200 flex items-center gap-3 text-left"
           >
             {/* Input field */}
-            <div className="w-full">
-              <input
-                type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder={
-                  activeTab === "banks"
-                    ? "Tìm ngân hàng hoặc từ khóa (VD: Vietcombank, MB, BIDV, OTP, lỗi chuyển tiền...)"
-                    : "Tìm theo khía cạnh (VD: Bảo mật & Đăng nhập, Chuyển tiền, UI/UX, Hiệu năng, CSKH...)"
-                }
-                className="w-full bg-transparent border-none outline-none text-white placeholder-slate-400 text-base sm:text-lg font-normal py-2"
-              />
-            </div>
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Bạn muốn phân tích ngân hàng hay khía cạnh nào? (VD: Vietcombank, MB, Giao diện, OTP, Chuyển tiền...)"
+              className="w-full bg-transparent border-none outline-none text-white placeholder-slate-400 text-base sm:text-lg font-normal py-1.5"
+            />
 
-            {/* Bottom Controls Row */}
-            <div className="mt-6 pt-3 flex items-center justify-between border-t border-slate-800/80">
-              {/* Left Controls: Plus + Tabs */}
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => router.push("/dashboard/reviews?hide_sidebar=1")}
-                  className="w-8 h-8 rounded-full bg-slate-800/80 hover:bg-slate-700 border border-slate-700/70 flex items-center justify-center text-slate-300 hover:text-white transition"
-                  title="Mở tất cả đánh giá"
-                >
-                  <Plus className="w-4 h-4" />
-                </button>
-
-                <SlidingToggle<"banks" | "aspects">
-                  id="hero-tab-toggle"
-                  variant="pill"
-                  value={activeTab}
-                  onChange={setActiveTab}
-                  options={[
-                    { value: "banks", label: "7 Ngân hàng", icon: "🏛️" },
-                    { value: "aspects", label: "7 Khía cạnh", icon: "📊" },
-                  ]}
-                />
-              </div>
-
-              {/* Right Controls: Filter + Mic + Send */}
-              <div className="flex items-center gap-2.5">
-                <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono text-slate-300 bg-slate-900/90 border border-slate-800">
-                  <Sparkles className="w-3 h-3 text-cyan-400" />
-                  <span>Trí tuệ ABSA</span>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => router.push("/dashboard/benchmark")}
-                  className="w-8 h-8 rounded-full bg-slate-800/80 hover:bg-slate-700 border border-slate-700/70 flex items-center justify-center text-slate-400 hover:text-slate-200 transition"
-                  title="Tùy chỉnh đối sánh"
-                >
-                  <SlidersHorizontal className="w-3.5 h-3.5" />
-                </button>
-
-                <button
-                  type="submit"
-                  className="w-9 h-9 rounded-full bg-white hover:bg-slate-200 text-black flex items-center justify-center transition active:scale-95 shadow-lg shadow-white/20"
-                  title="Gửi câu lệnh tìm kiếm"
-                >
-                  <ArrowUp className="w-4 h-4 font-bold" />
-                </button>
-              </div>
-            </div>
+            {/* Send Button */}
+            <button
+              type="submit"
+              className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white hover:bg-slate-200 text-black flex items-center justify-center transition active:scale-95 shadow-lg shadow-white/20 flex-shrink-0"
+              title="Gửi câu lệnh tìm kiếm"
+            >
+              <ArrowUp className="w-4.5 h-4.5 sm:w-5 sm:h-5 font-bold" />
+            </button>
           </form>
 
-          {/* Quick interactive chips based on activeTab */}
+          {/* Quick interactive chips */}
           <div className="mt-3.5 flex flex-wrap items-center justify-center gap-1.5 px-1">
             <span className="text-[11px] font-mono text-slate-400 mr-1 flex items-center gap-1">
               <Sparkles className="w-3 h-3 text-cyan-400" />
               Truy cập nhanh:
             </span>
-            {activeTab === "banks"
-              ? CANONICAL_BANKS.map((b) => (
-                  <button
-                    key={b}
-                    type="button"
-                    onClick={() => handleQuickBankSelect(b)}
-                    className="px-2.5 py-1 rounded-full text-xs font-medium bg-slate-900/80 hover:bg-cyan-950/80 border border-slate-800 hover:border-cyan-500/50 text-slate-300 hover:text-cyan-300 transition-all shadow-sm active:scale-95"
-                  >
-                    {b}
-                  </button>
-                ))
-              : CANONICAL_ASPECTS.map((a) => (
-                  <button
-                    key={a}
-                    type="button"
-                    onClick={() => handleQuickAspectSelect(a)}
-                    className="px-2.5 py-1 rounded-full text-xs font-medium bg-slate-900/80 hover:bg-cyan-950/80 border border-slate-800 hover:border-cyan-500/50 text-slate-300 hover:text-cyan-300 transition-all shadow-sm active:scale-95"
-                  >
-                    {a}
-                  </button>
-                ))}
+            {CANONICAL_BANKS.map((b) => (
+              <button
+                key={b}
+                type="button"
+                onClick={() => handleQuickBankSelect(b)}
+                className="px-2.5 py-1 rounded-full text-xs font-medium bg-slate-900/80 hover:bg-cyan-950/80 border border-slate-800 hover:border-cyan-500/50 text-slate-300 hover:text-cyan-300 transition-all shadow-sm active:scale-95"
+              >
+                {b}
+              </button>
+            ))}
           </div>
         </div>
       </div>
