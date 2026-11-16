@@ -8,12 +8,6 @@ import { MarketOverviewResponse } from "@/types";
 import { formatNumber } from "@/lib/utils";
 import { SlidingToggle } from "@/components/ui/SlidingToggle";
 
-const SUGGESTIONS = [
-  { text: "Đăng nhập sinh trắc học Vietcombank & BIDV", target: "/dashboard/reviews?aspect=Login+%26+Authentication" },
-  { text: "So sánh trải nghiệm chuyển tiền Techcombank vs MBBank", target: "/dashboard/benchmark" },
-  { text: "Top điểm nghẽn trải nghiệm khiến người dùng vote 1 sao", target: "/dashboard/reviews?rating=1" },
-];
-
 export function HeroSection() {
   const router = useRouter();
   const [liveOverview, setLiveOverview] = useState<MarketOverviewResponse | null>(null);
@@ -168,24 +162,6 @@ export function HeroSection() {
               </div>
             </div>
           </form>
-
-          {/* Quick Suggestions Chips - Chuẩn Google Stitch (✦ chip buttons) */}
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
-            {SUGGESTIONS.map((item, idx) => (
-              <button
-                key={idx}
-                type="button"
-                onClick={() => {
-                  setQuery(item.text);
-                  router.push(item.target);
-                }}
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium text-slate-300 bg-slate-900/70 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 hover:text-white transition backdrop-blur-md"
-              >
-                <span className="text-cyan-400 text-[10px]">✦</span>
-                <span>{item.text}</span>
-              </button>
-            ))}
-          </div>
         </div>
       </div>
     </section>
