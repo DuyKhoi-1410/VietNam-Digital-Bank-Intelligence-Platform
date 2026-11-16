@@ -39,7 +39,7 @@ export function BenchmarkComparisonChart({ data }: BenchmarkComparisonChartProps
           So Sánh Trực Tiếp Điểm Sao & Mức Độ Hài Lòng
         </div>
         <p className="text-xs text-slate-400 mt-0.5">
-          Đối chiếu giữa điểm đánh giá Google Play (★) và tỷ lệ khen ngợi / phàn nàn (%) của từng ngân hàng
+          Đối chiếu giữa điểm đánh giá Google Play (★) và tỷ lệ Tích cực / Tiêu cực (%) của từng ngân hàng
         </p>
       </div>
 

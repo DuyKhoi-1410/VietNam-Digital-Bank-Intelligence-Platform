@@ -54,3 +54,42 @@ export function getSentimentViName(sentiment: string | undefined | null): string
   if (s === "NEUTRAL") return "Neutral";
   return sentiment;
 }
+
+export const COMPLAINT_DRIVER_VIETNAMESE_MAP: Record<string, string> = {
+  "Bảo mật & Đăng nhập": "Lỗi quét khuôn mặt sinh trắc học, chậm mã OTP và vướng mắc xác thực theo Quyết định 2345.",
+  "Hệ thống & Hiệu năng": "Ứng dụng bị văng (crash), tải chậm và lỗi mất kết nối máy chủ trong giờ cao điểm.",
+  "Giao dịch & Chuyển tiền": "Tắc nghẽn xử lý giao dịch, chậm nhận tiền chuyển khoản và lỗi quét mã QR.",
+  "CSKH & Phí dịch vụ": "Thời gian chờ tổng đài lâu, thắc mắc biểu phí duy trì và phản hồi hỗ trợ chậm.",
+  "Giao diện & UI/UX": "Khó tìm tính năng sau khi cập nhật phiên bản mới, bố cục giao diện chưa tối ưu.",
+  "Trải nghiệm chung": "Khách hàng không hài lòng về độ ổn định tổng thể và trải nghiệm chưa liền mạch.",
+  "Tính năng khác": "Lỗi chậm thông báo biến động số dư và các yêu cầu bổ sung tiện ích phụ trợ.",
+};
+
+export function getComplaintDriverVi(aspectName: string | undefined | null, originalText?: string | null): string {
+  if (aspectName && COMPLAINT_DRIVER_VIETNAMESE_MAP[aspectName]) {
+    return COMPLAINT_DRIVER_VIETNAMESE_MAP[aspectName];
+  }
+  if (!originalText) return "Ghi nhận phát sinh lỗi và ý kiến tiêu cực trong quá trình sử dụng.";
+  if (originalText.includes("Biometric") || originalText.includes("Decision 2345")) {
+    return "Lỗi quét khuôn mặt sinh trắc học, chậm mã OTP và vướng mắc xác thực theo Quyết định 2345.";
+  }
+  if (originalText.includes("App crashes") || originalText.includes("server connection")) {
+    return "Ứng dụng bị văng (crash), tải chậm và lỗi mất kết nối máy chủ trong giờ cao điểm.";
+  }
+  if (originalText.includes("Transaction delays") || originalText.includes("QR code")) {
+    return "Tắc nghẽn xử lý giao dịch, chậm nhận tiền chuyển khoản và lỗi quét mã QR.";
+  }
+  if (originalText.includes("Hotline wait times") || originalText.includes("maintenance fees")) {
+    return "Thời gian chờ tổng đài lâu, thắc mắc biểu phí duy trì và phản hồi hỗ trợ chậm.";
+  }
+  if (originalText.includes("Post-update navigation") || originalText.includes("interface")) {
+    return "Khó tìm tính năng sau khi cập nhật phiên bản mới, bố cục giao diện chưa tối ưu.";
+  }
+  if (originalText.includes("General dissatisfaction") || originalText.includes("instability")) {
+    return "Khách hàng không hài lòng về độ ổn định tổng thể và trải nghiệm chưa liền mạch.";
+  }
+  if (originalText.includes("secondary feature") || originalText.includes("notification")) {
+    return "Lỗi chậm thông báo biến động số dư và các yêu cầu bổ sung tiện ích phụ trợ.";
+  }
+  return originalText;
+}

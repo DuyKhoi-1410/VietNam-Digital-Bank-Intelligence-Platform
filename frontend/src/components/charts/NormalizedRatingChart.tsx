@@ -36,7 +36,7 @@ export function NormalizedRatingChart({ data }: NormalizedRatingChartProps) {
           Tỷ Lệ Phân Bổ Điểm Đánh Giá Sao (1★ đến 5★)
         </div>
         <p className="text-xs text-slate-400 mt-0.5">
-          So sánh tỷ lệ % từng mức sao trên toàn bộ đánh giá của mỗi ngân hàng, nhận diện độ hài lòng và tỷ lệ phàn nàn
+          So sánh tỷ lệ % từng mức sao trên toàn bộ đánh giá của mỗi ngân hàng, nhận diện độ hài lòng và tỷ lệ đánh giá tiêu cực (1-2★)
         </p>
       </div>
 

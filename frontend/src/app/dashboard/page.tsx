@@ -7,7 +7,7 @@ import {
   MarketTrendsResponse,
   MarketAspectsResponse,
 } from "@/types";
-import { formatNumber, formatPercent, formatRating, getAspectViName } from "@/lib/utils";
+import { formatNumber, formatPercent, formatRating, getAspectViName, getComplaintDriverVi } from "@/lib/utils";
 import { MonthlyTrendChart } from "@/components/charts/MonthlyTrendChart";
 import { AspectNSSChart } from "@/components/charts/AspectNSSChart";
 import { SlidingToggle } from "@/components/ui/SlidingToggle";
@@ -362,11 +362,11 @@ export default function MarketOverviewPage() {
               <div className="flex items-center gap-2 text-rose-400 mb-4">
                 <AlertTriangle className="w-4 h-4" />
                 <h2 className="text-sm font-bold uppercase tracking-wider font-mono">
-                  Vấn Đề Bị Phàn Nàn Nhiều Nhất
+                  Điểm Nghẽn Trải Nghiệm Tiêu Cực (Pain Points)
                 </h2>
               </div>
               <p className="text-xs text-slate-400 mb-4">
-                Các tính năng nhận nhiều ý kiến tiêu cực và bức xúc nhất từ người dùng:
+                Các khía cạnh ghi nhận nhiều phản hồi tiêu cực nhất từ người dùng:
               </p>
 
               <div className="space-y-3">
@@ -374,9 +374,11 @@ export default function MarketOverviewPage() {
                   <div key={pp.aspect_name} className="p-3 rounded-lg bg-rose-500/5 border border-rose-500/20">
                     <div className="flex items-center justify-between text-xs font-semibold text-white mb-1">
                       <span>{getAspectViName(pp.aspect_name)}</span>
-                      <span className="text-rose-400 font-mono">{formatNumber(pp.negative_sub_sentences)} phàn nàn</span>
+                      <span className="text-rose-400 font-mono">{formatNumber(pp.negative_sub_sentences)} phản hồi tiêu cực</span>
                     </div>
-                    <div className="text-[11px] text-slate-400 mb-1">{pp.primary_complaint_driver}</div>
+                    <div className="text-[11px] text-slate-300 leading-relaxed mb-1.5">
+                      {getComplaintDriverVi(pp.aspect_name, pp.primary_complaint_driver)}
+                    </div>
                     <div className="text-[10px] text-slate-400 font-mono">
                       Chiếm tỷ lệ: {formatPercent(pp.negative_share_pct)} • Chỉ số NSS: {pp.net_sentiment_score.toFixed(1)}
                     </div>
@@ -387,7 +389,7 @@ export default function MarketOverviewPage() {
 
             <div className="mt-4 pt-4 border-t border-slate-800 text-[11px] text-slate-400 flex items-start gap-2">
               <Info className="w-3.5 h-3.5 text-cyan-400 flex-shrink-0 mt-0.5" />
-              <span>Chỉ số NSS = ((Khen ngợi - Phàn nàn) / Tổng phản hồi) × 100</span>
+              <span>Chỉ số NSS = ((Tích cực - Tiêu cực) / Tổng phản hồi) × 100</span>
             </div>
           </div>
         </div>

@@ -132,13 +132,13 @@ class MarketService:
         pain_points: List[MarketPainPoint] = []
 
         complaint_descriptions = {
-            "Bảo mật & Đăng nhập": "Biometric face verification failures, OTP delays, and biometric compliance friction under Decision 2345.",
-            "Hệ thống & Hiệu năng": "App crashes, slow loading, and server connection timeouts during peak hours.",
-            "Giao dịch & Chuyển tiền": "Transaction delays, pending transfers, and QR code reading errors.",
-            "CSKH & Phí dịch vụ": "Hotline wait times, account maintenance fees, and customer support responsiveness.",
-            "Giao diện & UI/UX": "Post-update navigation confusion and cluttered interface redesigns.",
-            "Trải nghiệm chung": "General dissatisfaction and app instability feedback.",
-            "Tính năng khác": "Miscellaneous secondary feature requests and notification bugs."
+            "Bảo mật & Đăng nhập": "Lỗi quét khuôn mặt sinh trắc học, chậm mã OTP và vướng mắc xác thực theo Quyết định 2345.",
+            "Hệ thống & Hiệu năng": "Ứng dụng bị văng (crash), tải chậm và lỗi mất kết nối máy chủ trong giờ cao điểm.",
+            "Giao dịch & Chuyển tiền": "Tắc nghẽn xử lý giao dịch, chậm nhận tiền chuyển khoản và lỗi quét mã QR.",
+            "CSKH & Phí dịch vụ": "Thời gian chờ tổng đài lâu, thắc mắc biểu phí duy trì và phản hồi hỗ trợ chậm.",
+            "Giao diện & UI/UX": "Khó tìm tính năng sau khi cập nhật phiên bản mới, bố cục giao diện chưa tối ưu.",
+            "Trải nghiệm chung": "Khách hàng không hài lòng về độ ổn định tổng thể và trải nghiệm chưa liền mạch.",
+            "Tính năng khác": "Lỗi chậm thông báo biến động số dư và các yêu cầu bổ sung tiện ích phụ trợ."
         }
 
         for r in rows:
@@ -172,7 +172,7 @@ class MarketService:
                         negative_sub_sentences=neg,
                         negative_share_pct=neg_share,
                         net_sentiment_score=nss,
-                        primary_complaint_driver=complaint_descriptions.get(name, "User friction recorded in reviews.")
+                        primary_complaint_driver=complaint_descriptions.get(name, "Ghi nhận phát sinh lỗi và ý kiến tiêu cực trong quá trình sử dụng.")
                     )
                 )
 

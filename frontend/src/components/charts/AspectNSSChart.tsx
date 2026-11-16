@@ -127,11 +127,11 @@ export function AspectNSSChart({ aspects, totalSubSentences }: AspectNSSChartPro
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-1.5">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-            <span className="text-slate-300">NSS Dương: Khách hàng khen ngợi & hài lòng</span>
+            <span className="text-slate-300">NSS Dương: Cảm xúc Tích cực (Positive) chiếm ưu thế</span>
           </div>
           <div className="flex items-center gap-1.5">
             <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
-            <span className="text-slate-300">NSS Âm: Khách hàng phàn nàn & gặp lỗi</span>
+            <span className="text-slate-300">NSS Âm: Cảm xúc Tiêu cực (Negative) chiếm ưu thế</span>
           </div>
         </div>
         <span className="text-cyan-400">Quy mô: {formatNumber(totalSubSentences)} câu phản hồi bóc tách</span>
