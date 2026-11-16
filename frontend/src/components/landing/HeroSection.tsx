@@ -1,40 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Plus, SlidersHorizontal, Mic, ArrowUp, Sparkles, Activity } from "lucide-react";
-import { api } from "@/lib/api";
-import { MarketOverviewResponse } from "@/types";
-import { formatNumber } from "@/lib/utils";
+import { Plus, SlidersHorizontal, ArrowUp, Sparkles } from "lucide-react";
 import { SlidingToggle } from "@/components/ui/SlidingToggle";
 
 export function HeroSection() {
   const router = useRouter();
-  const [liveOverview, setLiveOverview] = useState<MarketOverviewResponse | null>(null);
-  const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState("");
   const [activeTab, setActiveTab] = useState<"banks" | "aspects">("banks");
-
-  useEffect(() => {
-    let mounted = true;
-    api
-      .getMarketOverview()
-      .then((data) => {
-        if (mounted) {
-          setLiveOverview(data);
-          setLoading(false);
-        }
-      })
-      .catch(() => {
-        if (mounted) {
-          setLoading(false);
-        }
-      });
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
 
   const handleSearch = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -49,37 +23,6 @@ export function HeroSection() {
     <section className="relative min-h-[82vh] flex flex-col items-center justify-center pt-24 pb-8 px-4 sm:px-6 lg:px-8 overflow-hidden bg-transparent">
       {/* Hero Content Container */}
       <div className="relative z-10 max-w-4xl mx-auto text-center flex flex-col items-center w-full">
-        {/* Dynamic Live Dataset Badge (Retrieved strictly from BigQuery backend) */}
-        <div className="mb-8 inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-900/90 border border-slate-700/70 shadow-xl shadow-black/60 backdrop-blur-md">
-          {loading ? (
-            <div className="flex items-center gap-2 text-xs text-slate-400 font-mono">
-              <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
-              <span>Đang đồng bộ dữ liệu thời gian thực...</span>
-            </div>
-          ) : liveOverview ? (
-            <div className="flex items-center gap-2.5 text-xs font-mono text-slate-300">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-              </span>
-              <span>
-                <strong className="text-white font-semibold">{formatNumber(liveOverview.unique_baseline_reviews)}</strong> Đánh Giá Hợp Lệ
-              </span>
-              <span className="text-slate-600">•</span>
-              <span>
-                <strong className="text-white font-semibold">{liveOverview.total_banks_tracked}</strong> Ứng Dụng Ngân Hàng
-              </span>
-              <span className="text-slate-600">•</span>
-              <span className="text-cyan-400 font-semibold">Dữ Liệu Thực Chứng</span>
-            </div>
-          ) : (
-            <div className="flex items-center gap-2 text-xs text-slate-400 font-mono">
-              <Activity className="w-3.5 h-3.5 text-cyan-400" />
-              <span>Vietnam Digital Banking Intelligence — Dữ Liệu Thực Chứng</span>
-            </div>
-          )}
-        </div>
-
         {/* Large Editorial Headline - Màu gradient cực quang Aurora rực rỡ */}
         <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-white max-w-5xl leading-[1.08] sm:leading-[1.06]">
           Vietnam Digital Banking <br className="hidden sm:inline" />
