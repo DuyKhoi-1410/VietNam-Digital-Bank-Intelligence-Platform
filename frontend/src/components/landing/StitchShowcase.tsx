@@ -2,36 +2,44 @@
 
 import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
-import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import {
-  MousePointer,
-  ZoomIn,
-  Hand,
+  Play,
   Sparkles,
+  ArrowRight,
+  ShieldCheck,
+  CreditCard,
+  Zap,
+  Lock,
+  Smartphone,
+  Star,
+  Activity,
   ArrowUp,
   Plus,
-  Play,
-  Pause,
-  BrainCircuit,
-  GitCompare,
-  ArrowRight,
-  Radio,
-  Layers,
-  CheckCircle2,
-  AlertTriangle,
-  Flame,
-  Volume2,
-  Scan,
-  Compass,
-  ChevronLeft,
-  ChevronRight,
 } from "lucide-react";
+
+const RUNNING_APPLICATIONS_1 = [
+  "LẮNG NGHE TIẾNG NÓI NGƯỜI DÙNG THẬT",
+  "BÓC TÁCH CẢM XÚC 7 KHÍA CẠNH BẰNG AI (ABSA)",
+  "ĐỊNH LƯỢNG ĐIỂM NGHẼN BẢO MẬT & SINH TRẮC HỌC",
+  "TỐC ĐỘ GIAO DỊCH & CHUYỂN TIỀN 24/7",
+  "ĐỐI SÁNH NĂNG LỰC CẠNH TRANH 7 NGÂN HÀNG SỐ",
+  "RA QUYẾT ĐỊNH NÂNG CẤP SẢN PHẨM CHÍNH XÁC",
+  "100% DỮ LIỆU THỰC CHỨNG TỪ GOOGLE PLAY",
+];
+
+const RUNNING_APPLICATIONS_2 = [
+  "PHÂN TÍCH TRẢI NGHIỆM GIAO DIỆN UI/UX",
+  "THEO DÕI ĐỘ HÀI LÒNG THEO TỪNG PHIÊN BẢN APP",
+  "GIẢI MÃ NGUYÊN NHÂN NGƯỜI DÙNG ĐÁNH GIÁ 1 SAO",
+  "CHỈ SỐ CẢM XÚC RÒNG (NET SENTIMENT SCORE)",
+  "TỐI ƯU HÓA HÀNH TRÌNH KHÁCH HÀNG SỐ",
+  "KHÔNG DÙNG DỮ LIỆU GIẢ LẬP HAY PHỎNG ĐOÁN",
+];
 
 export function StitchShowcase() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
-  const [activeCard, setActiveCard] = useState(1); // 0: Lắng nghe, 1: AI ABSA, 2: Đối sánh
-  const [isPlaying, setIsPlaying] = useState(true);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -39,15 +47,6 @@ export function StitchShowcase() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  // Auto-cycle through the 3 cards like a dynamic product demo video
-  useEffect(() => {
-    if (!isPlaying) return;
-    const interval = setInterval(() => {
-      setActiveCard((prev) => (prev + 1) % 3);
-    }, 4500);
-    return () => clearInterval(interval);
-  }, [isPlaying]);
 
   // Track scroll progress as soon as the component enters the screen (start 90%) until it locks to top (start start)
   const { scrollYProgress } = useScroll({
@@ -80,20 +79,12 @@ export function StitchShowcase() {
   const previewBadgeOpacity = useTransform(smoothProgress, [0, 0.3], [1, 0]);
   const previewBadgeY = useTransform(smoothProgress, [0, 0.3], [0, -15]);
 
-  // Floating parallax and depth scale for the 3 internal cards
-  const cardsScale = useTransform(smoothProgress, [0, 0.95], [0.92, 1.0]);
+  // Center typography scale & depth on scroll
+  const centerScale = useTransform(smoothProgress, [0, 0.95], [0.92, 1.0]);
 
   // Prompt note (top left): slides and fades in as canvas approaches full screen
   const noteOpacity = useTransform(smoothProgress, [0.35, 0.85], [0, 1]);
   const noteY = useTransform(smoothProgress, [0.35, 0.85], [-12, 0]);
-
-  // Floating vertical toolstrip (right edge): slides in smoothly
-  const toolstripOpacity = useTransform(smoothProgress, [0.40, 0.85], [0, 1]);
-  const toolstripX = useTransform(smoothProgress, [0.40, 0.85], [24, 0]);
-
-  // Bottom prompt bar: slides up effortlessly into position
-  const barY = useTransform(smoothProgress, [0.35, 0.85], [25, 0]);
-  const barOpacity = useTransform(smoothProgress, [0.35, 0.85], [0, 1]);
 
   return (
     <section
@@ -110,26 +101,30 @@ export function StitchShowcase() {
             borderRadius,
             opacity,
           }}
-          className="relative w-full h-full bg-[#050811]/95 border border-cyan-500/30 shadow-[0_0_100px_rgba(0,0,0,0.98)] overflow-hidden flex flex-col justify-between p-4 sm:p-6 lg:p-8 select-none"
+          className="relative w-full h-full bg-[#03060f]/98 border border-cyan-500/30 shadow-[0_0_120px_rgba(0,0,0,0.98)] overflow-hidden flex flex-col justify-between p-4 sm:p-6 lg:p-8 select-none"
         >
           {/* =========================================================================
-              CANVAS AMBIENT LIQUID NEON AURORA (Google Stitch Signature Glow)
+              ORGANIC FLUID NEON AURORA BLOOM (Exact Google Stitch aesthetic from image)
               ========================================================================= */}
-          <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-cyan-500/20 blur-[140px] rounded-full pointer-events-none animate-pulse" style={{ animationDuration: "6s" }} />
-          <div className="absolute top-1/2 right-1/4 translate-x-1/2 -translate-y-1/2 w-[550px] h-[400px] bg-violet-600/20 blur-[150px] rounded-full pointer-events-none animate-pulse" style={{ animationDuration: "8s" }} />
-          <div className="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-emerald-500/15 blur-[160px] rounded-full pointer-events-none animate-pulse" style={{ animationDuration: "7s" }} />
+          <div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] sm:w-[950px] md:w-[1100px] h-[400px] sm:h-[550px] bg-gradient-to-r from-cyan-500/30 via-blue-600/35 to-violet-600/30 blur-[130px] rounded-full pointer-events-none animate-pulse"
+            style={{ animationDuration: "8s" }}
+          />
+          <div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] sm:w-[650px] h-[300px] sm:h-[400px] bg-gradient-to-br from-emerald-400/25 via-cyan-400/30 to-indigo-500/25 blur-[90px] rounded-full pointer-events-none"
+          />
 
           {/* Canvas Dot Matrix Pattern */}
           <div
             className="absolute inset-0 pointer-events-none opacity-20"
             style={{
-              backgroundImage: `radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.35) 1px, transparent 0)`,
+              backgroundImage: `radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.4) 1px, transparent 0)`,
               backgroundSize: "28px 28px",
             }}
           />
 
           {/* =========================================================================
-              FLOATING PREVIEW BADGE (Prominent when small, fades out as you zoom full)
+              FLOATING PREVIEW BADGE (Visible when small, fades out as you zoom full)
               ========================================================================= */}
           <motion.div
             style={{ opacity: previewBadgeOpacity, y: previewBadgeY }}
@@ -137,7 +132,7 @@ export function StitchShowcase() {
           >
             <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
             <span className="text-[11px] font-mono font-semibold text-cyan-300 uppercase tracking-wider">
-              ✦ Khám phá Năng lực Nền tảng • Cuộn để phóng to full
+              ✦ Trực Quan Hóa Trải Nghiệm Ngân Hàng Số • Cuộn để phóng to full
             </span>
           </motion.div>
 
@@ -145,7 +140,7 @@ export function StitchShowcase() {
               TOP ROW: Floating Prompt Note (Google Stitch signature) + Canvas Badge
               ========================================================================= */}
           <div className="relative z-20 flex items-start justify-between w-full">
-            {/* Top-Left Floating Prompt Note (Exact Google Stitch UX: Purpose Note) */}
+            {/* Top-Left Floating Prompt Note */}
             <motion.div
               style={{ opacity: noteOpacity, y: noteY }}
               className="max-w-xs sm:max-w-sm rounded-2xl bg-[#0b1120]/90 backdrop-blur-xl border border-slate-700/70 p-4 shadow-2xl text-left hidden md:block"
@@ -153,12 +148,12 @@ export function StitchShowcase() {
               <div className="flex items-center justify-between text-slate-400 mb-2">
                 <div className="flex items-center gap-1.5 font-mono text-[10px] text-cyan-400 font-bold uppercase tracking-wider">
                   <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                  <span>Nền Tảng Này Dùng Làm Gì?</span>
+                  <span>Ứng Dụng Nền Tảng VDBI</span>
                 </div>
                 <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
               </div>
               <p className="text-xs text-slate-300 leading-relaxed font-sans">
-                Chuyển hóa hàng ngàn phản hồi rời rạc trên kho ứng dụng thành bản đồ hành động sắc nét. Thấu hiểu điểm nghẽn, bóc tách tính năng bằng AI và nâng cấp trải nghiệm ngân hàng số.
+                Giải mã tiếng nói khách hàng trên 7 ứng dụng ngân hàng số thương mại. Bóc tách 7 khía cạnh nghiệp vụ bằng AI để tối ưu sản phẩm và nâng cao năng lực cạnh tranh.
               </p>
             </motion.div>
 
@@ -166,395 +161,155 @@ export function StitchShowcase() {
             <div className="flex items-center gap-2 ml-auto">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono text-cyan-300 bg-cyan-950/50 border border-cyan-500/30">
                 <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
-                <span>3 Trụ Cột Năng Lực Trực Quan</span>
+                <span>Không Dùng Dữ Liệu Ảo</span>
               </span>
               <Link
                 href="/dashboard"
                 className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-semibold text-black bg-white hover:bg-slate-200 transition shadow-md shadow-white/10"
               >
-                <span>Trải nghiệm Ngay</span>
+                <span>Mở Dashboard</span>
                 <ArrowRight className="w-3 h-3" />
               </Link>
             </div>
           </div>
 
           {/* =========================================================================
-              CENTER: 3D DYNAMIC FLOATING CARDS (AUTO-CYCLE & INTERACTIVE SWAPPING)
+              PLAYFUL 3D FLOATING & BOUNCING BANKING STICKERS (Sticker ngân hàng nhảy nhảy)
               ========================================================================= */}
-          <div className="relative z-10 flex-1 flex flex-col items-center justify-center my-2 sm:my-4 overflow-hidden perspective-[1200px]">
-            {/* The 3 Tall Canvas Displays with Neon Aura (Matches Google Stitch Image) */}
-            <motion.div
-              style={{ scale: cardsScale }}
-              className="flex items-center justify-center gap-4 sm:gap-6 md:gap-8 w-full max-w-5xl"
-            >
-              {/* =====================================================================
-                  CARD 0: LẮNG NGHE NGƯỜI DÙNG THẬT (Cyan / Electric Blue Neon)
-                  ===================================================================== */}
-              <motion.div
-                onClick={() => setActiveCard(0)}
-                animate={{
-                  scale: activeCard === 0 ? 1.05 : 0.94,
-                  y: activeCard === 0 ? -10 : 10,
-                  rotateY: activeCard === 0 ? 0 : 6,
-                  opacity: activeCard === 0 ? 1 : 0.65,
-                }}
-                transition={{ type: "spring", stiffness: 120, damping: 18 }}
-                className={`relative flex-shrink-0 w-[260px] sm:w-[280px] md:w-[300px] h-[400px] sm:h-[430px] rounded-3xl p-5 flex flex-col justify-between cursor-pointer transition-shadow duration-500 overflow-hidden backdrop-blur-2xl ${
-                  activeCard === 0
-                    ? "bg-[#0b152a]/95 border-2 border-cyan-400 shadow-[0_0_60px_rgba(6,182,212,0.45)] z-30"
-                    : "bg-[#080e1c]/80 border border-slate-800 hover:border-cyan-500/40 z-10"
-                }`}
+          {/* Sticker 1: Thẻ ngân hàng số (Top Left) */}
+          <motion.div
+            animate={{
+              y: [-12, 14, -12],
+              rotate: [-5, 7, -5],
+            }}
+            transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}
+            whileHover={{ scale: 1.15, rotate: 12, zIndex: 40 }}
+            className="absolute top-20 sm:top-24 left-4 sm:left-14 lg:left-24 z-20 px-3.5 py-2.5 rounded-2xl bg-[#0c162c]/90 border border-cyan-400/50 shadow-[0_0_30px_rgba(6,182,212,0.35)] backdrop-blur-xl flex items-center gap-3 cursor-pointer select-none group"
+          >
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-transform">
+              <CreditCard className="w-4 h-4" />
+            </div>
+            <div className="flex flex-col text-left">
+              <span className="text-xs font-bold text-white group-hover:text-cyan-300 transition-colors">Thẻ & Chuyển Tiền</span>
+              <span className="text-[10px] font-mono text-cyan-300">Giao dịch 24/7 • QR Code</span>
+            </div>
+          </motion.div>
+
+          {/* Sticker 2: Sinh trắc học & Bảo mật (Top Right) */}
+          <motion.div
+            animate={{
+              y: [14, -12, 14],
+              rotate: [6, -6, 6],
+            }}
+            transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+            whileHover={{ scale: 1.15, rotate: -10, zIndex: 40 }}
+            className="absolute top-24 sm:top-28 right-4 sm:right-14 lg:right-28 z-20 px-3.5 py-2.5 rounded-2xl bg-[#140e2c]/90 border border-violet-400/50 shadow-[0_0_30px_rgba(168,85,247,0.35)] backdrop-blur-xl flex items-center gap-3 cursor-pointer select-none group"
+          >
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-600 flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-transform">
+              <Lock className="w-4 h-4" />
+            </div>
+            <div className="flex flex-col text-left">
+              <span className="text-xs font-bold text-white group-hover:text-violet-300 transition-colors">Sinh Trắc Học</span>
+              <span className="text-[10px] font-mono text-violet-300">FaceID • Căn Cước CCCD</span>
+            </div>
+          </motion.div>
+
+          {/* Sticker 3: Tốc độ & UI/UX (Bottom Left) */}
+          <motion.div
+            animate={{
+              y: [-14, 10, -14],
+              rotate: [4, -6, 4],
+            }}
+            transition={{ duration: 4.6, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
+            whileHover={{ scale: 1.15, rotate: -10, zIndex: 40 }}
+            className="absolute bottom-28 sm:bottom-32 left-6 sm:left-16 lg:left-28 z-20 px-3.5 py-2.5 rounded-2xl bg-[#081c1c]/90 border border-emerald-400/50 shadow-[0_0_30px_rgba(16,185,129,0.35)] backdrop-blur-xl hidden sm:flex items-center gap-3 cursor-pointer select-none group"
+          >
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center text-slate-950 shadow-md group-hover:scale-110 transition-transform">
+              <Zap className="w-4 h-4 font-bold" />
+            </div>
+            <div className="flex flex-col text-left">
+              <span className="text-xs font-bold text-white group-hover:text-emerald-300 transition-colors">Giao Diện & UI/UX</span>
+              <span className="text-[10px] font-mono text-emerald-300">Tốc độ mượt mà</span>
+            </div>
+          </motion.div>
+
+          {/* Sticker 4: 7 Ngân hàng số & Ma trận đối sánh (Bottom Right) */}
+          <motion.div
+            animate={{
+              y: [12, -14, 12],
+              rotate: [-5, 7, -5],
+            }}
+            transition={{ duration: 5.4, repeat: Infinity, ease: "easeInOut", delay: 0.9 }}
+            whileHover={{ scale: 1.15, rotate: 10, zIndex: 40 }}
+            className="absolute bottom-28 sm:bottom-32 right-6 sm:right-16 lg:right-28 z-20 px-3.5 py-2.5 rounded-2xl bg-[#1e150a]/90 border border-amber-400/50 shadow-[0_0_30px_rgba(245,158,11,0.35)] backdrop-blur-xl hidden sm:flex items-center gap-3 cursor-pointer select-none group"
+          >
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center text-slate-950 shadow-md group-hover:scale-110 transition-transform">
+              <Smartphone className="w-4 h-4" />
+            </div>
+            <div className="flex flex-col text-left">
+              <span className="text-xs font-bold text-white group-hover:text-amber-300 transition-colors">7 Ngân Hàng Số</span>
+              <span className="text-[10px] font-mono text-amber-300">Đối sánh cạnh tranh</span>
+            </div>
+          </motion.div>
+
+          {/* =========================================================================
+              CENTER: GIANT EDITORIAL TYPOGRAPHY & INTRO BUTTON (Exact style as "Collaborate.")
+              ========================================================================= */}
+          <motion.div
+            style={{ scale: centerScale }}
+            className="relative z-20 my-auto text-center flex flex-col items-center max-w-4xl px-4 py-8"
+          >
+            {/* Superpower Category Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-cyan-500/40 text-xs font-mono text-cyan-300 mb-6 shadow-xl backdrop-blur-md">
+              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+              <span>TRÍ TUỆ NHÂN TẠO • TRẢI NGHIỆM KHÁCH HÀNG SỐ</span>
+            </div>
+
+            {/* Giant Editorial Headline (Matches "Collaborate." in Google Stitch image) */}
+            <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight text-white leading-[1.02]">
+              <span className="bg-gradient-to-r from-teal-200 via-cyan-300 to-sky-400 bg-clip-text text-transparent drop-shadow-[0_0_45px_rgba(34,211,238,0.55)]">
+                Intelligence.
+              </span>
+            </h2>
+
+            {/* Punchy concise statement explaining website application */}
+            <p className="mt-6 text-base sm:text-xl md:text-2xl text-slate-200 font-light max-w-2xl leading-relaxed">
+              Lắng nghe tiếng nói thật. Bóc tách 7 khía cạnh bằng AI. <br className="hidden sm:inline" />
+              Đối sánh năng lực & tối ưu trải nghiệm ngân hàng số.
+            </p>
+
+            {/* Play Intro / Explore Dashboard Button (Exact Google Stitch button style from image) */}
+            <div className="mt-8">
+              <Link
+                href="/dashboard"
+                className="inline-flex items-center gap-3 px-8 py-3.5 rounded-full text-sm font-medium text-slate-100 bg-[#0a1224]/80 hover:bg-[#111e3b] border border-cyan-500/40 hover:border-cyan-300 shadow-[0_0_35px_rgba(6,182,212,0.3)] transition-all duration-300 hover:scale-105 active:scale-95 backdrop-blur-xl group"
               >
-                {/* Internal Fluid Neon Glow */}
-                <div className="absolute -top-10 -left-10 w-48 h-48 bg-cyan-500/25 blur-3xl rounded-full pointer-events-none" />
-                <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-blue-600/25 blur-3xl rounded-full pointer-events-none" />
-
-                {/* Card Header */}
-                <div className="relative z-10">
-                  <div className="flex items-center justify-between pb-3 border-b border-cyan-500/20">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-bold text-cyan-300 bg-cyan-950/70 border border-cyan-500/40">
-                      <Radio className="w-3 h-3 text-cyan-400 animate-pulse" />
-                      TRỤ CỘT 01
-                    </span>
-                    <span className="text-[10px] font-mono text-cyan-400 flex items-center gap-1">
-                      <Volume2 className="w-3 h-3" />
-                      Lắng nghe
-                    </span>
-                  </div>
-
-                  <h3 className="mt-4 text-base sm:text-lg font-bold text-white tracking-tight">
-                    Lắng Nghe Người Dùng Thật
-                  </h3>
-                  <p className="mt-1 text-xs text-slate-300 leading-relaxed font-normal">
-                    Thu thập hàng ngàn phản hồi thực tế từ kho ứng dụng, khử trùng lặp và làm sạch để thấu cảm trải nghiệm người dùng.
-                  </p>
+                <div className="w-6 h-6 rounded-full bg-cyan-400/20 border border-cyan-400/50 flex items-center justify-center text-cyan-300 group-hover:bg-cyan-400 group-hover:text-black transition-all">
+                  <Play className="w-3 h-3 fill-current translate-x-0.5" />
                 </div>
+                <span>Khám phá nền tảng</span>
+              </Link>
+            </div>
+          </motion.div>
 
-                {/* Animated Interactive Visual: Floating Feedback Stream */}
-                <div className="relative z-10 space-y-2.5 my-auto">
-                  <motion.div
-                    animate={{ x: activeCard === 0 ? [0, 4, 0] : 0 }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                    className="p-3 rounded-2xl bg-[#0e1c36]/90 border border-cyan-500/30 text-[11px] text-slate-200 shadow-lg flex items-center gap-2.5"
-                  >
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                    <span className="truncate">&quot;Giao diện chuyển tiền nhanh, mượt&quot;</span>
-                  </motion.div>
+          {/* =========================================================================
+              BOTTOM: CONTINUOUS HORIZONTAL RUNNING TEXT TICKER (Chữ chạy ngang nói về ứng dụng)
+              ========================================================================= */}
+          <div className="relative z-20 w-full overflow-hidden py-3 border-t border-cyan-500/20 bg-slate-950/40 backdrop-blur-md">
+            {/* Left & Right Fade Masks */}
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#03060f] to-transparent z-10" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#03060f] to-transparent z-10" />
 
-                  <motion.div
-                    animate={{ x: activeCard === 0 ? [0, -4, 0] : 0 }}
-                    transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
-                    className="p-3 rounded-2xl bg-[#0e1c36]/90 border border-rose-500/30 text-[11px] text-slate-200 shadow-lg flex items-center gap-2.5"
-                  >
-                    <AlertTriangle className="w-4 h-4 text-rose-400 flex-shrink-0" />
-                    <span className="truncate">&quot;Quét khuôn mặt hay báo lỗi liên tục&quot;</span>
-                  </motion.div>
-
-                  <motion.div
-                    animate={{ x: activeCard === 0 ? [0, 4, 0] : 0 }}
-                    transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
-                    className="p-3 rounded-2xl bg-[#0e1c36]/90 border border-amber-500/30 text-[11px] text-slate-200 shadow-lg flex items-center gap-2.5"
-                  >
-                    <Flame className="w-4 h-4 text-amber-400 flex-shrink-0" />
-                    <span className="truncate">&quot;Cập nhật bản mới hay bị văng đột ngột&quot;</span>
-                  </motion.div>
-                </div>
-
-                {/* Card Footer */}
-                <div className="relative z-10 pt-3 border-t border-cyan-500/20 flex items-center justify-between text-xs text-cyan-300 font-mono">
-                  <span>Tiếng nói xác thực</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </motion.div>
-
-              {/* =====================================================================
-                  CARD 1: AI BÓC TÁCH 7 KHÍA CẠNH ABSA (Emerald / Cyan Neon Centerpiece)
-                  ===================================================================== */}
-              <motion.div
-                onClick={() => setActiveCard(1)}
-                animate={{
-                  scale: activeCard === 1 ? 1.05 : 0.94,
-                  y: activeCard === 1 ? -10 : 10,
-                  rotateY: activeCard === 1 ? 0 : 0,
-                  opacity: activeCard === 1 ? 1 : 0.65,
-                }}
-                transition={{ type: "spring", stiffness: 120, damping: 18 }}
-                className={`relative flex-shrink-0 w-[260px] sm:w-[280px] md:w-[300px] h-[400px] sm:h-[430px] rounded-3xl p-5 flex flex-col justify-between cursor-pointer transition-shadow duration-500 overflow-hidden backdrop-blur-2xl ${
-                  activeCard === 1
-                    ? "bg-[#091a24]/95 border-2 border-emerald-400 shadow-[0_0_60px_rgba(16,185,129,0.45)] z-30"
-                    : "bg-[#06121a]/80 border border-slate-800 hover:border-emerald-500/40 z-10"
-                }`}
-              >
-                {/* Center Highlight Badge */}
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-gradient-to-r from-emerald-400 via-teal-500 to-cyan-500 text-[10px] font-bold text-slate-950 uppercase tracking-wider shadow-lg flex items-center gap-1 z-30">
-                  <Sparkles className="w-3 h-3" />
-                  <span>Trọng Tâm Công Nghệ</span>
-                </div>
-
-                {/* Internal Fluid Neon Glow */}
-                <div className="absolute -top-10 -right-10 w-48 h-48 bg-emerald-500/25 blur-3xl rounded-full pointer-events-none" />
-                <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-cyan-500/25 blur-3xl rounded-full pointer-events-none" />
-
-                {/* Card Header */}
-                <div className="relative z-10">
-                  <div className="flex items-center justify-between pb-3 pt-1 border-b border-emerald-500/20">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-bold text-emerald-300 bg-emerald-950/70 border border-emerald-400/40">
-                      <BrainCircuit className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
-                      TRỤ CỘT 02
-                    </span>
-                    <span className="text-[10px] font-mono text-emerald-300">AI Đa chiều</span>
-                  </div>
-
-                  <h3 className="mt-4 text-base sm:text-lg font-bold text-white tracking-tight">
-                    Bóc Tách Khía Cạnh Bằng AI
-                  </h3>
-                  <p className="mt-1 text-xs text-slate-300 leading-relaxed font-normal">
-                    Mô hình ABSA tự động chẻ nhỏ từng câu phức tạp thành 7 khía cạnh độc lập, tách bạch giữa điểm số sao và bản chất tính năng.
-                  </p>
-                </div>
-
-                {/* Animated Interactive Visual: AI Sentence Decomposition */}
-                <div className="relative z-10 space-y-2 my-auto">
-                  <div className="p-2.5 rounded-xl bg-slate-950/80 border border-emerald-500/30 text-xs">
-                    <div className="flex items-center justify-between text-[10px] font-mono text-slate-400 mb-1.5">
-                      <span>CÂU NGUYÊN BẢN</span>
-                      <span className="text-emerald-400 font-bold">AI CHẺ NHỎ</span>
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <div className="flex items-center justify-between p-1.5 rounded-lg bg-[#0e2424]/90 border border-emerald-500/20">
-                        <span className="text-[10px] text-slate-200 truncate">&quot;Giao diện trực quan đẹp&quot;</span>
-                        <span className="text-[9px] font-mono font-semibold text-emerald-400 px-1 py-0.5 rounded bg-emerald-500/10 flex-shrink-0">
-                          UI/UX • Khen
-                        </span>
-                      </div>
-
-                      <div className="flex items-center justify-between p-1.5 rounded-lg bg-[#0e2424]/90 border border-rose-500/20">
-                        <span className="text-[10px] text-slate-200 truncate">&quot;nhưng chuyển tiền chậm&quot;</span>
-                        <span className="text-[9px] font-mono font-semibold text-rose-400 px-1 py-0.5 rounded bg-rose-500/10 flex-shrink-0">
-                          Chuyển tiền • Lỗi
-                        </span>
-                      </div>
-
-                      <div className="flex items-center justify-between p-1.5 rounded-lg bg-[#0e2424]/90 border border-amber-500/20">
-                        <span className="text-[10px] text-slate-200 truncate">&quot;quét vân tay hay đơ&quot;</span>
-                        <span className="text-[9px] font-mono font-semibold text-amber-400 px-1 py-0.5 rounded bg-amber-500/10 flex-shrink-0">
-                          Bảo mật • Sửa
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Card Footer */}
-                <div className="relative z-10 pt-3 border-t border-emerald-500/20 flex items-center justify-between text-xs text-emerald-300 font-mono">
-                  <span className="flex items-center gap-1.5">
-                    <Layers className="w-3.5 h-3.5 text-emerald-400" />
-                    7 khía cạnh độc lập
-                  </span>
-                  <span>Khám phá →</span>
-                </div>
-              </motion.div>
-
-              {/* =====================================================================
-                  CARD 2: ĐỐI SÁNH & RA QUYẾT ĐỊNH (Violet / Fuchsia Neon)
-                  ===================================================================== */}
-              <motion.div
-                onClick={() => setActiveCard(2)}
-                animate={{
-                  scale: activeCard === 2 ? 1.05 : 0.94,
-                  y: activeCard === 2 ? -10 : 10,
-                  rotateY: activeCard === 2 ? 0 : -6,
-                  opacity: activeCard === 2 ? 1 : 0.65,
-                }}
-                transition={{ type: "spring", stiffness: 120, damping: 18 }}
-                className={`relative flex-shrink-0 w-[260px] sm:w-[280px] md:w-[300px] h-[400px] sm:h-[430px] rounded-3xl p-5 flex flex-col justify-between cursor-pointer transition-shadow duration-500 overflow-hidden backdrop-blur-2xl ${
-                  activeCard === 2
-                    ? "bg-[#18112c]/95 border-2 border-violet-400 shadow-[0_0_60px_rgba(168,85,247,0.45)] z-30"
-                    : "bg-[#110c20]/80 border border-slate-800 hover:border-violet-500/40 z-10"
-                }`}
-              >
-                {/* Internal Fluid Neon Glow */}
-                <div className="absolute -top-10 -left-10 w-48 h-48 bg-violet-600/25 blur-3xl rounded-full pointer-events-none" />
-                <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-fuchsia-600/25 blur-3xl rounded-full pointer-events-none" />
-
-                {/* Card Header */}
-                <div className="relative z-10">
-                  <div className="flex items-center justify-between pb-3 border-b border-violet-500/20">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-bold text-violet-300 bg-violet-950/70 border border-violet-500/40">
-                      <GitCompare className="w-3.5 h-3.5 text-violet-400 animate-pulse" />
-                      TRỤ CỘT 03
-                    </span>
-                    <span className="text-[10px] font-mono text-violet-300 flex items-center gap-1">
-                      <Compass className="w-3 h-3" />
-                      Đối sánh
-                    </span>
-                  </div>
-
-                  <h3 className="mt-4 text-base sm:text-lg font-bold text-white tracking-tight">
-                    Đối Sánh & Ra Quyết Định
-                  </h3>
-                  <p className="mt-1 text-xs text-slate-300 leading-relaxed font-normal">
-                    Đặt các ngân hàng lên cùng ma trận đối sánh trực quan, nhận diện điểm mạnh, điểm nghẽn và đưa ra quyết định nâng cấp sản phẩm.
-                  </p>
-                </div>
-
-                {/* Animated Interactive Visual: Benchmark Gauges */}
-                <div className="relative z-10 space-y-2.5 my-auto">
-                  <div className="p-3 rounded-2xl bg-[#201438]/90 border border-violet-500/30 text-xs space-y-2">
-                    <div>
-                      <div className="flex items-center justify-between text-[11px] mb-1">
-                        <span className="text-slate-300">Ma trận đối sánh trực tiếp</span>
-                        <span className="text-violet-300 font-mono font-bold">2-4 Ngân hàng</span>
-                      </div>
-                      <div className="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden">
-                        <div className="bg-gradient-to-r from-violet-500 to-fuchsia-500 h-full w-[85%]" />
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="flex items-center justify-between text-[11px] mb-1">
-                        <span className="text-slate-300">Xác định khoảng cách năng lực</span>
-                        <span className="text-cyan-300 font-mono font-bold">Chênh lệch</span>
-                      </div>
-                      <div className="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden">
-                        <div className="bg-gradient-to-r from-cyan-400 to-blue-500 h-full w-[70%]" />
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="flex items-center justify-between text-[11px] mb-1">
-                        <span className="text-slate-300">Đề xuất ưu tiên xử lý cho Product</span>
-                        <span className="text-emerald-300 font-mono font-bold">Hành động</span>
-                      </div>
-                      <div className="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden">
-                        <div className="bg-gradient-to-r from-emerald-400 to-teal-400 h-full w-[90%]" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Card Footer */}
-                <div className="relative z-10 pt-3 border-t border-violet-500/20 flex items-center justify-between text-xs text-violet-300 font-mono">
-                  <span>Vị thế cạnh tranh</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </motion.div>
-            </motion.div>
-
-            {/* Video-style Demo Switcher Controls (Auto-cycle pills + Play/Pause) */}
-            <div className="mt-4 sm:mt-5 flex items-center gap-2 sm:gap-3 z-30">
-              <button
-                type="button"
-                onClick={() => setIsPlaying(!isPlaying)}
-                className="p-1.5 rounded-full bg-slate-900/90 border border-slate-700/80 hover:border-cyan-400/60 text-slate-300 hover:text-white transition shadow-lg flex items-center justify-center"
-                title={isPlaying ? "Tạm dừng tự động chuyển" : "Tiếp tục tự động chuyển như video"}
-              >
-                {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-current" />}
-              </button>
-
-              <div className="flex items-center gap-1.5 p-1 rounded-full bg-slate-900/90 border border-slate-800 shadow-xl backdrop-blur-md">
-                <button
-                  type="button"
-                  onClick={() => setActiveCard(0)}
-                  className={`px-3 py-1 rounded-full text-xs font-mono font-medium transition ${
-                    activeCard === 0
-                      ? "bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 shadow-sm"
-                      : "text-slate-400 hover:text-slate-200"
-                  }`}
-                >
-                  01 Lắng nghe
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setActiveCard(1)}
-                  className={`px-3 py-1 rounded-full text-xs font-mono font-medium transition ${
-                    activeCard === 1
-                      ? "bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 shadow-sm"
-                      : "text-slate-400 hover:text-slate-200"
-                  }`}
-                >
-                  02 Bóc tách ABSA
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setActiveCard(2)}
-                  className={`px-3 py-1 rounded-full text-xs font-mono font-medium transition ${
-                    activeCard === 2
-                      ? "bg-violet-500/20 text-violet-300 border border-violet-400/40 shadow-sm"
-                      : "text-slate-400 hover:text-slate-200"
-                  }`}
-                >
-                  03 Đối sánh
-                </button>
-              </div>
+            {/* Horizontal Continuous Marquee Row 1 */}
+            <div className="animate-marquee-infinite flex gap-8 items-center text-xs font-mono font-bold tracking-wider text-cyan-300/90 whitespace-nowrap">
+              {RUNNING_APPLICATIONS_1.concat(RUNNING_APPLICATIONS_1).map((item, idx) => (
+                <span key={idx} className="flex items-center gap-3 hover:text-white transition-colors cursor-default">
+                  <span className="text-cyan-400 text-sm">✦</span>
+                  <span>{item}</span>
+                </span>
+              ))}
             </div>
           </div>
-
-          {/* =========================================================================
-              FLOATING VERTICAL TOOLBAR (Right edge - Exact Google Stitch UI)
-              ========================================================================= */}
-          <motion.div
-            style={{ opacity: toolstripOpacity, x: toolstripX }}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 hidden lg:flex flex-col items-center gap-2 p-1.5 rounded-2xl bg-[#0b1120]/90 backdrop-blur-xl border border-slate-700/70 shadow-2xl"
-          >
-            <button
-              className="p-2 rounded-xl text-cyan-400 bg-cyan-500/15 hover:bg-cyan-500/25 transition"
-              title="Công cụ chọn (Pointer)"
-            >
-              <MousePointer className="w-4 h-4" />
-            </button>
-            <button
-              className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition"
-              title="Phóng to chi tiết (Zoom)"
-            >
-              <ZoomIn className="w-4 h-4" />
-            </button>
-            <button
-              className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition"
-              title="Di chuyển canvas (Pan)"
-            >
-              <Hand className="w-4 h-4" />
-            </button>
-            <button
-              className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition"
-              title="Trí tuệ AI (Insights)"
-            >
-              <Sparkles className="w-4 h-4" />
-            </button>
-          </motion.div>
-
-          {/* =========================================================================
-              BOTTOM ROW: Stitch Signature Prompt Input Bar + Scroll Continuity Guide
-              ========================================================================= */}
-          <motion.div
-            style={{ y: barY, opacity: barOpacity }}
-            className="relative z-20 w-full max-w-2xl mx-auto flex flex-col items-center gap-2"
-          >
-            {/* Floating Prompt Bar (Google Stitch equivalent) */}
-            <Link
-              href="/dashboard"
-              className="w-full flex items-center justify-between px-4 py-2.5 rounded-full bg-[#0d1424]/90 hover:bg-[#111a30] border border-slate-700/80 hover:border-cyan-500/40 shadow-2xl backdrop-blur-xl transition group"
-            >
-              <div className="flex items-center gap-2.5">
-                <div className="w-7 h-7 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 group-hover:text-cyan-400 transition">
-                  <Plus className="w-3.5 h-3.5" />
-                </div>
-                <span className="text-xs sm:text-sm text-slate-400 group-hover:text-slate-200 transition">
-                  Khám phá toàn bộ tính năng và công cụ trên Dashboard...
-                </span>
-              </div>
-              <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center shadow-md group-hover:scale-105 transition">
-                <ArrowUp className="w-4 h-4 font-bold" />
-              </div>
-            </Link>
-
-            {/* Scroll Indicator Prompt */}
-            <div className="text-[11px] font-mono text-slate-400 flex items-center gap-1.5 pt-1">
-              <span>Cuộn tiếp để xem phương pháp luận & giá trị cốt lõi</span>
-              <span className="animate-bounce">↓</span>
-            </div>
-          </motion.div>
         </motion.div>
       </div>
     </section>
