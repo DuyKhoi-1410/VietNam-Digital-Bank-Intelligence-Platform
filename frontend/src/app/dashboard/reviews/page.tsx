@@ -351,22 +351,27 @@ function ReviewExplorerContent() {
         {/* Active Filters Summary & Reset */}
         <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-800 text-xs">
           <div className="text-slate-400 font-mono text-[11px] flex flex-wrap items-center gap-2">
-            {selectedBank && (
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-cyan-950/80 border border-cyan-800/80 text-cyan-300 font-semibold text-xs">
-                <span>🏛️ {selectedBank}</span>
+            {selectedBank ? (
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-cyan-950/80 border border-cyan-800/80 text-cyan-300 font-semibold text-xs shadow-sm">
+                <span>🏛️ Ngân hàng: {selectedBank}</span>
                 <button
                   type="button"
                   onClick={() => setSelectedBank("")}
                   className="hover:text-white transition-colors"
-                  title="Xóa bộ lọc ngân hàng"
+                  title="Xóa bộ lọc ngân hàng (xem toàn bộ 7 ngân hàng)"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>
               </span>
-            )}
-            {selectedAspect && (
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-800/80 border border-slate-700 text-cyan-400 text-xs">
-                <span>Khía cạnh: &ldquo;{getAspectViName(selectedAspect)}&rdquo;</span>
+            ) : selectedAspect ? (
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-slate-900 border border-slate-800 text-slate-400 text-xs font-mono">
+                🏛️ Toàn bộ 7 ngân hàng
+              </span>
+            ) : null}
+
+            {selectedAspect ? (
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-cyan-950/80 border border-cyan-800/80 text-cyan-300 font-semibold text-xs shadow-sm">
+                <span>📊 Khía cạnh: {getAspectViName(selectedAspect)}</span>
                 <button
                   type="button"
                   onClick={() => setSelectedAspect("")}
@@ -376,10 +381,15 @@ function ReviewExplorerContent() {
                   <X className="w-3.5 h-3.5" />
                 </button>
               </span>
-            )}
+            ) : selectedBank ? (
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-slate-900 border border-slate-800 text-slate-400 text-xs font-mono">
+                📊 Toàn bộ khía cạnh
+              </span>
+            ) : null}
+
             {keyword && (
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-800/80 border border-slate-700 text-slate-200 text-xs">
-                <span>Từ khóa: &ldquo;{keyword}&rdquo;</span>
+                <span>🔍 Từ khóa: &ldquo;{keyword}&rdquo;</span>
                 <button
                   type="button"
                   onClick={() => {
@@ -393,8 +403,9 @@ function ReviewExplorerContent() {
                 </button>
               </span>
             )}
+
             {!selectedBank && !selectedAspect && !keyword && (
-              <span className="text-slate-500 italic">Hiển thị toàn bộ đánh giá 7 ngân hàng</span>
+              <span className="text-slate-500 italic">Hiển thị toàn bộ 19.303 đánh giá 7 ngân hàng thương mại</span>
             )}
           </div>
           <button
