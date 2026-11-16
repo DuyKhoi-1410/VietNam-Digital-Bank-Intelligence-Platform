@@ -11,13 +11,13 @@ export function StorySection() {
 
       <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
         {/* Signature Stitch Headline - "Vibe design is here" equivalent */}
-        <h2 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.1]">
-          Trí tuệ thực chứng từ Dữ liệu Lớn
+        <h2 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.15] max-w-4xl">
+          VietNam Digital Banking Intelligence
         </h2>
 
         {/* Subtitle Statement */}
         <p className="mt-6 text-lg sm:text-xl md:text-2xl text-slate-300 font-normal leading-relaxed max-w-3xl">
-          VDBI chuyển hóa 19,303 đánh giá người dùng thực tế thành dữ liệu thông minh và bóc tách cảm xúc đa chiều trên 7 ứng dụng ngân hàng số. Tách bạch giữa điểm sao và bản chất trải nghiệm để giúp bạn ra quyết định sản phẩm chính xác.
+          Nền tảng phân tích phản hồi người dùng dựa trên Sentiment Analysis và Aspect-Based Sentiment Analysis (ABSA), cung cấp góc nhìn chuyên sâu về trải nghiệm ngân hàng số tại Việt Nam.
         </p>
 
         {/* Signature Stitch Dark Pill Button - "[ Start designing ]" equivalent */}
