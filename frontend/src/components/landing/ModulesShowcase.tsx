@@ -148,7 +148,7 @@ export function ModulesShowcase() {
   return (
     <section
       id="modules"
-      className="relative py-24 sm:py-32 bg-[#02050e] border-t border-slate-900/80 overflow-hidden"
+      className="relative py-24 sm:py-32 bg-transparent border-t border-slate-800/30 overflow-hidden"
     >
       {/* Background Ambient Radial Glows */}
       <div className="absolute top-1/4 left-1/4 w-[600px] h-[400px] bg-cyan-600/10 blur-[160px] rounded-full pointer-events-none" />
