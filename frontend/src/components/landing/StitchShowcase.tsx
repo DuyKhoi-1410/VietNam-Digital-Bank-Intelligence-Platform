@@ -42,32 +42,56 @@ const RUNNING_APPLICATIONS = [
   "THEO DÕI ĐỘ HÀI LÒNG THEO TỪNG PHIÊN BẢN APP",
 ];
 
-// 24 predetermined floating dust specks with staggered delays, sizes, and natural floating physics
+// 48 predetermined floating dust specks with staggered delays, sizes, and natural floating physics
 const FLOATING_PARTICLES = [
-  { id: 1, left: "7%", size: 3, duration: 8.5, delay: 0.2, xOffset: 20 },
-  { id: 2, left: "14%", size: 2.5, duration: 11.2, delay: 2.1, xOffset: -15 },
-  { id: 3, left: "22%", size: 4, duration: 7.8, delay: 1.4, xOffset: 30 },
-  { id: 4, left: "30%", size: 2, duration: 13.0, delay: 3.5, xOffset: -25 },
-  { id: 5, left: "38%", size: 3.5, duration: 9.2, delay: 0.8, xOffset: 15 },
-  { id: 6, left: "46%", size: 2.5, duration: 10.5, delay: 4.2, xOffset: -20 },
-  { id: 7, left: "53%", size: 4.5, duration: 8.0, delay: 1.9, xOffset: 25 },
-  { id: 8, left: "61%", size: 3, duration: 12.1, delay: 2.8, xOffset: -30 },
-  { id: 9, left: "69%", size: 2, duration: 9.7, delay: 0.5, xOffset: 18 },
-  { id: 10, left: "77%", size: 3.5, duration: 11.5, delay: 3.1, xOffset: -12 },
-  { id: 11, left: "84%", size: 4, duration: 8.9, delay: 1.2, xOffset: 22 },
-  { id: 12, left: "91%", size: 2.5, duration: 10.2, delay: 4.7, xOffset: -18 },
-  { id: 13, left: "11%", size: 3, duration: 12.8, delay: 5.3, xOffset: 25 },
-  { id: 14, left: "27%", size: 2, duration: 9.4, delay: 6.1, xOffset: -15 },
-  { id: 15, left: "42%", size: 4, duration: 11.0, delay: 5.8, xOffset: 35 },
-  { id: 16, left: "58%", size: 3.5, duration: 8.3, delay: 6.5, xOffset: -25 },
-  { id: 17, left: "72%", size: 2.5, duration: 13.5, delay: 7.2, xOffset: 15 },
-  { id: 18, left: "87%", size: 3, duration: 9.9, delay: 6.9, xOffset: -20 },
-  { id: 19, left: "18%", size: 3.5, duration: 10.8, delay: 3.8, xOffset: -10 },
-  { id: 20, left: "35%", size: 2.5, duration: 12.3, delay: 4.9, xOffset: 20 },
-  { id: 21, left: "50%", size: 4, duration: 7.5, delay: 2.5, xOffset: -18 },
-  { id: 22, left: "66%", size: 3, duration: 11.8, delay: 5.0, xOffset: 28 },
-  { id: 23, left: "81%", size: 2, duration: 9.1, delay: 1.7, xOffset: -22 },
-  { id: 24, left: "95%", size: 3.5, duration: 10.6, delay: 3.3, xOffset: 16 },
+  { id: 1, left: "4%", size: 2.5, duration: 8.5, delay: 0.2, xOffset: 20 },
+  { id: 2, left: "8%", size: 3.5, duration: 11.2, delay: 2.1, xOffset: -15 },
+  { id: 3, left: "12%", size: 2, duration: 7.8, delay: 1.4, xOffset: 30 },
+  { id: 4, left: "16%", size: 4, duration: 13.0, delay: 3.5, xOffset: -25 },
+  { id: 5, left: "20%", size: 2.5, duration: 9.2, delay: 0.8, xOffset: 15 },
+  { id: 6, left: "24%", size: 3, duration: 10.5, delay: 4.2, xOffset: -20 },
+  { id: 7, left: "28%", size: 4.5, duration: 8.0, delay: 1.9, xOffset: 25 },
+  { id: 8, left: "32%", size: 2, duration: 12.1, delay: 2.8, xOffset: -30 },
+  { id: 9, left: "36%", size: 3.5, duration: 9.7, delay: 0.5, xOffset: 18 },
+  { id: 10, left: "40%", size: 2.5, duration: 11.5, delay: 3.1, xOffset: -12 },
+  { id: 11, left: "44%", size: 4, duration: 8.9, delay: 1.2, xOffset: 22 },
+  { id: 12, left: "48%", size: 2, duration: 10.2, delay: 4.7, xOffset: -18 },
+  { id: 13, left: "52%", size: 3.5, duration: 12.8, delay: 5.3, xOffset: 25 },
+  { id: 14, left: "56%", size: 2.5, duration: 9.4, delay: 6.1, xOffset: -15 },
+  { id: 15, left: "60%", size: 4.5, duration: 11.0, delay: 5.8, xOffset: 35 },
+  { id: 16, left: "64%", size: 3, duration: 8.3, delay: 6.5, xOffset: -25 },
+  { id: 17, left: "68%", size: 2, duration: 13.5, delay: 7.2, xOffset: 15 },
+  { id: 18, left: "72%", size: 3.5, duration: 9.9, delay: 6.9, xOffset: -20 },
+  { id: 19, left: "76%", size: 2.5, duration: 10.8, delay: 3.8, xOffset: -10 },
+  { id: 20, left: "80%", size: 4, duration: 12.3, delay: 4.9, xOffset: 20 },
+  { id: 21, left: "84%", size: 2, duration: 7.5, delay: 2.5, xOffset: -18 },
+  { id: 22, left: "88%", size: 3.5, duration: 11.8, delay: 5.0, xOffset: 28 },
+  { id: 23, left: "92%", size: 2.5, duration: 9.1, delay: 1.7, xOffset: -22 },
+  { id: 24, left: "96%", size: 3, duration: 10.6, delay: 3.3, xOffset: 16 },
+  { id: 25, left: "6%", size: 2, duration: 12.5, delay: 6.8, xOffset: -18 },
+  { id: 26, left: "10%", size: 4, duration: 8.7, delay: 4.5, xOffset: 24 },
+  { id: 27, left: "15%", size: 2.5, duration: 10.4, delay: 5.7, xOffset: -22 },
+  { id: 28, left: "19%", size: 3, duration: 13.8, delay: 2.3, xOffset: 16 },
+  { id: 29, left: "23%", size: 3.5, duration: 9.5, delay: 7.1, xOffset: -28 },
+  { id: 30, left: "27%", size: 2, duration: 11.0, delay: 3.9, xOffset: 19 },
+  { id: 31, left: "31%", size: 4.5, duration: 8.2, delay: 1.6, xOffset: -14 },
+  { id: 32, left: "35%", size: 2.5, duration: 12.0, delay: 5.4, xOffset: 26 },
+  { id: 33, left: "39%", size: 3, duration: 9.8, delay: 0.9, xOffset: -17 },
+  { id: 34, left: "43%", size: 2, duration: 14.2, delay: 4.0, xOffset: 21 },
+  { id: 35, left: "47%", size: 4, duration: 7.9, delay: 6.3, xOffset: -25 },
+  { id: 36, left: "51%", size: 2.5, duration: 10.7, delay: 2.7, xOffset: 18 },
+  { id: 37, left: "55%", size: 3.5, duration: 11.6, delay: 5.1, xOffset: -20 },
+  { id: 38, left: "59%", size: 2, duration: 8.4, delay: 1.1, xOffset: 23 },
+  { id: 39, left: "63%", size: 4, duration: 13.2, delay: 4.4, xOffset: -16 },
+  { id: 40, left: "67%", size: 2.5, duration: 9.3, delay: 6.6, xOffset: 27 },
+  { id: 41, left: "71%", size: 3, duration: 10.9, delay: 3.4, xOffset: -21 },
+  { id: 42, left: "75%", size: 4.5, duration: 8.6, delay: 0.4, xOffset: 15 },
+  { id: 43, left: "79%", size: 2, duration: 12.7, delay: 5.9, xOffset: -29 },
+  { id: 44, left: "83%", size: 3.5, duration: 9.0, delay: 2.0, xOffset: 22 },
+  { id: 45, left: "87%", size: 2.5, duration: 11.4, delay: 6.0, xOffset: -18 },
+  { id: 46, left: "91%", size: 3, duration: 13.6, delay: 3.7, xOffset: 14 },
+  { id: 47, left: "94%", size: 4, duration: 8.1, delay: 1.5, xOffset: -24 },
+  { id: 48, left: "98%", size: 2, duration: 10.3, delay: 4.8, xOffset: 20 },
 ];
 
 export function StitchShowcase() {
@@ -279,58 +303,58 @@ export function StitchShowcase() {
               ========================================================================= */}
           <motion.div
             style={{ scale: centerScale }}
-            className="relative z-20 my-auto mx-auto w-full max-w-4xl text-center flex flex-col items-center justify-center px-4 py-4 sm:py-6"
+            className="relative z-20 my-auto mx-auto w-full max-w-5xl text-center flex flex-col items-center justify-center px-4 py-3 sm:py-5"
           >
             {/* ===================================================================
-                MAJESTIC VDBI LOGO (Căn giữa hoàn hảo, hiệu ứng neon phát quang nổi khối 3D)
+                MAJESTIC VDBI LOGO (Thiết kế compact tinh tế, hào quang phát sáng 3D)
                 =================================================================== */}
             <motion.div
               animate={{
-                y: [-7, 7, -7],
-                scale: [1, 1.025, 1],
+                y: [-6, 6, -6],
+                scale: [1, 1.02, 1],
               }}
               transition={{
                 duration: 5.5,
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.04 }}
               onClick={() => {
                 if (typeof window !== "undefined") {
                   window.scrollTo({ top: 0, behavior: "smooth" });
                 }
               }}
-              className="relative mb-6 sm:mb-8 group cursor-pointer"
+              className="relative mb-3 sm:mb-4 group cursor-pointer"
             >
               {/* Outer Radial Ambient Neon Flare */}
-              <div className="absolute inset-0 -m-6 sm:-m-10 bg-gradient-to-r from-cyan-400/40 via-sky-400/50 to-blue-500/40 blur-3xl rounded-full pointer-events-none group-hover:opacity-100 opacity-90 transition-opacity duration-500" />
+              <div className="absolute inset-0 -m-5 sm:-m-8 bg-gradient-to-r from-cyan-400/35 via-sky-400/45 to-blue-500/35 blur-2xl rounded-full pointer-events-none group-hover:opacity-100 opacity-80 transition-opacity duration-500" />
 
-              {/* Glassmorphic Capsule Showcase for VDBI Brand (100% Vector Sharpness, 0% Blur/Grain) */}
-              <div className="relative px-6 sm:px-9 py-4 sm:py-5 rounded-3xl bg-slate-950/75 border border-cyan-400/50 backdrop-blur-2xl shadow-[0_0_60px_rgba(6,182,212,0.45)] transition-all duration-300 group-hover:border-cyan-300 group-hover:shadow-[0_0_90px_rgba(6,182,212,0.7)] flex items-center justify-center gap-4 sm:gap-6 md:gap-7 overflow-hidden">
+              {/* Glassmorphic Capsule Showcase for VDBI Brand (Gọn gàng hơn, 100% Vector Sharpness, 0% Grain) */}
+              <div className="relative px-4 sm:px-6 md:px-7 py-2 sm:py-2.5 rounded-2xl bg-slate-950/80 border border-cyan-400/40 backdrop-blur-2xl shadow-[0_0_40px_rgba(6,182,212,0.35)] transition-all duration-300 group-hover:border-cyan-300 group-hover:shadow-[0_0_70px_rgba(6,182,212,0.6)] flex items-center justify-center gap-3 sm:gap-4 md:gap-5 overflow-hidden">
                 {/* Laser Top Specular Reflection Line */}
                 <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-300/80 to-transparent pointer-events-none" />
 
-                {/* VDBI Stylized Emblem Mark */}
-                <div className="relative w-16 sm:w-20 md:w-24 h-12 sm:h-14 md:h-16 flex-shrink-0">
+                {/* VDBI Stylized Emblem Mark (Tỉ lệ thu gọn hài hòa) */}
+                <div className="relative w-11 sm:w-14 md:w-16 h-8 sm:h-10 md:h-11 flex-shrink-0">
                   <Image
                     src="/logo-mark.png"
                     alt="VDBI Emblem"
                     width={495}
                     height={223}
-                    className="w-full h-full object-contain filter drop-shadow-[0_0_15px_rgba(6,182,212,0.6)] transition-transform duration-300 group-hover:scale-105"
+                    className="w-full h-full object-contain filter drop-shadow-[0_0_12px_rgba(6,182,212,0.6)] transition-transform duration-300 group-hover:scale-105"
                     priority
                   />
                 </div>
 
                 {/* Laser Vertical Divider */}
-                <div className="h-10 sm:h-12 w-[1px] bg-gradient-to-b from-transparent via-cyan-400/50 to-transparent" />
+                <div className="h-6 sm:h-8 w-[1px] bg-gradient-to-b from-transparent via-cyan-400/50 to-transparent" />
 
-                {/* Vector Brand Typography (Ultra-sharp, crystal clear, vibrant neon gradient) */}
+                {/* Vector Brand Typography (Gọn gàng, siêu nét, rực rỡ neon) */}
                 <div className="flex flex-col text-left select-none tracking-tight">
-                  <span className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-white leading-tight tracking-tight">
+                  <span className="text-xs sm:text-base md:text-lg lg:text-xl font-bold text-white leading-tight tracking-tight">
                     Vietnam Digital
                   </span>
-                  <div className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-extrabold leading-tight tracking-tight flex items-center gap-1.5 sm:gap-2">
+                  <div className="text-xs sm:text-base md:text-lg lg:text-xl font-bold leading-tight tracking-tight flex items-center gap-1 sm:gap-1.5">
                     <span className="text-white">Banking</span>
                     <span className="text-neon-intelligence">
                       Intelligence
@@ -340,16 +364,16 @@ export function StitchShowcase() {
               </div>
             </motion.div>
 
-            {/* Giant Editorial Headline (High-Contrast Neon Cyan Gradient) */}
-            <div className="h-[60px] sm:h-[80px] md:h-[95px] flex items-center justify-center">
+            {/* Giant Editorial Headline (To hơn, uy lực và nổi bật tuyệt đối) */}
+            <div className="h-[75px] sm:h-[110px] md:h-[135px] lg:h-[155px] flex items-center justify-center">
               <AnimatePresence mode="wait">
                 <motion.h2
                   key={wordIndex}
-                  initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
+                  initial={{ opacity: 0, y: 24, filter: "blur(10px)" }}
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, y: -20, filter: "blur(8px)" }}
+                  exit={{ opacity: 0, y: -24, filter: "blur(10px)" }}
                   transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-none"
+                  className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tight leading-none"
                 >
                   <span className="text-gradient-neon-sync">
                     {SHOWCASE_WORDS[wordIndex].word}
@@ -359,7 +383,7 @@ export function StitchShowcase() {
             </div>
 
             {/* Concise statement explaining website application */}
-            <div className="h-[45px] sm:h-[55px] mt-2 sm:mt-3 flex items-center justify-center">
+            <div className="h-[45px] sm:h-[60px] mt-2 sm:mt-3 flex items-center justify-center">
               <AnimatePresence mode="wait">
                 <motion.p
                   key={wordIndex}
