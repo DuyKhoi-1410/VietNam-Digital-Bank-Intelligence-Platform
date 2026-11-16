@@ -395,14 +395,6 @@ export default function MarketOverviewPage() {
           </div>
         </div>
       )}
-
-      {/* Methodological Transparency Notice */}
-      <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 text-xs text-slate-400 flex items-start gap-3">
-        <Info className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
-        <p className="leading-relaxed">
-          Ghi chú phương pháp luận: Mô hình phân tích chuyên sâu (ABSA) được áp dụng trên 8.666 đánh giá chi tiết (từ 4 từ trở lên), phân tách thành 13.864 câu độc lập để gán chính xác vào 7 nhóm tính năng. 10.730 đánh giá ngắn (dưới 3 từ) chỉ được đánh giá cảm xúc chung và không phân loại theo tính năng.
-        </p>
-      </div>
     </div>
   );
 }
