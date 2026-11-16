@@ -37,10 +37,8 @@ export function LandingNavbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-transparent backdrop-blur-md py-4 sm:py-5"
-          : "bg-transparent py-6 sm:py-7"
+      className={`fixed top-0 left-0 right-0 z-50 bg-transparent transition-all duration-300 ${
+        scrolled ? "py-4 sm:py-5" : "py-6 sm:py-7"
       }`}
     >
       <div className="max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12">
@@ -64,29 +62,29 @@ export function LandingNavbar() {
             </span>
           </Link>
 
-          {/* Desktop Navigation Links */}
+          {/* Desktop Navigation Links - Chỉ có chữ nổi bật, thanh bar trong suốt 100% không có bất kỳ vệt màu đen nào */}
           <nav className="hidden md:flex items-center gap-10 lg:gap-12">
             <a
               href="#overview"
-              className="text-base lg:text-[1.05rem] font-medium text-slate-300 hover:text-white transition-colors tracking-wide"
+              className="text-base lg:text-[1.05rem] font-medium text-slate-200 hover:text-white transition-colors tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
             >
               Tổng Quan
             </a>
             <a
               href="#modules"
-              className="text-base lg:text-[1.05rem] font-medium text-slate-300 hover:text-white transition-colors tracking-wide"
+              className="text-base lg:text-[1.05rem] font-medium text-slate-200 hover:text-white transition-colors tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
             >
               Tiện Ích
             </a>
             <a
               href="#methodology"
-              className="text-base lg:text-[1.05rem] font-medium text-slate-300 hover:text-white transition-colors tracking-wide"
+              className="text-base lg:text-[1.05rem] font-medium text-slate-200 hover:text-white transition-colors tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
             >
               Phương Pháp Luận
             </a>
             <a
               href="#faq"
-              className="text-base lg:text-[1.05rem] font-medium text-slate-300 hover:text-white transition-colors tracking-wide"
+              className="text-base lg:text-[1.05rem] font-medium text-slate-200 hover:text-white transition-colors tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
             >
               FAQ
             </a>
