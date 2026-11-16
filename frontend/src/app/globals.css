@@ -241,22 +241,21 @@ body {
 
 .text-gradient-neon-sync {
   background: linear-gradient(
-    115deg,
+    135deg,
     #ffffff 0%,
-    #38bdf8 18%,
-    #818cf8 38%,
-    #c084fc 58%,
-    #e879f9 78%,
-    #22d3ee 92%,
+    #e0f7fa 20%,
+    #38bdf8 45%,
+    #c084fc 75%,
+    #f472b6 92%,
     #ffffff 100%
   );
-  background-size: 250% auto;
-  animation: shimmer-neon-aurora 7s ease-in-out infinite;
+  background-size: 200% auto;
+  animation: shimmer-neon-aurora 8s ease-in-out infinite;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 35px rgba(56, 189, 248, 0.85))
-    drop-shadow(0 0 75px rgba(168, 85, 247, 0.7))
-    drop-shadow(0 0 120px rgba(217, 70, 239, 0.45));
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.95))
+    drop-shadow(0 0 14px rgba(56, 189, 248, 0.6))
+    drop-shadow(0 0 28px rgba(192, 132, 252, 0.35));
 }
 
 .text-gradient-animated {
