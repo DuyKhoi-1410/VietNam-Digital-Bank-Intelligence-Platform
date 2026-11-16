@@ -240,20 +240,38 @@ export function StitchShowcase() {
               {/* Outer Radial Ambient Neon Flare */}
               <div className="absolute inset-0 -m-6 sm:-m-10 bg-gradient-to-r from-cyan-400/25 via-sky-400/35 to-blue-500/25 blur-2xl rounded-full pointer-events-none group-hover:opacity-100 opacity-80 transition-opacity duration-500" />
 
-              {/* Glassmorphic Capsule Showcase for VDBI Logo */}
-              <div className="relative px-6 sm:px-10 py-4 sm:py-5 rounded-3xl bg-slate-950/50 border border-cyan-400/40 backdrop-blur-2xl shadow-[0_0_50px_rgba(6,182,212,0.4)] transition-all duration-300 group-hover:border-cyan-300 group-hover:shadow-[0_0_80px_rgba(6,182,212,0.65)] overflow-hidden">
+              {/* Glassmorphic Capsule Showcase for VDBI Brand (100% Vector Sharpness, 0% Blur/Grain) */}
+              <div className="relative px-6 sm:px-9 py-4 sm:py-5 rounded-3xl bg-slate-950/65 border border-cyan-400/40 backdrop-blur-2xl shadow-[0_0_50px_rgba(6,182,212,0.35)] transition-all duration-300 group-hover:border-cyan-300 group-hover:shadow-[0_0_80px_rgba(6,182,212,0.6)] flex items-center gap-4 sm:gap-6 md:gap-7 overflow-hidden">
                 {/* Laser Top Specular Reflection Line */}
                 <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-300/80 to-transparent pointer-events-none" />
 
-                {/* Big High-Res VDBI Logo Image */}
-                <Image
-                  src="/logo-full.png"
-                  alt="Vietnam Digital Banking Intelligence - VDBI Official Logo"
-                  width={1328}
-                  height={223}
-                  className="w-[280px] sm:w-[440px] md:w-[560px] lg:w-[640px] h-auto object-contain filter drop-shadow-[0_0_30px_rgba(6,182,212,0.85)] transition-transform duration-300 group-hover:scale-[1.02]"
-                  priority
-                />
+                {/* VDBI Stylized Emblem Mark */}
+                <div className="relative w-16 sm:w-20 md:w-24 h-12 sm:h-14 md:h-16 flex-shrink-0">
+                  <Image
+                    src="/logo-mark.png"
+                    alt="VDBI Emblem"
+                    width={495}
+                    height={223}
+                    className="w-full h-full object-contain filter drop-shadow-[0_0_15px_rgba(6,182,212,0.6)] transition-transform duration-300 group-hover:scale-105"
+                    priority
+                  />
+                </div>
+
+                {/* Laser Vertical Divider */}
+                <div className="h-10 sm:h-12 w-[1px] bg-gradient-to-b from-transparent via-cyan-400/50 to-transparent" />
+
+                {/* Vector Brand Typography (Ultra-sharp, crystal clear, vibrant neon gradient) */}
+                <div className="flex flex-col text-left select-none tracking-tight">
+                  <span className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-white leading-tight tracking-tight">
+                    Vietnam Digital
+                  </span>
+                  <div className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-extrabold leading-tight tracking-tight flex items-center gap-1.5 sm:gap-2">
+                    <span className="text-white">Banking</span>
+                    <span className="text-neon-intelligence">
+                      Intelligence
+                    </span>
+                  </div>
+                </div>
               </div>
             </motion.div>
 
