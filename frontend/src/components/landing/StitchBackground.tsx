@@ -234,24 +234,24 @@ export function StitchBackground() {
               <stop offset="100%" stopColor="#9333ea" stopOpacity="0.25" />
             </linearGradient>
 
-            {/* Gaussian Blur Filters - Giảm loang rộng, tăng độ sắc nét dải sóng để chuyển động cơ học nhìn rõ nét và năng động */}
+            {/* Gaussian Blur Filters for Smooth Silk Loan Màu */}
             <filter id="stitchBlurBroad" x="-30%" y="-40%" width="160%" height="180%">
-              <feGaussianBlur stdDeviation="30" />
+              <feGaussianBlur stdDeviation="55" />
             </filter>
             <filter id="stitchBlurMid" x="-20%" y="-30%" width="140%" height="160%">
-              <feGaussianBlur stdDeviation="15" />
+              <feGaussianBlur stdDeviation="28" />
             </filter>
             <filter id="stitchBlurCore" x="-15%" y="-20%" width="130%" height="140%">
-              <feGaussianBlur stdDeviation="6" />
+              <feGaussianBlur stdDeviation="14" />
             </filter>
           </defs>
 
-          {/* 1. Broad Diffused Color-Bleed Foundation Layer (Nền mượt mà không bị loang đục) */}
+          {/* 1. Broad Diffused Color-Bleed Foundation Layer ("Loan màu" bao phủ mượt mà) */}
           <path
             d="M -120 280 C 320 440, 560 590, 960 540 C 1260 500, 1450 360, 1750 300"
             fill="none"
             stroke="url(#stitchGradWide)"
-            strokeWidth="170"
+            strokeWidth="250"
             strokeLinecap="round"
             filter="url(#stitchBlurBroad)"
             opacity="0.75"
@@ -263,22 +263,22 @@ export function StitchBackground() {
             d="M -100 350 C 300 520, 720 610, 1060 520 C 1320 440, 1500 280, 1720 260"
             fill="none"
             stroke="url(#stitchGradSecondary)"
-            strokeWidth="85"
+            strokeWidth="120"
             strokeLinecap="round"
             filter="url(#stitchBlurMid)"
-            opacity="0.8"
+            opacity="0.75"
             className="animate-stitch-wave-secondary"
           />
 
-          {/* 3. Primary Vibrant Mid-Body Ribbon (Sóng chính lượn sống động, biên độ lớn) */}
+          {/* 3. Primary Vibrant Mid-Body Ribbon (Sóng chính lượn sống động) */}
           <path
             d="M -120 280 C 320 440, 560 590, 960 540 C 1260 500, 1450 360, 1750 300"
             fill="none"
             stroke="url(#stitchGradBody)"
-            strokeWidth="88"
+            strokeWidth="125"
             strokeLinecap="round"
             filter="url(#stitchBlurMid)"
-            opacity="0.92"
+            opacity="0.9"
             className="animate-stitch-wave-primary"
           />
 
@@ -287,35 +287,23 @@ export function StitchBackground() {
             d="M -90 320 C 350 490, 680 580, 1040 500 C 1300 420, 1490 310, 1740 330"
             fill="none"
             stroke="url(#stitchGradCore)"
-            strokeWidth="42"
+            strokeWidth="50"
             strokeLinecap="round"
             filter="url(#stitchBlurMid)"
-            opacity="0.88"
+            opacity="0.85"
             className="animate-stitch-wave-core"
           />
 
-          {/* 5. Radiant Electric Core Filament (Trục neon phát sáng sắc sảo, dao động mạnh mẽ) */}
+          {/* 5. Radiant Electric Core Filament (Trục neon phát sáng rực rỡ và dao động mạnh) */}
           <path
             d="M -120 280 C 320 440, 560 590, 960 540 C 1260 500, 1450 360, 1750 300"
             fill="none"
             stroke="url(#stitchGradCore)"
-            strokeWidth="28"
+            strokeWidth="42"
             strokeLinecap="round"
             filter="url(#stitchBlurCore)"
             opacity="1"
             className="animate-stitch-wave-core"
-          />
-
-          {/* 6. High-Frequency Electric Pulse Filament (Sợi xung điện cao tần lượn sóng cực nhanh, cực nét) */}
-          <path
-            d="M -150 250 C 280 400, 620 630, 1000 480 C 1220 380, 1420 300, 1780 280"
-            fill="none"
-            stroke="url(#stitchGradCore)"
-            strokeWidth="16"
-            strokeLinecap="round"
-            filter="url(#stitchBlurCore)"
-            opacity="0.95"
-            className="animate-stitch-wave-fast"
           />
         </svg>
       </div>
