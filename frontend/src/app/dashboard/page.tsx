@@ -300,9 +300,6 @@ export default function MarketOverviewPage() {
                 <h2 className="text-sm font-bold text-white uppercase tracking-wider font-mono">
                   7 Khía Cạnh Trải Nghiệm Cốt Lõi (ABSA)
                 </h2>
-                <span className="text-xs text-slate-400 font-mono">
-                  {formatNumber(aspectsData.total_sub_sentences)} câu phản hồi bóc tách theo mô hình ABSA
-                </span>
               </div>
 
               {/* Toggle View: Animated Sliding Toggle */}
