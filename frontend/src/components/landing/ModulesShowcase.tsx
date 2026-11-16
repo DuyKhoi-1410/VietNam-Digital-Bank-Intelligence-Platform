@@ -7,7 +7,6 @@ import {
   ChevronLeft,
   ChevronRight,
   ArrowUpRight,
-  Sparkles,
 } from "lucide-react";
 
 interface ShowcaseModule {
@@ -160,12 +159,8 @@ export function ModulesShowcase() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           {/* Header Title on Left */}
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-cyan-500/40 text-xs font-mono text-cyan-300 mb-4 shadow-xl backdrop-blur-md">
-              <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-              <span>5 PHÂN HỆ TRÍ TUỆ NHÂN TẠO • TRẢI NGHIỆM KHÁCH HÀNG SỐ</span>
-            </div>
             <h2 className="text-3xl sm:text-5xl md:text-6xl font-normal tracking-tight text-white leading-tight">
-              Khám phá các module phân tích
+              Khám phá các tiện ích
             </h2>
             <p className="mt-3 text-base sm:text-lg text-slate-400 font-light max-w-2xl leading-relaxed">
               Lựa chọn phân hệ chuyên sâu phù hợp với mục tiêu nghiên cứu và ra quyết định chiến lược của bạn.
