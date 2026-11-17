@@ -8,6 +8,7 @@ import {
   RatingBenchmarkResponse,
 } from "@/types";
 import { formatNumber, formatPercent, formatRating, getAspectViName } from "@/lib/utils";
+import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
 import { BenchmarkComparisonChart } from "@/components/charts/BenchmarkComparisonChart";
 import { NormalizedRatingChart } from "@/components/charts/NormalizedRatingChart";
 import { SlidingToggle } from "@/components/ui/SlidingToggle";
@@ -198,18 +199,24 @@ export default function BenchmarkPage() {
                   <div className="p-2 rounded bg-emerald-500/10 border border-emerald-500/20">
                     <div className="text-[10px] text-slate-400">Dẫn đầu</div>
                     <div className="text-xs font-bold text-emerald-400 truncate">{gap.leader_bank}</div>
-                    <div className="text-xs font-semibold text-white">{gap.leader_value.toFixed(2)}</div>
+                    <div className="text-xs font-semibold text-white">
+                      <AnimatedNumber value={gap.leader_value} format="rating" />
+                    </div>
                   </div>
 
                   <div className="p-2 rounded bg-rose-500/10 border border-rose-500/20">
                     <div className="text-[10px] text-slate-400">Cần cải thiện</div>
                     <div className="text-xs font-bold text-rose-400 truncate">{gap.laggard_bank}</div>
-                    <div className="text-xs font-semibold text-white">{gap.laggard_value.toFixed(2)}</div>
+                    <div className="text-xs font-semibold text-white">
+                      <AnimatedNumber value={gap.laggard_value} format="rating" />
+                    </div>
                   </div>
 
                   <div className="p-2 rounded bg-cyan-500/10 border border-cyan-500/20 flex flex-col justify-center">
                     <div className="text-[10px] text-slate-400">Chênh lệch</div>
-                    <div className="text-sm font-bold text-cyan-400">+{gap.gap_value.toFixed(2)}</div>
+                    <div className="text-sm font-bold text-cyan-400">
+                      +<AnimatedNumber value={gap.gap_value} format="rating" />
+                    </div>
                   </div>
                 </div>
               </div>

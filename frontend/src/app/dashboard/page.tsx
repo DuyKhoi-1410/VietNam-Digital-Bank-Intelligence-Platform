@@ -8,6 +8,7 @@ import {
   MarketAspectsResponse,
 } from "@/types";
 import { formatNumber, formatPercent, formatRating, getAspectViName, getComplaintDriverVi } from "@/lib/utils";
+import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
 import { MonthlyTrendChart } from "@/components/charts/MonthlyTrendChart";
 import { AspectNSSChart } from "@/components/charts/AspectNSSChart";
 import { SlidingToggle } from "@/components/ui/SlidingToggle";
@@ -121,7 +122,7 @@ export default function MarketOverviewPage() {
           </div>
           <div>
             <div className="text-3xl font-bold text-white font-mono">
-              {formatNumber(overview.unique_baseline_reviews)}
+              <AnimatedNumber value={overview.unique_baseline_reviews} format="integer" />
             </div>
             <div className="text-[11px] text-slate-400 mt-1">
               19.303 phản hồi thực tế (sau khi loại bỏ trùng lặp)
@@ -137,7 +138,7 @@ export default function MarketOverviewPage() {
           </div>
           <div>
             <div className="text-3xl font-bold text-white font-mono flex items-baseline gap-1">
-              <span>{formatRating(overview.market_average_rating)}</span>
+              <AnimatedNumber value={overview.market_average_rating} format="rating" />
               <span className="text-xs text-slate-400">/ 5.00 ★</span>
             </div>
             <div className="text-[11px] text-slate-400 mt-1">
@@ -154,10 +155,10 @@ export default function MarketOverviewPage() {
           </div>
           <div>
             <div className="text-3xl font-bold text-emerald-400 font-mono">
-              {formatPercent(overview.sentiment_distribution.positive_pct)}
+              <AnimatedNumber value={overview.sentiment_distribution.positive_pct} format="percent" />
             </div>
             <div className="text-[11px] text-slate-400 mt-1">
-              {formatNumber(overview.sentiment_distribution.positive_count)} đánh giá Positive (Tích cực)
+              <AnimatedNumber value={overview.sentiment_distribution.positive_count} format="integer" /> đánh giá Positive (Tích cực)
             </div>
           </div>
         </div>
@@ -170,10 +171,10 @@ export default function MarketOverviewPage() {
           </div>
           <div>
             <div className="text-3xl font-bold text-violet-300 font-mono">
-              {formatNumber(aspectsData?.total_detailed_reviews || 8666)}
+              <AnimatedNumber value={aspectsData?.total_detailed_reviews || 8666} format="integer" />
             </div>
             <div className="text-[11px] text-slate-400 mt-1">
-              {formatNumber(aspectsData?.total_sub_sentences || 13864)} câu bóc tách khía cạnh (đánh giá ≥ 4 từ)
+              <AnimatedNumber value={aspectsData?.total_sub_sentences || 13864} format="integer" /> câu bóc tách khía cạnh (đánh giá ≥ 4 từ)
             </div>
           </div>
         </div>
@@ -207,28 +208,28 @@ export default function MarketOverviewPage() {
           <div className="p-3 rounded-lg bg-emerald-500/5 border border-emerald-500/20">
             <div className="text-xs font-semibold text-emerald-400">Positive (Tích cực)</div>
             <div className="text-lg font-bold text-emerald-400 font-mono">
-              {formatPercent(overview.sentiment_distribution.positive_pct)}
+              <AnimatedNumber value={overview.sentiment_distribution.positive_pct} format="percent" />
             </div>
             <div className="text-[11px] text-slate-400">
-              {formatNumber(overview.sentiment_distribution.positive_count)} đánh giá
+              <AnimatedNumber value={overview.sentiment_distribution.positive_count} format="integer" /> đánh giá
             </div>
           </div>
           <div className="p-3 rounded-lg bg-amber-500/5 border border-amber-500/20">
             <div className="text-xs font-semibold text-amber-400">Neutral (Trung tính)</div>
             <div className="text-lg font-bold text-amber-400 font-mono">
-              {formatPercent(overview.sentiment_distribution.neutral_pct)}
+              <AnimatedNumber value={overview.sentiment_distribution.neutral_pct} format="percent" />
             </div>
             <div className="text-[11px] text-slate-400">
-              {formatNumber(overview.sentiment_distribution.neutral_count)} đánh giá
+              <AnimatedNumber value={overview.sentiment_distribution.neutral_count} format="integer" /> đánh giá
             </div>
           </div>
           <div className="p-3 rounded-lg bg-rose-500/5 border border-rose-500/20">
             <div className="text-xs font-semibold text-rose-400">Negative (Tiêu cực)</div>
             <div className="text-lg font-bold text-rose-400 font-mono">
-              {formatPercent(overview.sentiment_distribution.negative_pct)}
+              <AnimatedNumber value={overview.sentiment_distribution.negative_pct} format="percent" />
             </div>
             <div className="text-[11px] text-slate-400">
-              {formatNumber(overview.sentiment_distribution.negative_count)} đánh giá
+              <AnimatedNumber value={overview.sentiment_distribution.negative_count} format="integer" /> đánh giá
             </div>
           </div>
         </div>
@@ -374,7 +375,9 @@ export default function MarketOverviewPage() {
                   <div key={pp.aspect_name} className="p-3 rounded-lg bg-rose-500/5 border border-rose-500/20">
                     <div className="flex items-center justify-between text-xs font-semibold text-white mb-1">
                       <span>{getAspectViName(pp.aspect_name)}</span>
-                      <span className="text-rose-400 font-mono">{formatNumber(pp.negative_sub_sentences)} phản hồi tiêu cực</span>
+                      <span className="text-rose-400 font-mono">
+                        <AnimatedNumber value={pp.negative_sub_sentences} format="integer" /> phản hồi tiêu cực
+                      </span>
                     </div>
                     <div className="text-[11px] text-slate-300 leading-relaxed mb-1.5">
                       {getComplaintDriverVi(pp.aspect_name, pp.primary_complaint_driver)}

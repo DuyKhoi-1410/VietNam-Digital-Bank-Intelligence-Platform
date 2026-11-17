@@ -10,6 +10,7 @@ import {
   ReviewDetailResponse,
 } from "@/types";
 import { formatNumber, getSentimentBadgeClass, getAspectViName } from "@/lib/utils";
+import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
 import {
   Search,
   RefreshCw,
@@ -243,9 +244,13 @@ function ReviewExplorerContent() {
 
         {results && (
           <div className="flex items-center gap-2 text-xs font-mono text-slate-400 bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-800">
-            <span className="text-cyan-400 font-bold">{formatNumber(results.total_items)}</span>
+            <span className="text-cyan-400 font-bold">
+              <AnimatedNumber value={results.total_items} format="integer" />
+            </span>
             <span>kết quả /</span>
-            <span className="text-white font-semibold">{formatNumber(results.unique_baseline)}</span>
+            <span className="text-white font-semibold">
+              <AnimatedNumber value={results.unique_baseline} format="integer" />
+            </span>
             <span>đánh giá chuẩn</span>
           </div>
         )}

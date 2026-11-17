@@ -10,6 +10,7 @@ import {
   BankQuotesResponse,
 } from "@/types";
 import { formatNumber, formatPercent, formatRating, getSentimentBadgeClass, getAspectViName } from "@/lib/utils";
+import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
 import { AspectRadarChart } from "@/components/charts/AspectRadarChart";
 import { VersionAdoptionChart } from "@/components/charts/VersionAdoptionChart";
 import { SlidingToggle } from "@/components/ui/SlidingToggle";
@@ -186,7 +187,7 @@ export default function BankInsightsPage() {
             <div className="glass-card rounded-xl p-5 border border-slate-800">
               <span className="text-xs font-mono uppercase text-slate-400">Tổng Đánh Giá Được Theo Dõi</span>
               <div className="text-3xl font-bold text-white font-mono mt-2">
-                {formatNumber(scorecard.total_reviews)}
+                <AnimatedNumber value={scorecard.total_reviews} format="integer" />
               </div>
               <div className="text-[11px] text-slate-400 mt-1">Dữ liệu theo dõi 5 tháng (07/2026 - 11/2026)</div>
             </div>
@@ -194,7 +195,7 @@ export default function BankInsightsPage() {
             <div className="glass-card rounded-xl p-5 border border-slate-800">
               <span className="text-xs font-mono uppercase text-slate-400">Điểm Sao Trung Bình</span>
               <div className="text-3xl font-bold text-amber-400 font-mono mt-2 flex items-baseline gap-1">
-                <span>{formatRating(scorecard.overall_average_rating)}</span>
+                <AnimatedNumber value={scorecard.overall_average_rating} format="rating" />
                 <span className="text-xs text-slate-400">★ / 5.00</span>
               </div>
               <div className="text-[11px] text-slate-400 mt-1">Điểm sao trung bình trên Google Play</div>
@@ -203,17 +204,17 @@ export default function BankInsightsPage() {
             <div className="glass-card rounded-xl p-5 border border-slate-800">
               <span className="text-xs font-mono uppercase text-slate-400">Tỷ Lệ Positive Sentiment</span>
               <div className="text-3xl font-bold text-emerald-400 font-mono mt-2">
-                {formatPercent(scorecard.sentiment_percentages.positive)}
+                <AnimatedNumber value={scorecard.sentiment_percentages.positive} format="percent" />
               </div>
               <div className="text-[11px] text-slate-400 mt-1">
-                {formatNumber(scorecard.sentiment_counts.positive)} đánh giá Positive (Tích cực)
+                <AnimatedNumber value={scorecard.sentiment_counts.positive} format="integer" /> đánh giá Positive (Tích cực)
               </div>
             </div>
 
             <div className="glass-card rounded-xl p-5 border border-slate-800">
               <span className="text-xs font-mono uppercase text-slate-400">Số Câu Phụ Phân Tích ABSA</span>
               <div className="text-3xl font-bold text-violet-300 font-mono mt-2">
-                {formatNumber(aspects?.bank_total_sub_sentences || 0)}
+                <AnimatedNumber value={aspects?.bank_total_sub_sentences || 0} format="integer" />
               </div>
               <div className="text-[11px] text-slate-400 mt-1">Bóc tách từ các đánh giá dài (≥ 4 từ)</div>
             </div>
@@ -242,8 +243,12 @@ export default function BankInsightsPage() {
                           className={`h-full ${star >= 4 ? "bg-amber-400" : star === 3 ? "bg-amber-600" : "bg-rose-500"}`}
                         />
                       </div>
-                      <span className="w-16 text-right text-slate-400">{formatNumber(count)}</span>
-                      <span className="w-12 text-right text-slate-400 text-[11px]">{formatPercent(pct, 0)}</span>
+                      <span className="w-16 text-right text-slate-400">
+                        <AnimatedNumber value={count} format="integer" />
+                      </span>
+                      <span className="w-12 text-right text-slate-400 text-[11px]">
+                        <AnimatedNumber value={pct} format="percent" decimals={0} />
+                      </span>
                     </div>
                   );
                 })}
@@ -262,7 +267,7 @@ export default function BankInsightsPage() {
                   <div className="flex justify-between text-slate-300 mb-1">
                     <span className="font-semibold text-emerald-400">Positive (Tích cực)</span>
                     <span className="text-emerald-400 font-semibold">
-                      {formatPercent(scorecard.sentiment_percentages.positive)} ({formatNumber(scorecard.sentiment_counts.positive)})
+                      <AnimatedNumber value={scorecard.sentiment_percentages.positive} format="percent" /> (<AnimatedNumber value={scorecard.sentiment_counts.positive} format="integer" />)
                     </span>
                   </div>
                   <div className="h-3 bg-slate-900 rounded-full overflow-hidden">
@@ -277,7 +282,7 @@ export default function BankInsightsPage() {
                   <div className="flex justify-between text-slate-300 mb-1">
                     <span className="font-semibold text-amber-400">Neutral (Trung tính)</span>
                     <span className="text-amber-400 font-semibold">
-                      {formatPercent(scorecard.sentiment_percentages.neutral)} ({formatNumber(scorecard.sentiment_counts.neutral)})
+                      <AnimatedNumber value={scorecard.sentiment_percentages.neutral} format="percent" /> (<AnimatedNumber value={scorecard.sentiment_counts.neutral} format="integer" />)
                     </span>
                   </div>
                   <div className="h-3 bg-slate-900 rounded-full overflow-hidden">
@@ -292,7 +297,7 @@ export default function BankInsightsPage() {
                   <div className="flex justify-between text-slate-300 mb-1">
                     <span className="font-semibold text-rose-400">Negative (Tiêu cực)</span>
                     <span className="text-rose-400 font-semibold">
-                      {formatPercent(scorecard.sentiment_percentages.negative)} ({formatNumber(scorecard.sentiment_counts.negative)})
+                      <AnimatedNumber value={scorecard.sentiment_percentages.negative} format="percent" /> (<AnimatedNumber value={scorecard.sentiment_counts.negative} format="integer" />)
                     </span>
                   </div>
                   <div className="h-3 bg-slate-900 rounded-full overflow-hidden">
