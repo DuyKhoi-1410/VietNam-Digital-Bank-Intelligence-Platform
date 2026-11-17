@@ -56,6 +56,7 @@ export function LandingNavbar() {
               alt="Vietnam Digital Banking Intelligence"
               width={260}
               height={44}
+              style={{ width: "auto" }}
               className="h-9 sm:h-11 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
               priority
             />

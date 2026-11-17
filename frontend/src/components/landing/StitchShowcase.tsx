@@ -147,10 +147,10 @@ export function StitchShowcase() {
 
   // Physics-based spring smoothing to eliminate mouse-wheel stepping and make the zoom silky smooth (60-120fps)
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 90,
-    damping: 24,
-    mass: 0.25,
-    restDelta: 0.0001,
+    stiffness: 100,
+    damping: 28,
+    mass: 0.2,
+    restDelta: 0.001,
   });
 
   // Scale: Starts clearly compact (0.60 on desktop, 0.74 on mobile) -> smoothly expands to 1.0 (true full screen) as it enters
@@ -205,7 +205,7 @@ export function StitchShowcase() {
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] sm:w-[1300px] md:w-[1550px] h-[500px] sm:h-[650px] bg-gradient-to-r from-cyan-400/35 via-indigo-500/30 to-purple-600/35 blur-[130px] rounded-full pointer-events-none"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] sm:w-[1300px] md:w-[1550px] h-[500px] sm:h-[650px] bg-gradient-to-r from-cyan-400/35 via-indigo-500/30 to-purple-600/35 blur-[130px] rounded-full pointer-events-none transform-gpu will-change-transform"
           />
 
           {/* Blob 2: Vibrant Electric Violet & Magenta Swirl */}
@@ -220,7 +220,7 @@ export function StitchShowcase() {
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] sm:w-[1000px] md:w-[1250px] h-[420px] sm:h-[550px] bg-gradient-to-br from-cyan-300/30 via-purple-500/35 to-fuchsia-500/30 blur-[110px] rounded-full pointer-events-none"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] sm:w-[1000px] md:w-[1250px] h-[420px] sm:h-[550px] bg-gradient-to-br from-cyan-300/30 via-purple-500/35 to-fuchsia-500/30 blur-[110px] rounded-full pointer-events-none transform-gpu will-change-transform"
           />
 
           {/* Blob 3: Center Radiant Core Spotlight - Chiếu sáng êm dịu, loang màu ăn khớp chuẩn xác với chữ (Cyan & Violet & Fuchsia) */}
@@ -234,7 +234,7 @@ export function StitchShowcase() {
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[850px] h-[350px] sm:h-[450px] bg-gradient-to-r from-cyan-400/40 via-violet-500/45 to-fuchsia-400/40 blur-[85px] rounded-full pointer-events-none"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[850px] h-[350px] sm:h-[450px] bg-gradient-to-r from-cyan-400/40 via-violet-500/45 to-fuchsia-400/40 blur-[85px] rounded-full pointer-events-none transform-gpu will-change-transform"
           />
 
           {/* Canvas Dot Matrix Pattern */}
@@ -274,7 +274,7 @@ export function StitchShowcase() {
                   width: p.size,
                   height: p.size,
                 }}
-                className={`absolute rounded-full ${
+                className={`absolute rounded-full transform-gpu will-change-transform ${
                   p.id % 2 === 0
                     ? "bg-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.95)]"
                     : "bg-purple-300 shadow-[0_0_12px_rgba(216,180,254,0.95)]"

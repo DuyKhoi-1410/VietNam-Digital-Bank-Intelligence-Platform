@@ -131,6 +131,7 @@ export function Sidebar({
                   alt="Vietnam Digital Banking Intelligence"
                   width={180}
                   height={30}
+                  style={{ width: "auto" }}
                   className="h-7 w-auto object-contain transition-transform group-hover:scale-[1.02]"
                   priority
                 />

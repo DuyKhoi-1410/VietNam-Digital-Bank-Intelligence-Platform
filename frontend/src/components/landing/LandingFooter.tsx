@@ -38,6 +38,7 @@ export function LandingFooter() {
                   alt="Vietnam Digital Banking Intelligence"
                   width={220}
                   height={38}
+                  style={{ width: "auto" }}
                   className="h-8 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
                 />
               </Link>

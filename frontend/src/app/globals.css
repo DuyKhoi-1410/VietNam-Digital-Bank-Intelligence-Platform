@@ -83,21 +83,29 @@ body {
 .animate-stitch-wave-primary {
   animation: stitch-wave-flow-1 7s ease-in-out infinite alternate;
   transform-origin: 50% 60%;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .animate-stitch-wave-secondary {
   animation: stitch-wave-flow-2 9s ease-in-out infinite alternate;
   transform-origin: 45% 55%;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .animate-stitch-wave-core {
   animation: stitch-wave-flow-core 5.5s ease-in-out infinite alternate;
   transform-origin: 52% 58%;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .animate-stitch-wave-ambient {
   animation: stitch-wave-flow-ambient 11s ease-in-out infinite alternate;
   transform-origin: 50% 50%;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* Dynamic color shimmer / liquid light breathing */
@@ -272,14 +280,14 @@ body {
 }
 
 /* =========================================================================
-   INFINITE HORIZONTAL MARQUEE TICKER (PAUSE ON HOVER)
+   INFINITE HORIZONTAL MARQUEE TICKER (PAUSE ON HOVER - HARDWARE ACCELERATED)
    ========================================================================= */
 @keyframes marquee-horizontal {
   0% {
-    transform: translateX(0%);
+    transform: translate3d(0%, 0, 0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
@@ -288,6 +296,8 @@ body {
   width: max-content;
   animation: marquee-horizontal 30s linear infinite;
   will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .animate-marquee-infinite:hover {
