@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import Link from "next/link";
 import {
   motion,
   useScroll,
@@ -9,7 +8,6 @@ import {
   useSpring,
   AnimatePresence,
 } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 
 const SHOWCASE_WORDS = [
   {
@@ -41,56 +39,84 @@ const RUNNING_APPLICATIONS = [
   "THEO DÕI ĐỘ HÀI LÒNG THEO TỪNG PHIÊN BẢN APP",
 ];
 
-// 48 predetermined floating dust specks with staggered delays, sizes, and natural floating physics
+// 76 predetermined floating dust specks with staggered delays, sizes, and natural floating physics
 const FLOATING_PARTICLES = [
-  { id: 1, left: "4%", size: 2.5, duration: 8.5, delay: 0.2, xOffset: 20 },
-  { id: 2, left: "8%", size: 3.5, duration: 11.2, delay: 2.1, xOffset: -15 },
-  { id: 3, left: "12%", size: 2, duration: 7.8, delay: 1.4, xOffset: 30 },
-  { id: 4, left: "16%", size: 4, duration: 13.0, delay: 3.5, xOffset: -25 },
-  { id: 5, left: "20%", size: 2.5, duration: 9.2, delay: 0.8, xOffset: 15 },
-  { id: 6, left: "24%", size: 3, duration: 10.5, delay: 4.2, xOffset: -20 },
-  { id: 7, left: "28%", size: 4.5, duration: 8.0, delay: 1.9, xOffset: 25 },
-  { id: 8, left: "32%", size: 2, duration: 12.1, delay: 2.8, xOffset: -30 },
-  { id: 9, left: "36%", size: 3.5, duration: 9.7, delay: 0.5, xOffset: 18 },
-  { id: 10, left: "40%", size: 2.5, duration: 11.5, delay: 3.1, xOffset: -12 },
-  { id: 11, left: "44%", size: 4, duration: 8.9, delay: 1.2, xOffset: 22 },
-  { id: 12, left: "48%", size: 2, duration: 10.2, delay: 4.7, xOffset: -18 },
-  { id: 13, left: "52%", size: 3.5, duration: 12.8, delay: 5.3, xOffset: 25 },
-  { id: 14, left: "56%", size: 2.5, duration: 9.4, delay: 6.1, xOffset: -15 },
-  { id: 15, left: "60%", size: 4.5, duration: 11.0, delay: 5.8, xOffset: 35 },
-  { id: 16, left: "64%", size: 3, duration: 8.3, delay: 6.5, xOffset: -25 },
-  { id: 17, left: "68%", size: 2, duration: 13.5, delay: 7.2, xOffset: 15 },
-  { id: 18, left: "72%", size: 3.5, duration: 9.9, delay: 6.9, xOffset: -20 },
-  { id: 19, left: "76%", size: 2.5, duration: 10.8, delay: 3.8, xOffset: -10 },
-  { id: 20, left: "80%", size: 4, duration: 12.3, delay: 4.9, xOffset: 20 },
-  { id: 21, left: "84%", size: 2, duration: 7.5, delay: 2.5, xOffset: -18 },
-  { id: 22, left: "88%", size: 3.5, duration: 11.8, delay: 5.0, xOffset: 28 },
-  { id: 23, left: "92%", size: 2.5, duration: 9.1, delay: 1.7, xOffset: -22 },
-  { id: 24, left: "96%", size: 3, duration: 10.6, delay: 3.3, xOffset: 16 },
-  { id: 25, left: "6%", size: 2, duration: 12.5, delay: 6.8, xOffset: -18 },
-  { id: 26, left: "10%", size: 4, duration: 8.7, delay: 4.5, xOffset: 24 },
-  { id: 27, left: "15%", size: 2.5, duration: 10.4, delay: 5.7, xOffset: -22 },
-  { id: 28, left: "19%", size: 3, duration: 13.8, delay: 2.3, xOffset: 16 },
-  { id: 29, left: "23%", size: 3.5, duration: 9.5, delay: 7.1, xOffset: -28 },
-  { id: 30, left: "27%", size: 2, duration: 11.0, delay: 3.9, xOffset: 19 },
-  { id: 31, left: "31%", size: 4.5, duration: 8.2, delay: 1.6, xOffset: -14 },
-  { id: 32, left: "35%", size: 2.5, duration: 12.0, delay: 5.4, xOffset: 26 },
-  { id: 33, left: "39%", size: 3, duration: 9.8, delay: 0.9, xOffset: -17 },
-  { id: 34, left: "43%", size: 2, duration: 14.2, delay: 4.0, xOffset: 21 },
-  { id: 35, left: "47%", size: 4, duration: 7.9, delay: 6.3, xOffset: -25 },
-  { id: 36, left: "51%", size: 2.5, duration: 10.7, delay: 2.7, xOffset: 18 },
-  { id: 37, left: "55%", size: 3.5, duration: 11.6, delay: 5.1, xOffset: -20 },
-  { id: 38, left: "59%", size: 2, duration: 8.4, delay: 1.1, xOffset: 23 },
-  { id: 39, left: "63%", size: 4, duration: 13.2, delay: 4.4, xOffset: -16 },
-  { id: 40, left: "67%", size: 2.5, duration: 9.3, delay: 6.6, xOffset: 27 },
-  { id: 41, left: "71%", size: 3, duration: 10.9, delay: 3.4, xOffset: -21 },
-  { id: 42, left: "75%", size: 4.5, duration: 8.6, delay: 0.4, xOffset: 15 },
-  { id: 43, left: "79%", size: 2, duration: 12.7, delay: 5.9, xOffset: -29 },
-  { id: 44, left: "83%", size: 3.5, duration: 9.0, delay: 2.0, xOffset: 22 },
-  { id: 45, left: "87%", size: 2.5, duration: 11.4, delay: 6.0, xOffset: -18 },
-  { id: 46, left: "91%", size: 3, duration: 13.6, delay: 3.7, xOffset: 14 },
-  { id: 47, left: "94%", size: 4, duration: 8.1, delay: 1.5, xOffset: -24 },
-  { id: 48, left: "98%", size: 2, duration: 10.3, delay: 4.8, xOffset: 20 },
+  { id: 1, left: "3%", size: 2.5, duration: 8.5, delay: 0.2, xOffset: 20 },
+  { id: 2, left: "7%", size: 3.5, duration: 11.2, delay: 2.1, xOffset: -15 },
+  { id: 3, left: "10%", size: 2, duration: 7.8, delay: 1.4, xOffset: 30 },
+  { id: 4, left: "13%", size: 4, duration: 13.0, delay: 3.5, xOffset: -25 },
+  { id: 5, left: "16%", size: 2.5, duration: 9.2, delay: 0.8, xOffset: 15 },
+  { id: 6, left: "19%", size: 3, duration: 10.5, delay: 4.2, xOffset: -20 },
+  { id: 7, left: "22%", size: 4.5, duration: 8.0, delay: 1.9, xOffset: 25 },
+  { id: 8, left: "25%", size: 2, duration: 12.1, delay: 2.8, xOffset: -30 },
+  { id: 9, left: "28%", size: 3.5, duration: 9.7, delay: 0.5, xOffset: 18 },
+  { id: 10, left: "31%", size: 2.5, duration: 11.5, delay: 3.1, xOffset: -12 },
+  { id: 11, left: "34%", size: 4, duration: 8.9, delay: 1.2, xOffset: 22 },
+  { id: 12, left: "37%", size: 2, duration: 10.2, delay: 4.7, xOffset: -18 },
+  { id: 13, left: "40%", size: 3.5, duration: 12.8, delay: 5.3, xOffset: 25 },
+  { id: 14, left: "43%", size: 2.5, duration: 9.4, delay: 6.1, xOffset: -15 },
+  { id: 15, left: "46%", size: 4.5, duration: 11.0, delay: 5.8, xOffset: 35 },
+  { id: 16, left: "49%", size: 3, duration: 8.3, delay: 6.5, xOffset: -25 },
+  { id: 17, left: "52%", size: 2, duration: 13.5, delay: 7.2, xOffset: 15 },
+  { id: 18, left: "55%", size: 3.5, duration: 9.9, delay: 6.9, xOffset: -20 },
+  { id: 19, left: "58%", size: 2.5, duration: 10.8, delay: 3.8, xOffset: -10 },
+  { id: 20, left: "61%", size: 4, duration: 12.3, delay: 4.9, xOffset: 20 },
+  { id: 21, left: "64%", size: 2, duration: 7.5, delay: 2.5, xOffset: -18 },
+  { id: 22, left: "67%", size: 3.5, duration: 11.8, delay: 5.0, xOffset: 28 },
+  { id: 23, left: "70%", size: 2.5, duration: 9.1, delay: 1.7, xOffset: -22 },
+  { id: 24, left: "73%", size: 3, duration: 10.6, delay: 3.3, xOffset: 16 },
+  { id: 25, left: "76%", size: 2, duration: 12.5, delay: 6.8, xOffset: -18 },
+  { id: 26, left: "79%", size: 4, duration: 8.7, delay: 4.5, xOffset: 24 },
+  { id: 27, left: "82%", size: 2.5, duration: 10.4, delay: 5.7, xOffset: -22 },
+  { id: 28, left: "85%", size: 3, duration: 13.8, delay: 2.3, xOffset: 16 },
+  { id: 29, left: "88%", size: 3.5, duration: 9.5, delay: 7.1, xOffset: -28 },
+  { id: 30, left: "91%", size: 2, duration: 11.0, delay: 3.9, xOffset: 19 },
+  { id: 31, left: "94%", size: 4.5, duration: 8.2, delay: 1.6, xOffset: -14 },
+  { id: 32, left: "97%", size: 2.5, duration: 12.0, delay: 5.4, xOffset: 26 },
+  { id: 33, left: "5%", size: 3, duration: 9.8, delay: 0.9, xOffset: -17 },
+  { id: 34, left: "9%", size: 2, duration: 14.2, delay: 4.0, xOffset: 21 },
+  { id: 35, left: "12%", size: 4, duration: 7.9, delay: 6.3, xOffset: -25 },
+  { id: 36, left: "15%", size: 2.5, duration: 10.7, delay: 2.7, xOffset: 18 },
+  { id: 37, left: "18%", size: 3.5, duration: 11.6, delay: 5.1, xOffset: -20 },
+  { id: 38, left: "21%", size: 2, duration: 8.4, delay: 1.1, xOffset: 23 },
+  { id: 39, left: "24%", size: 4, duration: 13.2, delay: 4.4, xOffset: -16 },
+  { id: 40, left: "27%", size: 2.5, duration: 9.3, delay: 6.6, xOffset: 27 },
+  { id: 41, left: "30%", size: 3, duration: 10.9, delay: 3.4, xOffset: -21 },
+  { id: 42, left: "33%", size: 4.5, duration: 8.6, delay: 0.4, xOffset: 15 },
+  { id: 43, left: "36%", size: 2, duration: 12.7, delay: 5.9, xOffset: -29 },
+  { id: 44, left: "39%", size: 3.5, duration: 9.0, delay: 2.0, xOffset: 22 },
+  { id: 45, left: "42%", size: 2.5, duration: 11.4, delay: 6.0, xOffset: -18 },
+  { id: 46, left: "45%", size: 3, duration: 13.6, delay: 3.7, xOffset: 14 },
+  { id: 47, left: "48%", size: 4, duration: 8.1, delay: 1.5, xOffset: -24 },
+  { id: 48, left: "51%", size: 2, duration: 10.3, delay: 4.8, xOffset: 20 },
+  { id: 49, left: "54%", size: 3.5, duration: 12.2, delay: 2.4, xOffset: -16 },
+  { id: 50, left: "57%", size: 2.5, duration: 8.8, delay: 0.6, xOffset: 22 },
+  { id: 51, left: "60%", size: 4, duration: 10.9, delay: 3.6, xOffset: -26 },
+  { id: 52, left: "63%", size: 2, duration: 7.7, delay: 1.8, xOffset: 19 },
+  { id: 53, left: "66%", size: 3, duration: 11.3, delay: 5.2, xOffset: -14 },
+  { id: 54, left: "69%", size: 4.5, duration: 9.6, delay: 4.1, xOffset: 28 },
+  { id: 55, left: "72%", size: 2.5, duration: 13.4, delay: 6.7, xOffset: -22 },
+  { id: 56, left: "75%", size: 3.5, duration: 8.5, delay: 2.9, xOffset: 16 },
+  { id: 57, left: "78%", size: 2, duration: 10.6, delay: 0.7, xOffset: -18 },
+  { id: 58, left: "81%", size: 4, duration: 12.9, delay: 4.6, xOffset: 24 },
+  { id: 59, left: "84%", size: 2.5, duration: 9.1, delay: 3.2, xOffset: -20 },
+  { id: 60, left: "87%", size: 3, duration: 11.7, delay: 5.5, xOffset: 17 },
+  { id: 61, left: "90%", size: 4.5, duration: 8.0, delay: 1.3, xOffset: -25 },
+  { id: 62, left: "93%", size: 2, duration: 13.1, delay: 6.2, xOffset: 21 },
+  { id: 63, left: "96%", size: 3.5, duration: 9.4, delay: 2.2, xOffset: -15 },
+  { id: 64, left: "2%", size: 2.5, duration: 10.5, delay: 4.3, xOffset: 18 },
+  { id: 65, left: "8%", size: 3, duration: 12.4, delay: 1.0, xOffset: -22 },
+  { id: 66, left: "14%", size: 4, duration: 8.6, delay: 3.0, xOffset: 25 },
+  { id: 67, left: "20%", size: 2, duration: 11.1, delay: 5.6, xOffset: -17 },
+  { id: 68, left: "26%", size: 3.5, duration: 9.7, delay: 2.6, xOffset: 20 },
+  { id: 69, left: "35%", size: 2.5, duration: 13.0, delay: 4.9, xOffset: -24 },
+  { id: 70, left: "44%", size: 4, duration: 8.2, delay: 0.3, xOffset: 16 },
+  { id: 71, left: "53%", size: 2, duration: 10.8, delay: 6.4, xOffset: -19 },
+  { id: 72, left: "62%", size: 3.5, duration: 12.6, delay: 3.7, xOffset: 23 },
+  { id: 73, left: "71%", size: 2.5, duration: 9.0, delay: 1.5, xOffset: -21 },
+  { id: 74, left: "80%", size: 4, duration: 11.5, delay: 5.0, xOffset: 18 },
+  { id: 75, left: "89%", size: 2, duration: 8.7, delay: 2.7, xOffset: -16 },
+  { id: 76, left: "98%", size: 3.5, duration: 12.0, delay: 4.5, xOffset: 22 },
 ];
 
 export function StitchShowcase() {
@@ -213,9 +239,9 @@ export function StitchShowcase() {
 
           {/* Canvas Dot Matrix Pattern */}
           <div
-            className="absolute inset-0 pointer-events-none opacity-20"
+            className="absolute inset-0 pointer-events-none opacity-30"
             style={{
-              backgroundImage: `radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.35) 1px, transparent 0)`,
+              backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.45) 1px, transparent 0)`,
               backgroundSize: "28px 28px",
             }}
           />
@@ -271,41 +297,11 @@ export function StitchShowcase() {
           </motion.div>
 
           {/* =========================================================================
-              TOP ROW: Minimal Brand Header (Left) + Direct Dashboard Action (Right)
-              ========================================================================= */}
-          <div className="relative z-20 flex items-center justify-between w-full">
-            {/* Top-Left: Minimal Brand Tag */}
-            <div className="flex items-center gap-2.5">
-              <span className="font-mono text-sm tracking-wider font-extrabold text-white">
-                VDBI
-              </span>
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold tracking-widest text-cyan-300 bg-cyan-950/70 border border-cyan-500/40 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
-                AI INTELLIGENCE
-              </span>
-            </div>
-
-            {/* Top-Right: Direct Dashboard Action */}
-            <div className="flex items-center gap-3">
-              <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono text-cyan-300 bg-cyan-950/40 border border-cyan-500/30">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
-                <span>100% Dữ Liệu Thực</span>
-              </span>
-              <Link
-                href="/dashboard"
-                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold text-black bg-white hover:bg-slate-200 transition shadow-md shadow-white/10"
-              >
-                <span>Mở Dashboard</span>
-                <ArrowRight className="w-3 h-3" />
-              </Link>
-            </div>
-          </div>
-
-          {/* =========================================================================
               CENTER: GIGANTIC HERO SHOWCASE (Neon Xanh - Tím Cyber Aurora)
               ========================================================================= */}
           <motion.div
             style={{ scale: centerScale }}
-            className="relative z-20 my-auto mx-auto w-full max-w-6xl text-center flex flex-col items-center justify-center px-4 py-4"
+            className="relative z-20 flex-1 my-auto mx-auto w-full max-w-6xl text-center flex flex-col items-center justify-center px-4 py-4"
           >
             {/* Giant Editorial Headline (To rõ, sắc nét, Neon Xanh Tím tương phản cao cực kỳ dễ đọc) */}
             <div className="h-[75px] sm:h-[110px] md:h-[140px] lg:h-[165px] xl:h-[185px] flex items-center justify-center w-full">

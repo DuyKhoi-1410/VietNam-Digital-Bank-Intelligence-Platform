@@ -75,7 +75,7 @@ export function StitchBackground() {
             y: originY,
             vx: 0,
             vy: 0,
-            baseRadius: 0.9, // Hạt li ti tinh tế, nhạt màu thanh thoát
+            baseRadius: 1.05, // Hạt trắng rõ nét, đậm hơn theo yêu cầu
           });
         }
       }
@@ -155,9 +155,9 @@ export function StitchBackground() {
         dot.x += dot.vx;
         dot.y += dot.vy;
 
-        // 6. Uniform rendering - Giữ nguyên màu sắc và kích cỡ, chỉ tách hạt vật lý (tuyệt đối không sáng màu khi rê chuột)
+        // 6. Uniform rendering - Giữ nguyên màu sắc và kích cỡ, hạt trắng đậm nét rõ ràng
         ctx.beginPath();
-        ctx.fillStyle = "rgba(255, 255, 255, 0.17)";
+        ctx.fillStyle = "rgba(255, 255, 255, 0.28)";
         ctx.arc(dot.x, dot.y, dot.baseRadius, 0, Math.PI * 2);
         ctx.fill();
       }

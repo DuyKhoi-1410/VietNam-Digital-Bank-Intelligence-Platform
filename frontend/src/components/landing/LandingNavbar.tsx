@@ -59,9 +59,6 @@ export function LandingNavbar() {
               className="h-9 sm:h-11 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
               priority
             />
-            <span className="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-xs font-mono tracking-wider uppercase border border-cyan-500/30 bg-cyan-950/40 text-cyan-300">
-              BETA
-            </span>
           </Link>
 
           {/* Desktop Navigation Links - Chỉ có chữ nổi bật, thanh bar trong suốt 100% không có bất kỳ vệt màu đen nào */}
